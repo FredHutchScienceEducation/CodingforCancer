@@ -1,0 +1,266 @@
+- Class: meta
+  Course: cfc_swirl
+  Lesson: 7.0_tidyverse
+  Author: Hanako Osuga
+  Type: Standard
+  Organization: Fred Hutch Cancer Center
+  Version: 2.4.5
+
+- Class: txt
+  Output: "welcome to the lesson on tidyverse!"
+  
+- Class: mult_question
+  Output: "what is tidyverse?"
+  AnswerChoices: package;software;app
+  AnswerTests: omnitest(correctVal = "package")
+
+- Class: txt
+  Output: "packages are extensions to R that you can download and use"
+  
+- Class: txt
+  Output: "we will be using one called tidyverse, it is technically a 
+  collection of packages"
+  
+- Class: txt
+  Output: "tiyverse contains readr, dplyr, and ggplot2 but you dont need to
+  memorize each individual package but it can be helpful when Googling"
+
+
+- Class: cmd_question
+  Output: "load the tidyverse library/package with. Type: library(tidyverse)"
+  CorrectAnswer: library(tidyverse)
+  AnswerTests: omnitest(correctExpr = "library(tidyverse)")
+  Hint: "the function to load a library is library()"
+  
+- Class: txt
+  Output: "you only need to install the package once but you will need to load it before each session"
+
+
+- Class: cmd_question
+  Output: "import the data set from last time by loading the palmerpenguins package"
+  CorrectAnswer: library(palmerpenguins)
+  AnswerTests: omnitest(correctExpr = "library(palmerpenguins)")
+  Hint: "did you install the palmer penguins package from before? also check your ()"
+
+- Class: cmd_question
+  Output: "Let's inspect the structure of penguins. Use the str() function on penguins. Type: str(penguins)"
+  CorrectAnswer: str(penguins)
+  AnswerTests: omnitest(correctExpr = "str(penguins)")
+  Hint: "the function str() can be used to insepct the structure of an R object"
+
+- Class: mult_question
+  Output: "what is the data type stored in the bill_depth column (check your previous output)?"
+  AnswerChoices: numerics;integer;character;logical
+  CorrectAnswer: numerics
+  AnswerTests: omnitest(correctVal = "numerics")
+  Hint: "check the output of your last command"
+
+- Class: mult_question
+  Output: "what is the first column in the list that contains NA values (check your previous output)?"
+  AnswerChoices: bill_length_mm; bill_depth_mm; year; body_mass_g
+  CorrectAnswer: bill_length_mm
+  AnswerTests: omnitest(correctVal = "bill_length_mm")
+  Hint: "go back to the output for the str() command"
+  
+- Class: txt
+  Output: "you can select specific columns using the select function, the 
+  format is variable <- select(df_name, column_name)"
+  
+- Class: cmd_question
+  Output: "extract the column flipper_length_mm from penguins to an object named flippers"
+  CorrectAnswer: flippers <- select(penguins, flipper_length_mm)
+  AnswerTests: omnitest(correctExpr = " flippers <- select(penguins, flipper_length_mm)")
+  Hint: "check the format above!"
+
+- Class: cmd_question
+  Output: "print flippers to see your extracted columns"
+  CorrectAnswer: flippers
+  AnswerTests: omnitest(correctExpr = 'flippers')
+  Hint: "type the variable name"
+  
+- Class: cmd_question
+  Output: "you can extract multiple columns by adding their names to the select
+  command. Extract flipper_length_mm, bill_length_mm, and bill_depth_mm and assign it to an object named flippers_bills"
+  CorrectAnswer: flippers_bills <- select(penguins, flipper_length_mm, bill_length_mm, bill_depth_mm)
+  AnswerTests: omnitest(correctExpr = " flippers_bills <- select(penguins, flipper_length_mm, bill_length_mm, bill_depth_mm)")
+  Hint: "add the column names after the first column, use commas between column names"
+  
+- Class: cmd_question
+  Output: "print the variable to see your extracted column"
+  CorrectAnswer: flippers_bills
+  AnswerTests: omnitest(correctExpr = "flippers_bills")
+  
+- Class: txt
+  Output: "you can also use a range of columns (includes everything between) 
+  using :, the format is variable <- select(df_name, start_col:end_col)"
+  
+- Class: cmd_question
+  Output: "extract columns between species and sex from penguins
+  assign it to penguins_no_year"
+  CorrectAnswer: penguins_no_year <- select(penguins, species:sex)
+  AnswerTests: omnitest(correctExpr = "penguins_no_year <- select(penguins, species:sex)")
+  
+- Class: cmd_question
+  Output: "print penguins_no_year to see your extracted columns"
+  CorrectAnswer: penguins_no_year
+  AnswerTests: omnitest(correctExpr = "penguins_no_year")
+
+- Class: txt
+  Output: "you can also use something called helper functions"
+  
+- Class: txt
+  Output: "helper functions help you tell R the parameters for the rows/columns 
+  you want to extract, the format is variable name <- select(df_name, helper_function(argument))"
+
+- Class: cmd_question
+  Output: "lets start with the helper function starts_with, extract the column 
+  in penguins that starts with 'bill' and assign it to column_start_bill"
+  CorrectAnswer: column_start_bill <- select(penguins, starts_with('bill'))
+  AnswerTests: omnitest(correctExpr = " column_start_bill <- select(penguins, starts_with('bill'))" )
+  Hint: "the format is variable <- select(df_name, helper_function(argument))"
+  
+- Class: cmd_question
+  Output: "print your extracted columns"
+  CorrectAnswer: column_start_bill
+  AnswerTests: omnitest(correctExpr= "column_start_bill")
+  
+- Class: cmd_question
+  Output: "now try ends_with() to extract the column that ends with 'mm',
+  assign it to columns_ends_mm"
+  CorrectAnswer: columns_ends_mm <- select(penguins, ends_with('mm'))
+  AnswerTests: omnitest(correctExpr = "columns_ends_mm <- select(penguins, ends_with('mm'))")
+  Hint: "the format is variable <- select(df_name, helper_function(argument))"
+  
+- Class: cmd_question
+  Output: "print your extracted columns"
+  CorrectAnswer: columns_ends_mm
+  AnswerTests: omnitest(correctExpr = "columns_ends_mm")
+  
+- Class: cmd_question   
+  Output: "next try contains() to extract the column that contains 'length',
+  assign it to columns_contains_length"
+  CorrectAnswer: columns_contains_length <- select(penguins, contains('length'))
+  AnswerTests: omnitest(correctExpr = "columns_contains_length <- select(penguins, contains('length'))")
+  Hint: "the format is variable <- select(df_name, helper_function(argument))"
+
+- Class: cmd_question
+  Output: "print it!"
+  CorrectAnswer: columns_contains_length
+  AnswerTests: omnitest(correctExpr = "columns_contains_length")
+  
+- Class: txt
+  Output: "you can combine conditions and/or helper functions using & or |"
+  
+- Class: cmd_question
+  Output: "extract columns that contain 'length' OR ends with 'mm', assign it 
+  to selected_columns_contains_lots "
+  CorrectAnswer: selected_columns_contains_lots <- select(penguins, (contains('length') | ends_with('mm')))
+  AnswerTests: omnitest(correctExpr = "selected_columns_contains_lots <- select(penguins, (contains('length') | ends_with('mm')))")
+  Hint: "enclose your helper function with (), but be careful to close all parentheses"
+
+- Class: cmd_question
+  Output: "lets see what we extracted!"
+  CorrectAnswer: selected_columns_contains_lots
+  AnswerTests: omnitest(correctExpr = "selected_columns_contains_lots")
+  Hint: "print it!"
+
+- Class: txt
+  Output: "what about rows?"
+  
+- Class: txt 
+  Output: "for rows we use the filter() function which accepts many 
+  logical/relational operations as conditions"
+
+- Class: txt
+  Output: "the format is typically, variable <- filter(df_name, condition),
+  where the condition can be anything like sex == 'female', or flipper_length_mm > 150.0"
+  
+- Class: cmd_question
+  Output: "keep only penguins where species is 'Adelie' from
+  penguins, assign to adelies_only"
+  CorrectAnswer: adelies_only <- filter(penguins, species == "Adelie")
+  AnswerTests: omnitest(correctExpr = 'adelies_only <- filter(penguins, species == "Adelie")')
+  Hint: "the condition for this would be that species == 'Adelie'"
+  
+- Class: cmd_question
+  Output: "next keep only penguins that were recorded after 2008 using the 
+  year column and assign it to after_2008"
+  CorrectAnswer: after_2008 <- filter(penguins, year > 2008)
+  AnswerTests: omnitest(correctExpr = " after_2008 <- filter(penguins, year > 2008)")
+  Hint: "if they are recorded after 2008, is year greater than or less than 2008?"
+
+- Class: cmd_question
+  Output: "like columns, you can combine conditions. Keep only normal samples 
+  (species == 'Chinstrap') AND the penguin is recorded after 2008,
+  assign it to chinstrap_after_2008"
+  CorrectAnswer: chinstrap_after_2008 <- filter(penguins, (species == 'Chinstrap') & (year > 2008))
+  AnswerTests: omnitest(correctExpr  = "chinstrap_after_2008 <- filter(penguins, (species == 'Chinstrap') & (year > 2008))")
+  Hint: "use & to combine the conditions, enclose each condition in a ()"
+  
+- Class: txt
+  Output: 'there are a few ways to accomplish the same thing in R'
+
+- Class: txt
+  Output: "you can use intermediate objects to do things in multiple steps, or 
+  you can combine them into one nested function"
+  
+- Class: cmd_question
+  Output: "lets first only look at penguins on Dream island, filter these rows using the column island and assign it to dream_island"
+  CorrectAnswer: dream_island <- filter(penguins, island == 'Dream')
+  AnswerTests: omnitest(correctExpr = "dream_island <- filter(penguins, island == 'Dream')" )
+  Hint: "island should equal 'Dream'"
+
+- Class: cmd_question
+  Output: "now select only species, sex, and year columns from dream_island, assign it to dream_island_no_measurements"
+  CorrectAnswer: dream_island_no_measurements <- select(dream_island, species, sex, year)
+  AnswerTests: omnitest(correctExpr = " dream_island_no_measurements <- select(dream_island, species, sex, year)" )
+  Hint: "remember you can just list out column names when using select()"
+  
+- Class: txt
+  Output: "this is one way to get this subset, but you can also combine it into one nested function"
+
+- Class: txt
+  Output: "to nest these function together, start with the outer function, what happens last"
+
+- Class: txt
+  Output: "in this case, you want R to select columns, and when you tell R which 
+  data frame to select columns from you enter the filter function to filter out 
+  the rows you want"
+  
+- Class: cmd_question
+  Output: "nest the functions above and assign it to dream_island_no_measurement2"
+  CorrectAnswer: dream_island_no_measurement2 <- select(filter(penguins, island == 'Dream'), species, sex, year)
+  AnswerTests: omnitest(correctExpr = " dream_island_no_measurement2 <- select(filter(penguins, island == 'Dream'), species, sex, year)")
+  Hint: "take the select command from above, replace dream_island with your filter function"
+
+- Class: cmd_question
+  Output: "lets compare the two subsets, print dream_island_no_measurements"
+  CorrectAnswer: dream_island_no_measurements
+  AnswerTests: omnitest(correctExpr = "dream_island_no_measurements")
+
+- Class: cmd_question
+  Output: "print dream_island_no_measurement2"
+  CorrectAnswer: dream_island_no_measurement2
+  AnswerTests: omnitest(correctExpr = "dream_island_no_measurement2")
+  
+- Class: mult_question
+  Output: compare dream_island_no_measurement and dream_island_no_measurement2, do they look the same or different?
+  AnswerChoices: same;different
+  CorrectAnswer: same
+  AnswerTests: omnitest(correctVal = "same")
+
+- Class: txt
+  Output: "both ways get you the same output! there are many ways to get the same things in R"
+  
+- Class: txt
+  Output: "nested functions require less actual code but can be harder to format/test"
+  
+- Class: txt
+  Output: "there's not right or wrong way to do it, go with your preference"
+  
+- Class: txt
+  Output: "great work with the tidyverse lesson!"
+  
+- Class: txt
+  Output: "the secret word of the day is 'of the cell' "
+  

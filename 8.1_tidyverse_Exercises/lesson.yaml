@@ -1,0 +1,167 @@
+- Class: meta
+  Course: cfc_swirl
+  Lesson: 7.1_tidyverse_Exercises
+  Author: Hanako Osuga
+  Type: Standard
+  Organization: Fred Hutch Cancer Center
+  Version: 2.4.5
+
+- Class: txt
+  Output: "welcome to the tidyverse Exercises!"
+
+- Class: txt
+  Output: "we are going to continue working with the clinical data frame using tidyverse"
+
+- Class: cmd_question
+  Output: "lets load tidyverse"
+  CorrectAnswer: library(tidyverse)
+  AnswerTests: omnitest(correctExpr = "library(tidyverse)")
+  Hint: "use library() to load"
+  
+- Class: cmd_question
+  Output: "load the palmerpenguins dataset to get started"
+  CorrectAnswer: library(palmerpenguins)
+  AnswerTests: omnitest(correctExpr = "library(palmerpenguins)")
+  Hint: "use library() to load the palmerpenguins data set from last time"
+
+- Class: txt
+  Output: "now that you have your data set and tidyverse loaded, lets get started"
+
+- Class: mult_question
+  Output: "if this were a new data set and you wanted to know the structure of it, what function could you use?"
+  AnswerChoices: summary(); str(); View()
+  CorrectAnswer: str()
+  AnswerTests: omnitest(correctVal = "str()")
+  Hint: "we want to see the structure, not the data set itself or summary statistics"
+
+- Class: txt
+  Output: "today we are interested in looking at penguin measurements"
+  
+- Class: cmd_question
+  Output: 'lets start by looking at all columns that contain "mm", extract this and assign it to measurements'
+  CorrectAnswer: measurements <- select(penguins, contains('mm'))
+  AnswerTests: omnitest(correctExpr = "measurements <- select(penguins, contains('mm'))")
+  Hint: "use the helper functions!"
+  
+- Class: cmd_question
+  Output: "take a look at this new data frame using the View() function"
+  CorrectAnswer: View(measurements)
+  AnswerTests: omnitest(correctExpr= 'View(measurements)')
+  
+- Class: cmd_question
+  Output: "now lets look at the columns body_mass_g THROUGH year, assign this to penguins_first_half"
+  CorrectAnswer: penguins_first_half <- select(penguins, body_mass_g:year)
+  AnswerTests: omnitest(correctExpr = "penguins_first_half <- select(penguins, body_mass_g:year)")
+  Hint: "use : for through"
+
+- Class: txt
+  Output: "now lets put those parameters together to make 1 data frame"
+
+- Class: cmd_question
+  Output: "select the columns body_mass_g THROUGH year AND all columns that contain 'mm', assign this to penguin_data "
+  CorrectAnswer: penguin_data <- select(penguins, body_mass_g:year, contains('mm'))
+  AnswerTests: omnitest(correctExpr = "penguin_data <- select(penguins, body_mass_g:year, contains('mm'))" )
+  Hint: "put the parameters in the order its in the question (body_mass_g THROUGH year THEN contains mm)"
+  
+- Class: cmd_question
+  Output: "take a look at penguin_data using View()"
+  CorrectAnswer: View(penguin_data)
+  AnswerTests: omnitest(correctExpr = "View(penguin_data)")
+
+- Class: mult_question
+  Output: "which is the only column with a depth measurement?"
+  AnswerChoices: bill_depth_mm; sex; bill_length_mm
+  CorrectAnswer: bill_depth_mm
+  AnswerTests: omnitest(correctVal = "bill_depth_mm")
+  Hint: "look at the values in each column"
+  
+- Class: txt
+  Output: "now that we have the columns we want lets filter the rows to get the data we want to analyze"
+  
+- Class: mult_question
+  Output: "go back to your penguins_data tab, how many rows are there?"
+  AnswerChoices: 124; 344; 960; 3
+  CorrectAnswer: 344
+  AnswerTests: 344
+  Hint: "look at the bottom of the pane or scroll to the bottom"
+  
+- Class: cmd_question
+  Output: "filter penguins_data to show just the female penguins, assign it to filter1"
+  CorrectAnswer: filter1 <- filter(penguin_data, sex == "female")
+  AnswerTests: omnitest(correctExpr = 'filter1 <- filter(penguin_data, sex == "female")')
+  Hint: 'what do you want the sex column to equal?'
+  
+- Class: cmd_question
+  Output: "take a look at the structure of filter1"
+  CorrectAnswer: str(filter1)  
+  AnswerTests: omnitest(correctExpr = "str(filter1)")
+  Hint: "use str()"
+  
+- Class: mult_question
+  Output: "how many rows are in filter1?"
+  AnswerChoices: 344; 165; 32; 104
+  CorrectAnswer: 165
+  AnswerTests: omnitest(correctVal = '165')
+  Hint: "its a tibble of rows x columns"
+
+- Class: cmd_question
+  Output: "filter penguin_data for penguins who were have a flipper length greater than the median (197.0), assign this to filter2" 
+  CorrectAnswer: filter2 <- filter(penguin_data, flipper_length_mm > 197.0)
+  AnswerTests: omnitest(correctExpr = ' filter2 <- filter(penguin_data, flipper_length_mm > 197.0)')
+
+- Class: cmd_question 
+  Output: "print filter2"
+  CorrectAnswer: filter2
+  AnswerTests: omnitest(correctExpr = "filter2")
+
+- Class: mult_question
+  Output: "how many rows are in filter2?"
+  AnswerChoices: 45; 230; 166 ; 344
+  CorrectAnswer: 166
+  AnswerTests: omnitest(correctVal = '166')
+  Hint: "a tibble: row x columns"
+  
+- Class: cmd_question
+  Output: "now lets filter for rows with a bill length greater than the median (44.45) assign this to filter3"
+  CorrectAnswer: filter3 <- filter(penguin_data, bill_length_mm > 44.45)
+  AnswerTests: omnitest(correctExpr = "filter3 <- filter(penguin_data, bill_length_mm > 44.45)")
+
+- Class: cmd_question
+  Output: "open up filter3 using View"
+  CorrectAnswer: View(filter3)
+  AnswerTests: omnitest(correctExpr = "View(filter3)")
+
+- Class: mult_question
+  Output: "how many rows are in filter3?"
+  AnswerChoices: 64; 165; 171; 18
+  CorrectAnswer: 171
+  AnswerTests: omnitest(correctVal = '171')
+
+- Class: txt
+  Output: "remember penguin_data is already narrowed down to only show related columns"
+
+- Class: txt
+  Output: "and what we are interested in looking at is the data of penguins who have a bill length OR flipper length greater than the median"
+  
+- Class: cmd_question
+  Output: "lets combine the filters from above to filter for penguins in penguin_data who have either a flipper length or bill length greater than the median values,  assign this to filter_all"
+  CorrectAnswer: filter_all <-  filter(penguin_data, (bill_length_mm > 44.45 | flipper_length_mm > 197.0))
+  AnswerTests: omnitest(correctExpr = 'filter_all <-  filter(penguin_data, (bill_length_mm > 44.45 | flipper_length_mm > 197.0))' )
+  Hint: "combine the filters from filter2 and filter3 using | for or"
+
+- Class: cmd_question
+  Output: "open up filter_all"
+  CorrectAnswer: View(filter_all)
+  AnswerTests: omnitest(correctExpr = "View(filter_all)")
+  
+- Class: mult_question
+  Output: "how many rows are in filter_all?"
+  AnswerChoices: 64; 206; 414; 114
+  CorrectAnswer: 206
+  AnswerTests: omnitest(correctVal = '206')
+  Hint: "a tibble: row x column"
+
+- Class: txt
+  Output: "great work subsetting our dataset, now we have the data that we are interested in!"
+
+

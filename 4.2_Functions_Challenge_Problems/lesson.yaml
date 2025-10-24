@@ -1,0 +1,192 @@
+- Class: meta
+  Course: Coding for Cancer swirl
+  Lesson: 3.2 Functions Challenge Problems
+  Author: Hanako Osuga
+  Type: Standard
+  Organization: Fred Hutch Cancer Center
+  Version: 2.4.5
+
+- Class: txt
+  Output: "welcome to the challenge problems for the Functions lesson!"
+  
+- Class: txt
+  Output: "lets start the extra practice for the many functions in R"
+  
+- Class: txt
+  Output: "we are going to practice looking up new functions"
+  
+- Class: cmd_question
+  Output: "we have a new function called trunc, use the help feature to look up this function"
+  CorrectAnswer: ?trunc
+  AnswerTests: omnitest(correctExpr = "?trunc")
+  Hint: "the help feature is ?"
+  
+- Class: mult_question
+  Output: "what is the argument for the function trunc"
+  AnswerChoices: single numeric; multiple numerics; strings; logicals
+  CorrectAnswer: single numeric
+  AnswerTests: omnitest(correctVal= "single numeric")
+
+- Class: txt
+  Output: "the R help description was confusing, so lets try googling this function"
+  
+- Class: txt
+  Output: "search 'trunc function R docs' in Google"
+  
+- Class: mult_question
+  Output: "do you see the search result from Rdocumentation.org?"
+  AnswerChoices: yes; no; huh?
+  CorrectAnswer: yes
+  AnswerTests: omnitest(correctVal= "yes")
+  Hint: "make sure 'R docs' is in your search"
+  
+- Class: txt
+  Output: "this is the official R website with documentation with every R function"
+  
+- Class: txt
+  Output: "you can use this or other websites with user information like Stack Exchange whenever you need a refresher on fucntions"
+  
+- Class: txt
+  Output: "now that we know a little bit about trunc(), let's try using it"
+
+- Class: cmd_question
+  Output: "you have 32 cows in a pasture, to a new variable called total assign the number of cows in the entire pasture"
+  CorrectAnswer: total <- 32
+  AnswerTests: omnitest(correctExpr="total <- 32")
+
+- Class: cmd_question
+  Output: "you want to divide the cows into 3 groups for going out to graze, find the number of cows in each group and assign it to per_group"
+  CorrectAnswer: per_group <- total / 3
+  AnswerTests: omnitest(correctExpr="per_group <- total/3")
+  Hint: "use the stored value per_group"
+
+- Class: cmd_question
+  Output: "since you can't have part of a cow, truncate this number to figure out how many cows will be in eaech group"
+  CorrectAnswer: trunc(per_group)
+  AnswerTests: omnitest(correctExpr = "trunc(per_group)")
+  Hint: "use the stored value per_group"
+  
+- Class: mult_question
+  Output: "how many cows are in each group?"
+  AnswerChoices: 3;21;32;10
+  CorrectAnswer: 10
+  AnswerTests: omnitest(correctVal= "10")
+  
+- Class: cmd_question
+  Output: "how many cows are left in your pasture? subtract the value from above (including trunc) multiplied by 3 from total, assign it to cows_left"
+  CorrectAnswer: cows_left <- total - trunc(per_group)*3
+  AnswerTests: omnitest(correctExpr= "cows_left <- total - trunc(per_group)*3")
+  Hint: "use the stored value, cows_left should equal total cows - the truncated value of cows per group * number of groups"
+  
+- Class: cmd_question
+  Output: "print cows_left to see how many cows you have left in the pasture"
+  CorrectAnswer: cows_left
+  AnswerTests: omnitest(correctExpr= "cows_left", correctVal= 2)
+  
+- Class: txt
+  Output: "there are many resources available when learning how to code"
+
+- Class: txt
+  Output: "in this program, we also have resources and coding help sheets available for you in Google Classroom"
+  
+- Class: txt
+  Output: "in a seperate window, open up Google Classroom and find the Coding Helpsheet for this week"
+
+- Class: mult_question
+  Output: "what is the very last function in the Functions section of the Coding Helpsheet?"
+  AnswerChoices: sqrt; round; substr; max
+  CorrectAnswer: substr
+  AnswerTests: omnitest(correctVal="substr")
+  Hint: "go to the Week 1 Coding Helpsheet in Google Classroom"
+  
+- Class: txt
+  Output: "lets try using this function"
+  
+- Class: cmd_question
+  Output: "look up this new function in the help window"
+  CorrectAnswer: ?substr
+  AnswerTests: omnitest(correctExpr= "?substr")
+  Hint: "? is the help operator"
+
+- Class: text_question
+  Output: "what does this function do, copy the description from the help window"
+  CorrectAnswer: Extract or replace substrings in a character vector.
+  AnswerTests: omnitest(correctVal= "Extract or replace substrings in a character vector.")
+  Hint: "copy and paste the description"
+
+- Class: cmd_question
+  Output: "copy this 'cows like to eat grass when they go to pasture' and assign it to the variable song"
+  CorrectAnswer: song <- "cows like to eat grass when they go to pasture"
+  AnswerTests: omnitest(correctExpr = "song <- 'cows like to eat grass when they go to pasture' ")
+  Hint: "it should be in one line, like this song <- 'cows like to eat grass when they go to pasture'" 
+
+- Class: txt
+  Output: "the argument of this function can be found in the help window"
+  
+- Class: cmd_question
+  Output: "lets take the first 22 characters of that phrase using the substr function"
+  CorrectAnswer: substr(song, 1, 22)
+  AnswerTests: omnitest(correctExpr = "substr(song, 1, 22)", correctVal = "cows like to eat grass")
+  Hint: "you want to extract the 1st through the 22nd characters"
+
+- Class: txt
+  Output: "lets go back to the ToothGrowth dataset and the low_dose and high_dose vectors from earlier"
+  
+- Class: cmd_question
+  Output: "what is the median of high_dose?"
+  CorrectAnswer: median(high_dose)
+  AnswerTests: omnitest(correctExpr = "median(high_dose)")
+  Hint: "the function for calculating the median is median()"
+  
+- Class: cmd_question
+  Output: "what is the median of low_dose?"
+  CorrectAnswer: median(low_dose)
+  AnswerTests: omnitest(correctExpr = "median(low_dose)")
+  Hint: "the function for calcuating the median is median()"
+  
+- Class: txt
+  Output: "lets try changing the vectors"
+  
+- Class: cmd_question
+  Output: "subset high_dose and exclude the 10th element and call this new subset high_dose_subset"
+  CorrectAnswer: high_dose_subset <- high_dose[-10]
+  AnswerTests: omnitest(correctExpr = "high_dose_subset <- high_dose[-10]")
+  Hint: "a negative index removes that value"
+  
+- Class: cmd_question
+  Output: "subset low_dose and exclude the first element, call this new subset low_dose_subset"
+  CorrectAnswer: low_dose_subset <- low_dose[-1]
+  AnswerTests: omnitest(correctExpr = "low_dose_subset <- low_dose[-1]")
+  Hint: "a negative index removes that value"
+  
+- Class: cmd_question
+  Output: "what is the median of high_dose_subset?"
+  CorrectAnswer: median(high_dose_subset)
+  AnswerTests: omnitest(correctExpr = "median(high_dose_subset)")
+
+- Class: cmd_question
+  Output: "what is the median of low_dose_subset?"
+  CorrectAnswer: median(low_dose_subset)
+  AnswerTests: omnitest(correctExpr = "median(low_dose_subset)")
+  
+- Class: mult_question
+  Output: "which has a higher median, low_dose or low_dose_subset?"
+  AnswerChoices: low_dose; low_dose_subset
+  CorrectAnswer: low_dose_subset
+  AnswerTests: omnitest(correctVal = "low_dose_subset")
+  Hint: "compare the values you calculated"
+  
+- Class: mult_question
+  Output: "which has a higher median, high_dose or high_dose_subset?"
+  AnswerChoices: high_dose; high_dose_subset
+  CorrectAnswer: high_dose_subset
+  AnswerTests: omnitest(correctVal = "high_dose_subset")
+  Hint: "compare the values you calculated"
+  
+- Class: txt
+  Output: 'remember if any functions are confusing you can always look them up in R and on the internet!'
+  
+- Class: txt
+  Output: "great job with the Functions Challenge Problems!"
+  
+  

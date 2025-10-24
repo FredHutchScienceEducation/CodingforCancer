@@ -1,0 +1,132 @@
+- Class: meta
+  Course: cfc_swirl
+  Lesson: 7.2_tidyverse_Challenge_Problems
+  Author: Hanako Osuga
+  Type: Standard
+  Organization: Fred Hutch Cancer Center
+  Version: 2.4.5
+
+- Class: txt
+  Output: "welcome to the tidyverse Challenge Problems!"
+
+- Class: txt
+  Output: "we are going to continue working with the penguins data frame using tidyverse"
+  
+- Class: cmd_question
+  Output: "lets load tidyverse"
+  CorrectAnswer: library(tidyverse)
+  AnswerTests: omnitest(correctExpr = "library(tidyverse)")
+  Hint: "use library() to load"
+  
+- Class: cmd_question
+  Output: "load palmerpenguins to get our data set"
+  CorrectAnswer: library(palmerpenguins)
+  AnswerTests: omnitest(correctExpr = "library(palmerpenguins)")
+  Hint: "use library() to load palmerpenguins"
+
+- Class: txt
+  Output: "now that you have your data set and tidyverse loaded, lets get started"
+  
+- Class: txt
+  Output: "for the next activity we will use the penguins_raw data frame"
+
+- Class: cmd_question
+  Output: "view penguins_raw to get familiar with this new data frame"
+  CorrectAnswer: View(penguins_raw)
+  AnswerTests: omnitest(correctExpr = 'View(penguins_raw)')
+  Hint: "dont forget to capitalize!"
+  
+- Class: txt
+  Output: "we want to isolate these columns from penguins_raw: Species, Region, Island, and Stage"
+  
+- Class: txt
+  Output: "there are 6 ways to select the columns above, lets explore each one!"
+  
+- Class: cmd_question
+  Output: "select the columns using their names, assign this to try_1"
+  CorrectAnswer: try_1 <- select(penguins_raw, Species, Region, Island, Stage)
+  AnswerTests: omnitest(correctExpr = "try_1 <- select(penguins_raw, Species, Region, Island, Stage)")
+  Hint: "make sure your syntax of the column names matches what is in the data frame"
+  
+- Class: cmd_question
+  Output: "select the columns by listing their index numbers (3,4,5,6), assign this to try_2"
+  CorrectAnswer: try_2 <- select(penguins_raw, c(3,4,5,6))
+  AnswerTests: omnitest(correctExpr = "try_2 <- select(penguins_raw, c(3,4,5,6))")
+  
+- Class: cmd_question
+  Output: "select the columns using their index numbers but dont list them all out, assign this to try_3"
+  CorrectAnswer: try_3 <- select(penguins_raw, 3:6)
+  AnswerTests: omnitest(correctExpr = "try_3 <- select(penguins_raw, 3:6)")
+  Hint: "use through (:)"
+
+- Class: cmd_question
+  Output: "select the columns using the [] and :, assign this to try_4"
+  CorrectAnswer: try_4 <- penguins_raw[ , 3:6]
+  AnswerTests: omnitest(correctExpr = "try_4 <- penguins_raw[ , 3:6]")
+
+- Class: cmd_question
+  Output: "select the columns using [] but NOT :, assign thsi to try_5"
+  CorrectAnswer: try_5 <- penguins_raw[ , c(3, 4, 5, 6)]
+  AnswerTests: omnitest(correctExpr = "try_5 <- penguins_raw[ , c(3, 4, 5, 6)]")
+
+- Class: cmd_question
+  Output: "lastly, select the columns using their names to make a vector, assign this to try_6"
+  CorrectAnswer: try_6 <- penguins_raw[c("Species", "Region", "Island", "Stage")]
+  AnswerTests: omnitest(correctExpr = 'try_6 <- penguins_raw[c("Species", "Region", "Island", "Stage")]')
+  Hint: "use [], c(), and the column names"
+
+- Class: txt
+  Output: "each of these 6 commands above get you the same result but they ask R in different ways"
+  
+- Class: cmd_question
+  Output: "now lets create a new object from penguins_raw called chinstrap_penguins_raw, that includes flipper length, culmen length, culmen deapth, body mass, sex, and island columns of chinstrap penguins (Chinstrap penguin (Pygoscelis antarctica)) only"
+  CorrectAnswer: chinstrap_penguins_raw <- select(filter(penguins_raw, Species == "Chinstrap penguin (Pygoscelis antarctica)"), "Flipper Length (mm)", "Culmen Length (mm)", "Culmen Depth (mm)", "Body Mass (g)", "Sex", "Island")
+  AnswerTests: omnitest(correctExpr = 'chinstrap_penguins_raw <- select(filter(penguins_raw, Species == "Chinstrap penguin (Pygoscelis antarctica)"), "Flipper Length (mm)", "Culmen Length (mm)", "Culmen Depth (mm)", "Body Mass (g)", "Sex", "Island")')
+  Hint: "Use the colmn names like in try_6 and use the full value for chinstrap penguin in this data frame"
+
+- Class: cmd_question
+  Output: "calculate the mean flipper length of chinstrap penguins in the subset you created in the previous step"
+  CorrectAnswer: mean(chinstrap_penguins_raw$'Flipper Length (mm)', na.rm = TRUE)
+  AnswerTests: omnitest(correctExpr = "mean(chinstrap_penguins_raw$'Flipper Length (mm)', na.rm = TRUE)")
+  Hint: "dont forget to remove NAs and use the column name!"
+  
+- Class: cmd_question
+  Output: "next lets create a new object from penguins_raw called gentoo_penguins_raw, that contains the same columns as before (flipper length, culmen length, culmen deapth, body mass, sex, and island) for Gentoo penguins (Gentoo penguin (Pygoscelis papua))"
+  CorrectAnswer: gentoo_penguins_raw <- select(filter(penguins_raw, Species == "Gentoo penguin (Pygoscelis papua)"), "Flipper Length (mm)", "Culmen Length (mm)", "Culmen Depth (mm)", "Body Mass (g)", "Sex", "Island")
+  AnswerTests: omnitest(correctExpr = 'gentoo_penguins_raw <- select(filter(penguins_raw, Species == "Gentoo penguin (Pygoscelis papua)"), "Flipper Length (mm)", "Culmen Length (mm)", "Culmen Depth (mm)", "Body Mass (g)", "Sex", "Island")')
+  Hint: "look back at your previous command, change filter"
+  
+- Class: cmd_question
+  Output: "lastly lets create a new object from penguins_raw called adelie_penguins_raw, that contains the same columns as before (flipper length, culmen length, culmen deapth, body mass, sex, and island) for Adelie penguins (Adelie Penguin (Pygoscelis adeliae))"
+  CorrectAnswer: adelie_penguins_raw <- select(filter(penguins_raw, Species == "Adelie Penguin (Pygoscelis adeliae)"), "Flipper Length (mm)", "Culmen Length (mm)", "Culmen Depth (mm)", "Body Mass (g)", "Sex", "Island")
+  AnswerTests: omnitest(correctExpr = 'adelie_penguins_raw <- select(filter(penguins_raw, Species == "Adelie Penguin (Pygoscelis adeliae)"), "Flipper Length (mm)", "Culmen Length (mm)", "Culmen Depth (mm)", "Body Mass (g)", "Sex", "Island")')
+  Hint: "look back at your previous command, change filter"
+
+- Class: cmd_question
+  Output: "calculate the mean body mass in Chinstrap penguins"
+  CorrectAnswer: mean(chinstrap_penguins_raw$"Body Mass (g)", na.rm= TRUE)
+  AnswerTests: omnitest(correctExpr = 'mean(chinstrap_penguins_raw$"Body Mass (g)", na.rm= TRUE)')
+  Hint: "dont forget to remove NAs and remember you can use $ for data frames, use the column name"
+  
+- Class: cmd_question
+  Output: "now calculate the same mean for Gentoo penguins"
+  CorrectAnswer: mean(gentoo_penguins_raw$"Body Mass (g)", na.rm= TRUE)
+  AnswerTests: omnitest(correctExpr ='mean(gentoo_penguins_raw$"Body Mass (g)", na.rm= TRUE)')
+  Hint: "change the subset from the previous command"
+
+- Class: cmd_question
+  Output: "now calculate the same for Adelie penguins"
+  CorrectAnswer: mean(adelie_penguins_raw$"Body Mass (g)", na.rm= TRUE)
+  AnswerTests: omnitest(correctExpr = 'mean(adelie_penguins_raw$"Body Mass (g)", na.rm= TRUE)')
+  Hint: "change the subset from the previous command"
+
+- Class: mult_question
+  Output: "what species of penguin had the highest mean body mass?"
+  AnswerChoices: Gentoo; Chinstrap; Adelie
+  CorrectAnswer: Gentoo
+  AnswerTests: omnitest(correctVal = "Gentoo")
+  
+- Class: txt
+  Output: "great work on these challenge problems!"
+
+
