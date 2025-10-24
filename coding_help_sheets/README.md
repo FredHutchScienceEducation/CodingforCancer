@@ -3,7 +3,7 @@
 Coding reference help sheets 
 
 
-Contents:
+## Content
 1. `Week1_HelpSheet.pdf` - data types, functions, operators, vectors
 1. `Week2_HelpSheet.pdf` - data frames, tidyverse
 1. `Week3_HelpSheet.pdf` - tidyverse, ggplot
