@@ -1,0 +1,43 @@
+﻿Item,Type,Season,Seed Price,Growth Time,Regrowth Time,Yield per Harvest,"Max Harvests
+per Season",Raw Sell Price,Jar Sell Price,Keg Sell Price,Cask Sell Price
+Blackberry,Foragable,Fall,,,,1,,20,90,60,120
+Crystal Fruit,Foragable,Winter,,,,1,,150,350,450,900
+Salmonberry,Foragable,Spring,,,,1,,5,60,15,30
+Spice Berry,Foragable,Summer,,,,1,,80,210,240,480
+Wild Plum,Foragable,Fall,,,,1,,80,210,240,480
+Ancient Fruit,Fruit,MultiSeason,,28,7,1,4,550,1150,1650,3300
+Apple,Fruit,MultiSeason,4000,28,1,1,28,100,250,300,600
+Apricot,Fruit,MultiSeason,2000,28,1,1,28,50,150,150,300
+Blueberry,Fruit,Summer,80,13,4,3,4,50,150,150,300
+Cactus Fruit,Fruit,Indoors,150,12,3,1,6,75,200,225,450
+Cherry,Fruit,MultiSeason,3400,28,1,1,28,80,210,240,480
+Cranberry,Fruit,Fall,240,7,5,2,5,75,200,225,450
+Grape,Fruit,Fall,60,10,3,1,6,80,210,240,480
+Melon,Fruit,Summer,80,12,,1,2,250,550,750,1500
+Orange,Fruit,MultiSeason,4000,28,1,1,28,100,250,300,600
+Peach,Fruit,MultiSeason,6000,28,1,1,28,140,330,420,840
+Pomegranate,Fruit,MultiSeason,6000,28,1,1,28,140,330,420,840
+Rhubarb,Fruit,Spring,100,13,,1,2,220,490,660,1320
+Starfruit,Fruit,Summer,400,13,,1,2,750,1550,2250,4500
+Strawberry,Fruit,Spring,100,8,4,1,5,120,290,360,720
+Sweet Gem Berry,Fruit,Fall,1000,24,,1,1,3000,6050,9000,18000
+Amaranth,Vegetable,Fall,70,7,,1,4,150,350,337,
+Artichoke,Vegetable,Fall,30,8,,1,3,160,370,360,
+Beet,Vegetable,Fall,20,6,,1,4,100,250,225,
+Bok Choy,Vegetable,Fall,50,4,,1,6,80,210,180,
+Cauliflower,Vegetable,Spring,80,12,,1,2,175,400,393,
+Corn,Vegetable,MultiSeason,150,14,4,1,4,50,150,112,
+Eggplant,Vegetable,Fall,20,5,5,1,5,60,170,135,
+Garlic,Vegetable,Spring,40,4,,1,6,60,170,135,
+Green Bean,Vegetable,Spring,60,10,3,1,6,40,130,90,
+Hops,Vegetable,Summer,60,11,1,1,17,25,100,56,
+Hot Pepper,Vegetable,Summer,40,5,3,1,8,40,130,90,
+Kale,Vegetable,Spring,70,6,,1,4,110,270,247,
+Parsnip,Vegetable,Spring,20,4,,1,6,35,120,78,
+Potato,Vegetable,Spring,50,6,,1.2,4,80,210,180,
+Pumpkin,Vegetable,Fall,100,13,,1,2,320,690,720,
+Radish,Vegetable,Summer,40,6,,1,4,90,230,202,
+Red Cabbage,Vegetable,Summer,100,9,,1,3,260,570,585,
+Tomato,Vegetable,Summer,50,11,4,1,5,60,170,135,
+Wheat,Vegetable,Summer or Fall,10,4,,1,6,25,100,56,
+Yam,Vegetable,Fall,60,10,,1,2,160,370,360,
