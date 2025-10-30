@@ -15,3 +15,7 @@ program.
 - `identify_artifact/` - example identify artifact
 - `rmd_lessons/` - instructional material on R markdown file format
 - `swirl_lessons/` - instructional material on [swirl](https://swirlstats.com/)
+
+## Funding
+
+Coding for Cancer is funded by National Cancer Institute Pathways to Cancer Research, a Youth Enjoy Science Award (YES/CURE, R25CA221770).
