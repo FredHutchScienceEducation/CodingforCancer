@@ -6,7 +6,7 @@ Contributors: [Matthew C Chan](https://github.com/matthewcchan), [Mackenzie M Jo
 
 ## Contents
 
-### Intro to R 
+### 1. Intro to R 
 The first five lessons use the `learnr` [package](https://github.com/rstudio/learnr) to deploy lessons.
 
 #### Getting started
@@ -36,10 +36,11 @@ Each lesson contains introduction material and examples designed to be presented
 
 
 
-### Data Manipulation/Tidyverse
+### 2. Data Manipulation/Tidyverse
 
 The following lessons are implemented using [R markdown](https://github.com/rstudio/rmarkdown).
 
+#### Lessons 
 | Directory | Topics Covered | Files |
 |------------|----------------|-------|
 | **06.0_dataframes/** | Exploring dataframes | `6.0_dataframes_worksheet.Rmd`, `6.1_dataframes_group_activity.Rmd`, `6.2_dataframes_exercises.Rmd` |
@@ -47,8 +48,11 @@ The following lessons are implemented using [R markdown](https://github.com/rstu
 | **08.0_piping/** | The pipe operator (`%>%`), chaining operations | `8.0_piping_worksheet.Rmd`, `8.0_piping_worksheet_KEY.Rmd`, `8.1_piping_group_worksheet.Rmd`, `8.2_piping_exercises.Rmd`, `8.2_piping_exercises_KEY.Rmd`, `clinical.csv` |
 | **09.0_data_manipulation/** | Data wrangling with `dplyr`: `mutate()`, `group_by()`, `tally()`, `summarize()`, `count()` | `9.0_data_manipulation_worksheet.Rmd`, `9.0_data_manipulation_worksheet_KEY.Rmd`, `9.1_data_manipulation_exercises.Rmd`, `9.2_data_manipulation_exercises.Rmd`, `9.3_data_manipulation_exercises.Rmd` |
 
-### Data Visualization
+### 3. Data Visualization
 
+The following lessons are implemented using [R markdown](https://github.com/rstudio/rmarkdown).
+
+#### Lessons 
 | Directory | Topics Covered | Files |
 |------------|----------------|-------|
 | **11.0_plots/** | Intro to data visualization with `ggplot2`, plot layers | `11.0_intro_to_plots_lesson.Rmd`, `11.0_intro_to_plots_lesson_KEY.Rmd`, `11.1_intro_to_plots_exercise.Rmd`, `11.1_intro_to_plots_exercise_KEY.Rmd` |
