@@ -7,3 +7,13 @@ Contributors: [Matthew C Chan](https://github.com/matthewcchan), [Mackenzie M Jo
 ## Content
 
 ### Intro to R 
+The first five lessons use the `learnr` package to deploy lessons.
+
+**Requirements**
+```
+install.packages("learnr")
+install.packages("remotes")
+remotes::install_github("rstudio/gradethis")
+install.packages("shiny")
+```
+
