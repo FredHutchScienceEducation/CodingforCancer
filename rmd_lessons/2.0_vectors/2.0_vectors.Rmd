@@ -1,0 +1,1366 @@
+---
+title: "2.0 Vectors"
+output:
+  learnr::tutorial:
+  progressive: TRUE
+tutorial:
+      id: 2.0_vectors
+      version: 1 # change the version when you want to invalidate past progress
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(gradethis)
+
+tutorial_options(
+    exercise.reveal_solution = FALSE, #Turn off show_solution button 
+    exercise.timelimit = 20, #Code can only run at most 20 seconds
+)
+
+```
+
+## Vectors
+
+Recall from last lesson, we assign single values inside a variable like this:
+
+```{r recap, exercise=TRUE}
+my_age <- 16
+```
+
+\
+If we want store multiple objects, we assign them to an object called a **vector**.
+
+To do this in R, we put the values in this `c()` function. The `c()` function is used to **c**ombine values.
+
+```{r combine, exercise = TRUE}
+ages <- c(50,55,60,65)
+ages
+```
+
+```{r combine2_setup, include= FALSE}
+ages <- c(50,55,60,65)
+```
+
+\
+
+Here's a more detailed look into each part of the code to make a vector:
+
+<center>
+<img src="https://private-user-images.githubusercontent.com/36866649/471266768-cbafe810-204e-46c2-a886-afebd320972d.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTM2NTg4MTMsIm5iZiI6MTc1MzY1ODUxMywicGF0aCI6Ii8zNjg2NjY0OS80NzEyNjY3NjgtY2JhZmU4MTAtMjA0ZS00NmMyLWE4ODYtYWZlYmQzMjA5NzJkLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA3MjclMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNzI3VDIzMjE1M1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTY0YTU1YTQyOTFjNDIyMDRjNWYxY2Q5YTcwYmMyMTJhZDIxMDBkOWM4YmRlZWEwNThjNjU1ZWM3NjhmMGRiMzAmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.1Ye6AEa_KOlVEIBGSEKMTF3HpPutt1kq2C7EcE08Y80" width = 850>
+</center>
+
+<small>Image credit: [Emma Rand](https://buzzrbeeline.blog/tag/rstats/)
+
+---
+
+
+
+\
+We can use the `c()` function to add more values is an existing vector.
+```{r combine2, exercise = TRUE, exercise.setup="combine2_setup"}
+more_ages <- c(ages, 70)
+more_ages
+```
+
+
+## Indexing
+Each element in a vector has an associated **index**, or **position**, that we can use as a reference. The **index** tells us the **position** of the element in the vector. 
+
+Take the following vector as an example:
+```{r organs, exercise=TRUE}
+organs <- c("lungs", "heart", "kidney", "brain", "stomach", "liver", "spleen")
+
+```
+
+```{r organs_setup, include=FALSE}
+organs <- c("lungs", "heart", "kidney", "brain", "stomach", "liver", "spleen")
+
+```
+
+\
+If we want to access the 3rd value in `organs`, we use square brackets `[]` with the vector like this: `organs[3]`. 
+```{r organs3, exercise=TRUE, exercise.setup="organs_setup"}
+organs[3]
+
+```
+
+
+\
+In the code chunk below, extract the 6th item in `organs`. 
+```{r organs6, exercise = TRUE, exercise.setup="organs_setup"}
+
+```
+
+::: {#organs6-hint}
+Use square brackets `[]` with the number 6 inside: `organs[6]`
+:::
+
+```{r organs6-solution}
+organs[6]
+```
+
+```{r organs6-check}
+grade_code(
+  correct = "Excellent! You successfully extracted the 6th element from the organs vector. The liver is at position 6.",
+  incorrect = "Not quite. Remember to use square brackets with the index number inside: organs[6]"
+)
+```
+
+## Subsetting
+
+Recall that the `organs` vector is:
+```{r}
+organs <- c("lungs", "heart", "kidney", "brain", "stomach", "liver", "spleen")
+
+```
+
+\
+
+We can also use indexing to extract multiple values from the vector. This is called **subsetting** a vector.
+
+To get the first **through** third elements use the `:` symbol like this: `organs[c(1:3)]`. 
+```{r subset1, exercise= TRUE, exercise.setup="organs_setup"}
+
+```
+
+
+\
+To get the **only first and third**, we need to first make a vector with 1 and 3 or `c(1,3)` and then put the vector in square brackets `[]`. 
+
+
+```{r subset3, exercise= TRUE, exercise.setup="organs_setup"}
+index <- c(1,3)
+organs[index]
+
+```
+
+```{r subset3-hint}
+index <- c(1,3)
+organs[index]
+
+```
+
+\
+Alternatively, it can be written in one line:
+```{r subset4, exercise=TRUE, exercise.setup="organs_setup"}
+organs[c(1,3)]
+
+```
+
+
+## Practice
+Recall that the `organs` vector is:
+```{r}
+organs <- c("lungs", "heart", "kidney", "brain", "stomach", "liver", "spleen")
+
+```
+
+\
+1. Extract the third through the sixth values in the `organs` vector. 
+```{r subset5, exercise=TRUE, exercise.setup="organs_setup"}
+
+
+```
+
+::: {#subset5-hint}
+Use the colon `:` to get a range of values: `organs[3:6]`
+:::
+
+```{r subset5-solution}
+organs[3:6]
+```
+
+```{r subset5-check}
+grade_code(
+  correct = "Perfect! You extracted elements 3 through 6: kidney, brain, stomach, and liver.",
+  incorrect = "Try using the colon operator to get a range: organs[3:6]"
+)
+```
+
+\
+1. Extract the second **and** seventh values in the `organs` vector.
+```{r subset6, exercise=TRUE, exercise.setup="organs_setup"}
+
+
+```
+
+::: {#subset6-hint}
+Use `c()` to combine specific index numbers: `organs[c(2,7)]`
+:::
+
+```{r subset6-solution}
+organs[c(2,7)]
+```
+
+```{r subset6-check}
+grade_code(
+  correct = "Great work! You successfully extracted the 2nd and 7th elements: heart and spleen.",
+  incorrect = "Remember to use c() to combine the index numbers: organs[c(2,7)]"
+)
+```
+
+\
+1. Extract the third through the sixth, the first, and the seventh value in the `organs` vector.
+```{r subset7, exercise=TRUE, exercise.setup="organs_setup"}
+
+
+```
+
+::: {#subset7-hint}
+Combine ranges and individual indices using `c()`: `organs[c(3:6, 1, 7)]`
+:::
+
+```{r subset7-solution}
+organs[c(3:6, 1, 7)]
+```
+
+```{r subset7-check}
+grade_code(
+  correct = "Excellent! You combined both ranges (3:6) and individual indices (1, 7) to extract multiple elements.",
+  incorrect = "Try combining ranges and individual numbers: organs[c(3:6, 1, 7)]"
+)
+```
+
+## Exercise 1 {data-progressive="TRUE"}
+
+Let's get started with the in-class exercises. This exercise set will cover the Vectors material. 
+
+\
+Vectors are objects where we can store multiple values! They can hold any data type (characters, numerics, integers, logicals), but all the values in a vector have to be the same data type.
+
+\
+Another way to think about vectors are lists like `(10,12,45)` or `("red", "orange", "pink")`.
+
+### Q1 of 7
+Let's try it out. To make a vector you use the `c()` function. Assign the variable `vector_1` a vector of `(1,2,3)`. 
+
+```{r ex1, exercise=TRUE}
+
+
+```
+
+::: {#ex1-hint}
+The assignment operator is `<-` or `=`.
+:::
+
+```{r ex1-solution}
+# with <- operator ----
+vector_1 <- c(1,2,3)
+
+# with = operator ----
+vector_1 = c(1,2,3)
+```
+
+```{r ex1-check}
+grade_code(
+  correct = "Perfect! You've created your first vector with three numeric values. The `c()` function combines values into a vector.",
+  incorrect = "Make sure to use the `c()` function to combine the values and assign them to `vector_1`."
+)
+```
+
+
+### Q2 of 7
+
+You can add values to the end of an existing vector by entering `c(vector, new_value)`.
+
+\
+Add `4` to the end of `vector_1`.
+```{r ex2_setup, include = FALSE}
+vector_1 = c(1,2,3)
+```
+
+::: {#ex2-hint}
+The argument for the new value goes after the argument for the vector.
+:::
+
+```{r ex2, exercise=TRUE, exercise.setup="ex2_setup"}
+
+
+```
+
+
+```{r ex2-solution}
+c(vector_1, 4)
+
+```
+
+```{r ex2-check}
+grade_code(
+  correct = "Great! You successfully added 4 to the end of vector_1. Notice how the new vector now contains (1,2,3,4).",
+  incorrect = "Remember to put the existing vector first, then the new value: `c(vector_1, 4)`"
+)
+```
+
+### Q3 of 7
+Now that we are able to add `4` to the end of `vector_1`, let's reassign `vector_1` with the updated vector `c(vector_1, 4)`. 
+```{r ex3, exercise=TRUE, exercise.setup="ex2_setup"}
+
+
+```
+
+::: {#ex3-hint}
+Assigned `vector_1` with the vector you created in Q2. 
+:::
+
+
+```{r ex3-solution}
+# with <- operator ----
+vector_1 <- c(vector_1, 4)
+
+# with = operator ----
+vector_1 = c(vector_1, 4)
+```
+
+```{r ex3-check}
+grade_code(
+  correct = "Excellent! You've updated vector_1 to permanently include the value 4. Now vector_1 contains (1,2,3,4).",
+  incorrect = "Use the assignment operator to update vector_1: vector_1 <- c(vector_1, 4)"
+)
+```
+
+
+### Q4 of 7
+
+Similarly, you can add values to the beginning of vectors by typing `c(new value, vector)`.
+
+\
+Add `0` to the beginning of `vector_1`. 
+
+```{r ex4_setup, include = FALSE}
+vector_1 = c(1,2,3,4)
+```
+
+::: {#ex4-hint}
+The argument for the value goes before the argument for the vector.
+:::
+
+```{r ex4, exercise=TRUE, exercise.setup="ex4_setup"}
+
+
+```
+
+
+```{r ex4-solution}
+c(0, vector_1)
+
+```
+
+```{r ex4-check}
+grade_code(
+  correct = "Perfect! You added 0 to the beginning of the vector. Notice how the order matters - the new value comes first.",
+  incorrect = "Put the new value first, then the existing vector: c(0, vector_1)"
+)
+```
+
+
+### Q5 of 7
+
+Now that we are able to add `0` to the beginning of `vector_1`, let's reassign `vector_1` with the updated vector (`c(0, vector_1)`). 
+
+```{r ex5_setup, include = FALSE}
+vector_1 = c(1,2,3,4)
+```
+
+::: {#ex5-hint}
+Assigned `vector_1` with the vector you created in Q4. 
+:::
+
+```{r ex5, exercise=TRUE, exercise.setup="ex5_setup"}
+
+
+```
+
+
+```{r ex5-solution}
+# with <- operator ----
+vector_1 <- c(0, vector_1)
+
+# with = operator ----
+vector_1 = c(0, vector_1)
+```
+
+```{r ex5-check}
+grade_code(
+  correct = "Great work! You've successfully updated vector_1 to start with 0. Your vector now contains (0,1,2,3,4).",
+  incorrect = "Remember to reassign vector_1 with the new vector: vector_1 <- c(0, vector_1)"
+)
+```
+
+
+
+
+### Q6 of 7
+
+Add `5` to the BEGINNING of `vector_1` and reassign it to `vector_1`. 
+```{r ex6_setup, include = FALSE}
+vector_1 = c(0,1,2,3,4)
+```
+
+::: {#ex6-hint}
+Put the new value 5 first, then the existing vector, and assign it back to `vector_1`.
+:::
+
+```{r ex6, exercise=TRUE, exercise.setup="ex6_setup"}
+
+
+```
+
+
+```{r ex6-solution}
+# with <- operator ----
+vector_1 <- c(5, vector_1)
+
+# with = operator ----
+vector_1 = c(5, vector_1)
+```
+
+```{r ex6-check}
+grade_code(
+  correct = "Excellent! You've added 5 to the beginning and reassigned the vector. Your final vector is (5,0,1,2,3,4).",
+  incorrect = "Remember to put 5 first and reassign to vector_1: vector_1 <- c(5, vector_1)"
+)
+```
+
+### Q7 of 7
+
+```{r ex7, echo=FALSE}
+question_checkbox('What is the final order of values in `vector_1`?',
+  answer("5, 0, 1, 2, 3, 4", correct = TRUE),
+  answer("0, 1, 2, 3, 4, 5"),
+  answer("1, 2, 3, 4, 5 "),
+  answer("0, 1, 2, 3, 4"),
+  try_again = "Not exactly. Print out the variable `vector_1` in the previous code chunk!",
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  correct = "Great work! Looks like you can make vectors and add values to them!"
+  )
+```
+
+### Great job completing the exercise!
+
+<center><img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDNhamdxMWo4ZWpwNGhuam10NnJ4Y3lwcndudHA3enM3N3hobWRiOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ely3apij36BJhoZ234/giphy.gif" height=200></center>
+
+
+## Exercise 2 {data-progressive="TRUE"}
+
+### Q1 of 9
+
+Each element in a vector has an associated index that can be used as a reference. 
+\
+
+<center><img src="https://blog.ed.ted.com/wp-content/uploads/2014/08/tumblr_inline_naitcpvDNp1sndsvm.gif" height=200></center>
+
+\
+Make a new vector called `organs` and assign these values `"lung"`, `"heart"`, `"kidney"`, `"brain"`, `"skin"`, `"liver"`.
+
+```{r ex2_1, exercise=TRUE}
+
+
+```
+
+::: {#ex2_1-hint}
+`c()` is the function for making new vectors. 
+:::
+
+
+```{r ex2_1-solution}
+# with <- operator ----
+organs <- c("lung", "heart", "kidney", "brain", "skin", "liver")
+
+# with = operator ----
+organs = c("lung", "heart", "kidney", "brain", "skin", "liver")
+```
+
+```{r ex2_1-check}
+grade_code(
+  correct = "Perfect! You've created a character vector with six organ names. Notice how all values are in quotes since they're text.",
+  incorrect = "Make sure to use `c()` and put each organ name in quotes: organs <- c(\"lung\", \"heart\", \"kidney\", \"brain\", \"skin\", \"liver\")"
+)
+```
+
+### Q2 of 9
+Great! Now we have an `organs` vector that looks like this:
+```{r}
+organs <- c("lung", "heart", "kidney", "brain", "skin", "liver")
+```
+
+We can use the square brackets `[]` to extract values at a specific position (index) of a vector.
+
+\
+In R indexes start at 1, meaning the first value in a vector is in position 1.
+
+\
+Extract the value at index 1 of `organs`.
+```{r ex2_2_setup, include=FALSE}
+organs <- c("lung", "heart", "kidney", "brain", "skin", "liver")
+
+
+```
+
+::: {#ex2_2-hint}
+Put the square brackets `[]` after the vector name followed by the position of the item you want.
+:::
+
+```{r ex2_2, exercise=TRUE, exercise.setup="ex2_2_setup"}
+
+
+```
+
+
+```{r ex2_2-solution}
+organs[1]
+
+```
+
+```{r ex2_2-check}
+grade_code(
+  correct = "Excellent! You extracted the first element 'lung' from the organs vector. Remember, R uses 1-based indexing.",
+  incorrect = "Use square brackets with the index number: organs[1]"
+)
+```
+
+
+### Q3 of 9
+```{r}
+organs <- c("lung", "heart", "kidney", "brain", "skin", "liver")
+```
+
+You can use a negative number to exclude a value in that position. 
+
+\
+Try excluding the value at index 2 of the vector `organs`. 
+
+```{r ex2_3, exercise=TRUE, exercise.setup="ex2_2_setup"}
+
+
+```
+
+::: {#ex2_3-hint}
+Put the square brackets `[]` after the vector name followed by the position of the item you want.
+:::
+
+```{r ex2_3-solution}
+organs[-2]
+
+```
+
+```{r ex2_3-check}
+grade_code(
+  correct = "Great! You excluded 'heart' (position 2) and got all other organs. Negative indexing is useful for removing specific elements.",
+  incorrect = "Use a negative sign before the index number: organs[-2]"
+)
+```
+
+
+### Q4 of 9
+
+You can use accessors to extract multiple values from a vector, this is called **subsetting.**
+
+\
+Here is an example: `vector[c(index1,index2)]` will let you get the values at `index1` and `index2`.
+
+\
+Let's extract the **first and fifth** values in our `organs` vectors (shown below):
+```{r}
+organs <- c("lung", "heart", "kidney", "brain", "skin", "liver")
+```
+
+
+::: {#ex2_4-hint}
+Enter the vector name, followed by the index numbers you want to extract in a seperate vector.
+:::
+
+
+```{r ex2_4, exercise=TRUE, exercise.setup="ex2_2_setup"}
+
+
+```
+
+
+```{r ex2_4-solution}
+organs[c(1,5)]
+
+
+```
+
+```{r ex2_4-check}
+grade_code(
+  correct = "Perfect! You extracted 'lung' and 'skin' (positions 1 and 5). This is how you select non-consecutive elements.",
+  incorrect = "Use c() to combine the index numbers: organs[c(1,5)]"
+)
+```
+
+
+### Q5 of 9
+
+If you wanted to get values from `index1` through `index2`, you use the colon `:` like this `vector[c(index1:index2)]` 
+
+\
+Extract the **first through fifth** values in the `organs` vectors (shown below):
+```{r}
+organs <- c("lung", "heart", "kidney", "brain", "skin", "liver")
+```
+
+
+```{r ex2_5, exercise=TRUE, exercise.setup="ex2_2_setup"}
+
+
+```
+
+::: {#ex2_5-hint}
+Use the colon operator to get a range: `organs[1:5]` or `organs[c(1:5)]`
+:::
+
+```{r ex2_5-solution}
+# with c() ----
+organs[c(1:5)]
+
+# without c() ----
+organs[1:5]
+```
+
+```{r ex2_5-check}
+grade_code(
+  correct = "Excellent! You extracted the first five organs using the colon operator. This gives you a continuous range of elements.",
+  incorrect = "Use the colon operator for ranges: organs[1:5]"
+)
+```
+
+
+### Q6 of 9
+
+Extract the second AND third items in `organs`.
+```{r}
+organs <- c("lung", "heart", "kidney", "brain", "skin", "liver")
+```
+
+
+```{r ex2_6, exercise=TRUE, exercise.setup="ex2_2_setup"}
+
+
+```
+
+::: {#ex2_6-hint}
+Do you want index2 AND index3 or index2 THROUGH index3?
+:::
+
+```{r ex2_6-solution}
+# c() solution ----
+organs[c(2,3)]
+
+# c() colon solution ----
+organs[c(2:3)]
+
+# colon solution ----
+organs[2:3]
+```
+
+```{r ex2_6-check}
+grade_code(
+  correct = "Great work! You extracted 'heart' and 'kidney'. Since positions 2 and 3 are consecutive, both c(2,3) and 2:3 work equally well.",
+  incorrect = "Use either organs[c(2,3)] or organs[2:3] to get consecutive elements"
+)
+```
+
+
+
+
+###
+
+This is a blank code chunk that you can use as scratch work for the remaining questions. Click on the **▷ Run Code** button to see what the `organs` vector contains.
+
+```{r blank, exercise=TRUE, exercise.setup="ex2_2_setup"}
+organs
+```
+
+
+### Q7 of 9 
+
+Suppose the `organs` vector is:
+```{r}
+organs <- c("lung", "heart", "kidney", "brain", "skin", "liver")
+```
+
+```{r ex2_7, echo=FALSE}
+question_checkbox('What organs would be selected if `organs[c(2,4,6)]` is used?',
+  answer("lung"),
+  answer("heart", correct = TRUE),
+  answer("kidney"),
+  answer("brain", correct = TRUE),
+  answer("skin"),
+  answer("liver", correct = TRUE),
+  try_again = "Not exactly. Try in the scratch work code chunk to see what the subsetted vector is.",
+  allow_retry = TRUE,
+  random_answer_order = FALSE,
+  correct = "Great work!"
+  )
+```
+
+
+### Q8 of 9 
+
+Suppose the `organs` vector is:
+```{r}
+organs <- c("lung", "heart", "kidney", "brain", "skin", "liver")
+```
+
+```{r ex2_8, echo=FALSE}
+question_checkbox('What organs would be selected if `organs[c(-1:-4)]` is used?',
+  answer("lung"),
+  answer("heart"),
+  answer("kidney"),
+  answer("brain"),
+  answer("skin", correct = TRUE),
+  answer("liver", correct = TRUE),
+  try_again = "Not exactly. Try in the scratch work code chunk to see what the subsetted vector is.",
+  allow_retry = TRUE,
+  random_answer_order = FALSE,
+  correct = "Great work! A negative value removes items and we can remove a range of items using the negative and colon (`:`)."
+  )
+```
+
+
+### Q9 of 9 
+
+Suppose the `organs` vector is:
+```{r}
+organs <- c("lung", "heart", "kidney", "brain", "skin", "liver")
+```
+
+```{r ex2_9, echo=FALSE}
+question_checkbox('What organs would be selected if `organs[c(1:3,6)]` is used?',
+  answer("lung", correct = TRUE),
+  answer("heart", correct = TRUE),
+  answer("kidney", correct = TRUE),
+  answer("brain"),
+  answer("skin"),
+  answer("liver", correct = TRUE),
+  try_again = "Not exactly. Try in the scratch work code chunk to see what the subsetted vector is.",
+  allow_retry = TRUE,
+  random_answer_order = FALSE,
+  correct = "Great work! We can combine both `:` and `,` in the `c()` vector to extract various items."
+  )
+```
+
+
+### Great job on completing the exercise!
+
+<center><img src="https://nerdbugs.com/cdn/shop/products/Untitleddesign_3_0dc24d2d-4910-4c48-bcc4-677c608f3209.gif" height=200></center>
+
+
+## Challenge Problem {data-progressive="TRUE"}
+
+Welcome to the challenge problems for the Vectors lesson. This is in no way required, it is meant for additional practice with R.
+
+In this problem set, we'll look more into using vectors in R.
+
+### 
+
+```{r ready1, echo=FALSE}
+question('Ready to proceed?',
+  answer("Yes", correct = TRUE),
+  answer("No"),
+  try_again = "No worries! These questions are entirely optional and provide additional practice!",
+  allow_retry = TRUE,
+  correct = "Excellent!"
+  )
+```
+
+### Q1 
+
+Let's create a new vector called `organs` that contains the values `"lung"`, `"prostate"`, `"breast"`. 
+
+
+```{r ex4_1, exercise=TRUE}
+
+
+```
+
+::: {#ex4_1-hint}
+Use the c() function and put each organ name in quotes.
+:::
+
+```{r ex4_1-solution}
+# with = ----
+organs = c("lung", "prostate", "breast")
+
+# without <- ----
+organs <- c("lung", "prostate", "breast")
+```
+
+```{r ex4_1-check}
+grade_code(
+  correct = "Perfect! You've created a character vector with three organ names. All text values need to be in quotes.",
+  incorrect = "Remember to use c() and put each organ name in quotes: organs <- c(\"lung\", \"prostate\", \"breast\")"
+)
+```
+
+### Q2
+
+
+
+```{r ex4_2, echo=FALSE}
+question_checkbox('What is the data type of the items in `organs`?',
+  answer("character", correct = TRUE),
+  answer("string", correct = TRUE),
+  answer("numeric"),
+  answer("integer"),
+  answer("booleon"),
+  answer("logical"),
+  try_again = 'Not exactly. What is data type is surrounded by `"` `"`? ',
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  correct = "Correct!"
+  )
+```
+
+### Q3
+
+There is a function (we will learn more about these next lesson) that we can use to check what data type a variable is.
+
+\
+`class()` is a function that tells you the data type of the inputted variable. You can use the function by typing `class()` and inserting the variable into the `()`.
+
+\
+Let's find the data type of `organs` using the function `class()`. 
+```{r ex4_3_setup, include=FALSE}
+organs <- c("lung", "prostate", "breast")
+```
+
+```{r ex4_3, exercise=TRUE, exercise.setup="ex4_3_setup"}
+
+
+```
+
+::: {#ex4_3-hint}
+Type `class(organs)`.
+:::
+
+```{r ex4_3-solution}
+class(organs)
+```
+
+```{r ex4_3-check}
+grade_code(
+  correct = "Excellent! The class() function shows that organs is a 'character' vector. This function is very useful for checking data types.",
+  incorrect = "Put the variable name inside the parentheses: class(organs)"
+)
+```
+
+
+### Q4
+
+R tends to handle interpreting data types in the background of operations. 
+
+\
+The following code is designed to cause some unexpected results in R. 
+
+\
+Make a vector named `num_char` with the following values `1`, `2`, `3`, `"a"`. 
+```{r ex4_4, exercise=TRUE}
+
+
+```
+
+::: {#ex4_4-hint}
+Mix numeric values (without quotes) and character values (with quotes) in the c() function.
+:::
+
+```{r ex4_4-solution}
+# using = operator ----
+num_char = c(1,2,3,"a")
+
+# using <- ----
+num_char <- c(1,2,3,"a")
+
+
+```
+
+```{r ex4_4-check}
+grade_code(
+  correct = "Great! You've created a mixed vector with both numbers and a character. Let's see what R does with this!",
+  incorrect = "Mix numbers (1,2,3) and a character (\"a\") in the c() function: num_char <- c(1,2,3,\"a\")"
+)
+```
+
+
+### Q5
+
+What is the type of data would you expect `num_char` to be?
+
+\
+Use the `class()` function to find out the data type of `num_char`.
+```{r ex4_5_setup, include=FALSE}
+num_char <- c(1,2,3,"a")
+```
+
+```{r ex4_5, exercise=TRUE, exercise.setup="ex4_5_setup"}
+
+
+```
+
+::: {#ex4_5-hint}
+Use the class() function with num_char as the argument.
+:::
+
+```{r ex4_5-solution}
+class(num_char)
+```
+
+```{r ex4_5-check}
+grade_code(
+  correct = "Interesting! Even though we mixed numbers and text, R converted everything to 'character' type. This is R's way of keeping all elements the same type.",
+  incorrect = "Use the class() function: class(num_char)"
+)
+```
+
+
+### Q6
+
+```{r ex4_6, echo=FALSE}
+question_checkbox('What is the data type of the items in `num_char`?',
+  answer("character", correct = TRUE),
+  answer("string", correct = TRUE),
+  answer("numeric"),
+  answer("integer"),
+  answer("booleon"),
+  answer("logical"),
+  try_again = 'Not exactly. What did the previous code chunk tell you the data type `num_char` was? ',
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  correct = "Correct!"
+  )
+```
+
+### Q7
+
+What is the data type of first value in `num_char`? Use the `class()` function on the extracted value. 
+
+```{r ex4_7, exercise=TRUE, exercise.setup="ex4_5_setup"}
+
+
+```
+
+::: {#ex4_7-hint}
+First extract the first element with [1], then use class() on that: class(num_char[1])
+:::
+
+```{r ex4_7-solution}
+class(num_char[1])
+```
+
+```{r ex4_7-check}
+grade_code(
+  correct = "Perfect! Even the first element (originally the number 1) is now a character. R converted all elements to maintain consistency.",
+  incorrect = "Extract the first element and check its class: class(num_char[1])"
+)
+```
+
+### Q8
+
+```{r ex4_8, echo=FALSE}
+question_checkbox('What is the data type of first value in `num_char`?',
+  answer("character", correct = TRUE),
+  answer("string", correct = TRUE),
+  answer("numeric"),
+  answer("integer"),
+  answer("booleon"),
+  answer("logical"),
+  try_again = 'Not exactly. What did the previous code chunk tell you the data type `num_char` was? ',
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  correct = "Correct! In this case, R changed the numeric values in the `num_char` to characters. "
+  )
+```
+
+### Q9
+
+Recall that all values in a vector have the same data type, so R does work in the background to not break this rule. 
+
+\
+Now make a vector called `num_logical` with the values `1`, `2`, `3`, `TRUE`. 
+```{r ex4_9, exercise=TRUE}
+
+
+```
+
+::: {#ex4_9-hint}
+Mix numeric values and a logical value (TRUE without quotes) in the c() function.
+:::
+
+```{r ex4_9-solution}
+# = operator ---
+num_logical = c(1,2,3, TRUE)
+
+# <- ----
+num_logical <- c(1,2,3, TRUE)
+
+```
+
+```{r ex4_9-check}
+grade_code(
+  correct = "Great! You've mixed numbers with a logical value (TRUE). Let's see how R handles this combination.",
+  incorrect = "Combine numbers and TRUE (without quotes): num_logical <- c(1,2,3, TRUE)"
+)
+```
+
+### Q10
+
+What is the type of data would you expect `num_logical` to be?
+
+\
+Use the `class()` function to find out the data type of `num_logical`.
+```{r ex4_10_setup, include=FALSE}
+num_logical <- c(1,2,3, TRUE)
+```
+
+```{r ex4_10, exercise=TRUE, exercise.setup="ex4_10_setup"}
+
+
+```
+
+::: {#ex4_10-hint}
+Use the `class()` function with `num_logical` as the argument to determine its data type.
+:::
+
+```{r ex4_10-solution}
+class(num_logical)
+```
+
+```{r ex4_10-check}
+grade_code(
+  correct = "Excellent! You've determined the data type of the vector. Notice that even though we included TRUE (a logical value), R converted everything to maintain consistency.",
+  incorrect = "Not quite. Make sure you're using the class() function with num_logical as the argument: class(num_logical)"
+)
+```
+
+
+### Q11
+
+```{r ex4_11, echo=FALSE}
+question_checkbox('What is the data type of the items in `num_logical`?',
+  answer("character"),
+  answer("string"),
+  answer("numeric", correct = TRUE),
+  answer("integer"),
+  answer("booleon"),
+  answer("logical"),
+  try_again = 'Not exactly. What did the previous code chunk tell you the data type `num_logical` was? ',
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  correct = "Correct! R converted all values to numeric to maintain a consistent data type throughout the vector."
+  )
+```
+
+### Q12
+Let's see what R did to keep the data type the same. 
+
+\
+What is the 4th value in `num_logical`?
+```{r ex4_12, exercise=TRUE, exercise.setup="ex4_10_setup"}
+
+
+```
+
+::: {#ex4_12-hint}
+Use square brackets with the index number to extract a specific element from a vector: `vector_name[index_number]`
+:::
+
+```{r ex4_12-solution}
+num_logical[4]
+```
+
+```{r ex4_12-check}
+grade_code(
+  correct = "Great! You've extracted the 4th element. Notice how R converted the logical value TRUE to the numeric value 1.",
+  incorrect = "Remember to use square brackets to index the vector. Try: num_logical[4]"
+)
+```
+
+### Q13
+
+```{r ex4_13, echo=FALSE}
+question_checkbox('What happened to the value TRUE in `num_logical`?',
+  answer("R changed TRUE to 1", correct = TRUE),
+  answer("No change"),
+  answer("Magic?"),
+  try_again = 'Not exactly. What is the difference between what you entered and what is stored in the vector?',
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  correct = "Correct! R automatically converts logical TRUE to numeric 1 to maintain vector consistency."
+  )
+```
+
+### Q14
+Add the value `FALSE` to the end of `num_logical` and update `num_logical`.
+
+```{r ex4_14, exercise=TRUE, exercise.setup="ex4_10_setup"}
+
+
+```
+
+::: {#ex4_14-hint}
+Use the `c()` function to combine the existing vector with the new value: `vector_name <- c(vector_name, new_value)`
+:::
+
+```{r ex4_14-solution}
+# = operator ---
+num_logical = c(num_logical, FALSE)
+
+# <- ----
+num_logical <- c(num_logical, FALSE)
+
+```
+
+```{r ex4_14-check}
+grade_code(
+  correct = "Perfect! You've successfully added FALSE to the vector. R will convert this logical value to maintain numeric consistency.",
+  incorrect = "Try using the c() function to combine the existing vector with FALSE: num_logical <- c(num_logical, FALSE)"
+)
+```
+
+### Q15
+
+Now extract on the 5th value of the `num_logical` vector (the one we just added). 
+```{r ex4_15_setup, include=FALSE}
+num_logical <- c(1,2,3, TRUE, FALSE)
+```
+
+```{r ex4_15, exercise=TRUE, exercise.setup="ex4_15_setup"}
+
+
+```
+
+::: {#ex4_15-hint}
+Have R tell you what the 5th value of the vector is. Use square brackets with index 5.
+:::
+
+```{r ex4_15-solution}
+num_logical[5]
+```
+
+```{r ex4_15-check}
+grade_code(
+  correct="Correct! To keep the data type numerics for all values, R changed TRUE to 1, and FALSE to 0.",
+  incorrect = "Use square brackets to extract the 5th element: num_logical[5]"
+)
+```
+
+
+
+### Q16
+Let's take a look at what happens with the other values are characters, not numerics. 
+
+\
+Make a third vector called `char_logical` with values `"a"`, `"b"`, `"c"`, `TRUE`.
+```{r ex4_16, exercise=TRUE}
+
+
+```
+
+::: {#ex4_16-hint}
+Create a vector using `c()` function. Remember to put character values in quotes: `vector_name <- c("a", "b", "c", TRUE)`
+:::
+
+```{r ex4_16-solution}
+# = operator ---
+char_logical = c("a", "b", "c", TRUE)
+
+# <- ----
+char_logical <- c("a", "b", "c", TRUE)
+
+```
+
+```{r ex4_16-check}
+grade_code(
+  correct = "Excellent! You've created a mixed vector with characters and a logical value. Let's see how R handles this!",
+  incorrect = "Create the vector using c() with the specified values: char_logical <- c('a', 'b', 'c', TRUE)"
+)
+```
+
+
+### Q17
+
+What do you expect the data type of this vector to be? 
+
+\
+Determine the data type of `char_logical`. 
+
+```{r ex4_17_setup, include=FALSE}
+char_logical = c("a", "b", "c", TRUE)
+```
+
+```{r ex4_17, exercise=TRUE, exercise.setup="ex4_17_setup"}
+
+
+```
+
+::: {#ex4_17-hint}
+Use the `class()` function to determine the data type: `class(vector_name)`
+:::
+
+```{r ex4_17-solution}
+class(char_logical)
+
+```
+
+```{r ex4_17-check}
+grade_code(
+  correct = "Great! R converted everything to character type because characters are more general than logical values.",
+  incorrect = "Use the class() function to check the data type: class(char_logical)"
+)
+```
+
+### Q18
+
+What is the 4th value in the `char_logical`?
+```{r ex4_18, exercise=TRUE, exercise.setup="ex4_17_setup"}
+
+
+```
+::: {#ex4_18-hint}
+Extract the 4th value in the `char_logical` vector using square brackets with index 4.
+:::
+
+```{r ex4_18-solution}
+char_logical[4]
+
+```
+
+```{r ex4_18-check}
+grade_code(
+  correct = "Perfect! Notice how TRUE has been converted to the character string 'TRUE' (with quotes).",
+  incorrect = "Use square brackets to extract the 4th element: char_logical[4]"
+)
+```
+
+### Q19
+
+```{r ex4_19, echo=FALSE}
+question_checkbox('What happened to the 4th value in `char_logical`?',
+  answer("R changed `TRUE` (logical) to `'TRUE'` (character)", correct = TRUE),
+  answer("No change"),
+  answer("Magic?"),
+  answer("R swapped values out"),
+  try_again = 'Not exactly. What is different about the TRUE you entered and the TRUE R outputted?',
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  correct = "Correct! R changes the data types of what it can to make the data types all the same across values in a vector. Logical TRUE became character 'TRUE'."
+  )
+```
+
+### Q20
+
+Let's make one last vector called `tricky` with values `1`,`2`,`3`, `'4'`.
+```{r ex4_20, exercise=TRUE}
+
+
+```
+
+::: {#ex4_20-hint}
+Create the vector using c(). Remember that '4' (with quotes) is a character, while 4 (without quotes) would be numeric.
+:::
+
+```{r ex4_20-solution}
+# = operator ---
+tricky = c(1, 2, 3, "4")
+
+# <- ----
+tricky <- c(1, 2, 3, "4")
+
+```
+
+```{r ex4_20-check}
+grade_code(
+  correct = "Excellent! You've created a vector mixing numeric and character values. Let's see what R does with this!",
+  incorrect = "Create the vector with c(1, 2, 3, '4'). Note that '4' should be in quotes to make it a character."
+)
+```
+
+### Q21
+What is the data type of `tricky`?
+```{r ex4_21_setup, include=FALSE}
+tricky <- c(1, 2, 3, "4")
+```
+
+```{r ex4_21, exercise=TRUE, exercise.setup="ex4_21_setup"}
+
+
+```
+
+::: {#ex4_21-hint}
+Use the `class()` function to determine the data type of the tricky vector.
+:::
+
+```{r ex4_21-solution}
+class(tricky)
+
+```
+
+```{r ex4_21-check}
+grade_code(
+  correct = "Correct! Even though most values were numeric, R converted everything to character because of the single character value '4'.",
+  incorrect = "Use the class() function: class(tricky)"
+)
+```
+
+### Q22
+
+What is the 3rd value in `tricky`?
+```{r ex4_22, exercise=TRUE, exercise.setup="ex4_21_setup"}
+
+
+```
+
+::: {#ex4_22-hint}
+Extract the 3rd element using square brackets: `vector_name[3]`
+:::
+
+```{r ex4_22-solution}
+tricky[3]
+
+```
+
+```{r ex4_22-check}
+grade_code(
+  correct = "Perfect! Notice that the numeric 3 has been converted to the character '3' (with quotes) to maintain vector consistency.",
+  incorrect = "Use square brackets to extract the 3rd element: tricky[3]"
+)
+```
+
+
+### Q23
+
+```{r ex4_23, echo=FALSE}
+question_checkbox('What happened to the 3rd value in `tricky`?',
+  answer("R changed a numeric to a character", correct = TRUE),
+  answer("No change"),
+  answer("R is playing tricks"),
+  try_again = 'Not exactly. What did the previous code chunk suggest when you extracted the third value.',
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  correct = "Correct! The data types must be the same across a single vector. R converted the numeric 3 to character '3' to maintain consistency."
+  )
+```
+
+### Congrats on finishing the challenge problem! 
+
+<center><img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExajFrOHNjNjR3dGlpY3Z1ODIxNnhzcHhqNXo1ZGxnd3hxYjBsM2ZnNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0unkiodQqmA3lPO5e/giphy.gif" height=200><img src="https://media.tenor.com/p74bDU3leq0AAAAM/animals.gif" height=200></center>
+
+This was a long problem set! Good job learning more about vectors!
+
+\
+R is doing a lot in the background, most of the time you don't need to think about it, but it is good to know what is happening so that if you run into an issue, you can troubleshoot.
+
+## Exit ticket
+
+Questions? Don’t forget to turn in today’s exit ticket!
+
+https://forms.gle/pQaiC2FSP99RYnaX7 
+
+<center>
+<img src="https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/d4f90788-7a14-4d44-94ab-da13dd41f009_rw_3840.png?h=f5064c39facd1560385710f3320bb3a6" width = 400>
+</center>
+
+<small>Image source: [Allison Horst](https://allisonhorst.com/everything-else)</small>

@@ -1,0 +1,215 @@
+# 9.2 Data Manipulation Exercises
+
+Name:
+
+Date:
+
+------------------------------------------------------------------------
+
+In this exercise, we will explore data about palm trees.
+
+> Plant traits are critical to plant form and function —including growth, survival and reproduction— and therefore shape fundamental aspects of population and ecosystem dynamics as well as ecosystem services. Here, we present a global species-level compilation of key functional traits for palms (Arecaceae), a plant family with keystone importance in tropical and subtropical ecosystems.
+
+As always, we will start with a fresh, clean environment. The code chunk below clears your environment if you want to reset your work in interactive mode. Or use the broom button on the top right corner.
+
+```{r}
+rm(list = ls())
+```
+
+## Load the dataset and packages
+
+Load the tidyverse package:
+
+```{r}
+library(tidyverse)
+```
+
+Run this code chunk below to download the dataset and extract the dataframes into its own object. After running this code chunk, you should see the downloaded dataframe(s) in the Environment pane.
+
+```{r}
+#### Do not alter the code below. This is a function that will download your dataset. 
+
+palmtrees <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-03-18/palmtrees.csv')
+
+```
+
+Let's explore our palm tree dataset:
+
+```{r}
+head(palm_trees)
+```
+
+```{r}
+colnames(palm_trees)
+```
+
+------------------------------------------------------------------------
+
+## Part I: Piping and `mutate()` practice
+
+1.  **Question 1A**: Create a piped dataframe to explore the relationship between palm height and stem diameter for palms that are native to specific biogeographic regions.
+
+    ```{r}
+    # Columns needed: 
+    # Rows needed: 
+
+    # Piped dataframe: call this object height_diameter_region_df
+
+
+    # mutate() question: Convert height from meters to feet (multiply by 3.28) and call the new column height_feet
+
+    ```
+
+2.  **Question 1B**: Create a piped dataframe to explore the relationship between fruit length and fruit width for climbing palms.
+
+    ```{r}
+    # Columns needed: 
+    # Rows needed: 
+
+    # Piped dataframe: call this object fruit_climbing_df
+
+
+    # mutate() question: Create a fruit_ratio column by dividing fruit_length by fruit_width
+
+    ```
+
+3.  **Question 1C**: Explore the relationship between maximum height and stem diameter for palms from tropical regions with armed stems.
+
+    ```{r}
+    # Columns needed: 
+    # Rows needed: 
+
+    # Piped dataframe: call this object tropical_armed_df
+
+
+    # mutate() question: Create a size_category column that classifies palms as "Small" (height < 5m), "Medium" (5-15m), or "Large" (>15m)
+
+    ```
+
+------------------------------------------------------------------------
+
+## Part II: Grouping and counting with `group_by()` and `tally()`
+
+1.  **Question 2A**: Using the palm trees dataframe, determine how many palm species are in each biogeographic region using `group_by()` and `tally()`.
+
+    ```{r}
+
+    # Which biogeographic region has the most palm species?
+
+    ```
+
+2.  **Question 2B**: Using the palm trees dataframe, how many palm species are classified in each growth form category? Use `group_by()` and `tally()`.
+
+    ```{r}
+
+    ```
+
+3.  **Question 2C**: Count how many palm species have armed vs. unarmed stems.
+
+    ```{r}
+
+    ```
+
+------------------------------------------------------------------------
+
+## Part III: Summarizing data with `group_by()` and `summarise()`
+
+1.  **Question 3A**: Using the palm trees dataframe, summarize the average maximum height by growth form. Call this `avg_height_by_growth_form`.
+
+    ```{r}
+
+    ```
+
+2.  **Question 3B**: Summarize the average stem diameter by biogeographic region. Call this `avg_diameter_by_region`.
+
+    ```{r}
+
+    ```
+
+3.  **Question 3C**: Calculate the median fruit length by climbing status (climbing vs non-climbing palms).
+
+    ```{r}
+
+    ```
+
+------------------------------------------------------------------------
+
+## Part IV: Data transformation and export
+
+1.  **Question 4A**: Create a summary of average fruit length by biogeographic region and round to 2 decimal places. Call this `avg_fruit_by_region_rounded`.
+
+    ```{r}
+
+    # Round the average fruit length to 2 decimal places using mutate() and round()
+
+    ```
+
+2.  **Question 4B**: Save your `avg_fruit_by_region_rounded` dataframe as a CSV file called "palm_fruit_summary.csv".
+
+    ```{r}
+
+    # The new file should be visible in your Files tab on the bottom right panel
+    ```
+
+------------------------------------------------------------------------
+
+## Part V: Advanced grouping and arranging
+
+1.  **Question 5A**: Using the palm trees dataframe, count the number of species by growth form and arrange in descending order.
+
+    ```{r}
+
+    ```
+
+2.  **Question 5B**: Calculate the maximum height by biogeographic region and arrange in ascending order of height.
+
+    ```{r}
+
+    ```
+
+3.  **Question 5C**: Find the average stem diameter for each combination of growth form and climbing status.
+
+    ```{r}
+
+    ```
+
+------------------------------------------------------------------------
+
+## Part VI: Filtering with the `%in%` operator
+
+Extract data specifying which years of diagnosis to keep: 2010-2013:
+
+```{r}
+clinical_reduced <- clinical %>%
+  filter(year_of_diagnosis %in% c(2010:2013))
+```
+
+This creates the same result as using multiple OR statements:
+
+```{r}
+clinical_reduced_same <- clinical %>%
+  filter(year_of_diagnosis == 2010 |
+         year_of_diagnosis == 2011 |
+         year_of_diagnosis == 2012 |
+         year_of_diagnosis == 2013)
+```
+
+
+1.  **Question 6A**: Using the `%in%` operator, create a new subsetted dataframe called `palm_subset1` that includes only palms from "Neotropics" and "Africa" biogeographic regions.
+
+    ```{r}
+
+    ```
+
+2.  **Question 6B**: Using the `%in%` operator, create a new subsetted dataframe called `palm_subset2` that includes only palms with growth forms of "Tree" and "Shrub".
+
+    ```{r}
+
+    ```
+
+3.  **Question 6C**: **Challenge**: Combine multiple conditions to create a subset of tall tree palms from tropical regions.
+
+    ```{r}
+    # Filter for: Tree growth form, height > 10m, and from Neotropics or Africa
+
+    ```

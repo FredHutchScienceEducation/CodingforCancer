@@ -1,0 +1,164 @@
+# 8.0 Piping
+
+Name:
+
+Date:
+
+------------------------------------------------------------------------
+
+We will start with a fresh, clean environment. The code chunk below clears your environment if you want to reset your work in interactive mode. Or use the broom button on the top right corner.
+
+```{r}
+rm(list = ls())
+```
+
+## 1. Loading packages and data
+
+Today we will learn about piping, which is part of the tidyverse package! Piping helps streamline workflows by using the output of one command as the input for the next command.
+
+Load the necessary packages:
+
+```{r}
+library(tidyverse)
+library(palmerpenguins)
+penguins = penguins
+```
+
+------------------------------------------------------------------------
+
+## 2. Recap of `select()` and `filter()`.
+
+We can use the `select()` to select columns and the `filter()` function to filter rows.
+
+As an example, let's ask the question: What is the bill length of female penguins on each island?
+
+If we wanted to do both `select()` and `filter()`, we can store intermediate variables in multiple steps:
+
+```{r}
+
+```
+
+We can also use a nested function:
+
+```{r}
+
+```
+
+------------------------------------------------------------------------
+
+## 3. Introduction to piping
+
+The piping operator is `%>%`. It takes the result from the left side and passes it to the function on the right side.
+
+We can use piping to make it more readable:
+
+```{r}
+
+```
+
+Let's try our first pipe! Use piping to create a dataframe containing only penguins recorded in the year 2007 and select the columns `year`, `flipper_length`, and `species`.
+
+```{r}
+
+```
+
+Now you try! Use piping to create a dataframe containing only penguins with `flipper_length_mm` over 190mm and select the columns `species`, `sex`, and `year`.
+
+```{r}
+
+```
+
+------------------------------------------------------------------------
+
+## 4. Working with a new dataset
+
+Now we'll work with a clinical dataset to practice our piping skills with a larger dataframe.
+
+First, let's read in the `clinical` dataset:
+
+```{r}
+clinical <- read_csv("clinical.csv")
+```
+
+Let's explore this new dataframe using functions we've learned:
+
+```{r}
+# Check the dimensions
+dim(clinical)
+```
+
+```{r}
+# Look at the column names
+colnames(clinical)
+```
+
+```{r}
+# Look at the first few rows
+head(clinical)
+```
+
+------------------------------------------------------------------------
+
+## 5. Exploring data types and missing values
+
+We can check the data type of specific columns using the `class()` function:
+
+```{r}
+# Check the data type of year_of_birth
+
+```
+
+```{r}
+# Check the data type of Tobacco.smoking.history
+
+```
+
+We can also check for missing values (NA) in our data:
+
+```{r}
+# Check if there are any NA values in sample_type
+
+```
+
+```{r}
+# Count the total number of NA values in pack_years_smoked
+
+```
+
+------------------------------------------------------------------------
+
+## 6. Practice with piping and the clinical dataframe
+
+Let's create a subset of the clinical dataframe using piping! Create a new dataframe called `smoke_clinical` that includes only these 5 columns:
+
+-   `primary_diagnosis`
+-   `Vital.status`
+-   `Tobacco.smoking.history`
+-   `pack_years_smoked`
+-   `cigarettes_per_day`
+
+```{r}
+
+```
+
+**Practice**: Create a new dataframe called `filtered_clinical` that:
+
+1.  Filters to keep only patients with `Vital.status` equal to "Alive"
+
+2.  Selects the columns `primary_diagnosis`, `age_at_diagnosis`, and `Vital.status`
+
+```{r}
+
+
+```
+
+**Practice**: Create a new dataframe that:
+
+1.  Filters to keep only patients who have `pack_years_smoked` greater than 10
+2.  Creates a new column called `heavy_smoker` that equals "Yes" for all these patients
+3.  Selects the columns `primary_diagnosis`, `pack_years_smoked`, and `heavy_smoker`
+
+```{r}
+
+
+```

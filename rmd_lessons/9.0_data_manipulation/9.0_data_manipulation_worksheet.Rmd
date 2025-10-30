@@ -1,0 +1,262 @@
+# 9.0 Data Manipulation
+
+Name:
+
+Date:
+
+------------------------------------------------------------------------
+
+We will start with a fresh, clean environment. The code chunk below clears your environment if you want to reset your work in interactive mode. Or use the broom button on the top right corner.
+
+```{r}
+rm(list = ls())
+```
+
+## Loading packages and data
+
+Today we will learn about data manipulation using the "split-apply-combine" strategy. This is really helpful because you can organize big datasets into more organized pieces and then put it back together.
+
+Load the necessary packages:
+
+```{r}
+library(tidyverse)
+library(palmerpenguins)
+```
+
+Load the penguins data:
+
+```{r}
+penguins = penguins
+```
+
+------------------------------------------------------------------------
+
+## 1. Adding new columns with `mutate()`
+
+We can add new columns to our dataframe using the `mutate()` function. This is especially powerful when combined with piping.
+
+Use piping to create a new column called `bill_length_cm` where the `bill_length_mm` is converted to centimeters (divide by 10).
+
+```{r}
+
+```
+
+You can also use mutate to combine the entries in each column. Use piping to create a new column called `total_bill_mm` that is the sum of `bill_length_mm` and `bill_depth_mm`.
+
+```{r}
+
+```
+
+
+**Practice**: Use piping to create a new column called `mass_kg` where the `body_mass_g` is converted to kilograms (divide by 1000).
+
+```{r}
+
+```
+
+
+------------------------------------------------------------------------
+
+## 2. Grouping and counting with `group_by()` and `tally()`
+
+For categorical data, it can be helpful to count members of a group. We can do this by combining `group_by()` and `tally()`.
+
+Count the number of penguins of each sex:
+
+```{r}
+
+```
+
+Currently we have 11 NA penguins included. We should remove these and create a clean table:
+
+```{r}
+
+
+```
+
+------------------------------------------------------------------------
+
+## 3. Summarizing data with `group_by()` and `summarize()`
+
+We can also use `group_by()` with `summarize()`. The main difference is that the non-grouping and non-output columns are removed.
+
+Summarize the average bill length (in mm) by sex:
+
+```{r}
+
+```
+
+**Practice**: Summarize the average flipper length by island.
+
+```{r}
+
+
+```
+
+------------------------------------------------------------------------
+
+## 4. Saving data to a file
+
+You can save results to a file using the `write_csv()` function. This can be useful for later applications.
+
+Save `bill_df` as a .csv file in our data directory:
+
+```{r}
+
+```
+
+------------------------------------------------------------------------
+
+## 5. Using `count()` and `arrange()`
+
+The `count()` function can be very helpful since it combines `group_by()` and `tally()` together.
+
+The `arrange()` function sorts the data: - To sort by ascending numbers: `arrange(n)` - To sort by descending numbers: `arrange(desc(n))`
+
+Count distinct number of penguin species in ascending order:
+
+```{r}
+
+```
+
+Count distinct number of penguin species in descending order:
+
+```{r}
+
+```
+
+**Practice**: Count the number of penguins by island and arrange in descending order.
+
+```{r}
+
+
+```
+
+------------------------------------------------------------------------
+
+## 6. Using the `%in%` operator
+
+Sometimes we only want to include specific values. The `%in%` operator is very helpful! This works similarly to OR statements.
+
+Extract data specifying which species to keep: Adelie and Chinstrap:
+
+```{r}
+
+
+```
+
+This will create the same result as using multiple OR statements:
+
+```{r}
+
+```
+
+**Practice**: Filter penguins to include only those from "Biscoe" and "Dream" islands.
+
+```{r}
+
+
+```
+
+------------------------------------------------------------------------
+
+## 7. Applying concepts with the clinical dataframe
+
+Let's try these functions with the `clinical` dataframe!
+
+Load the clinical data:
+
+```{r}
+
+
+```
+
+Count the number of each AJCC pathological stage and remove the NAs:
+
+```{r}
+
+
+```
+
+**Practice**: Count the number of patients by gender and remove NAs.
+
+```{r}
+
+
+```
+
+------------------------------------------------------------------------
+
+## 8. Advanced summarizing with clinical data
+
+Summarize the average age at diagnosis (in days) by tissue or organ of origin in a data frame called `age_tissue_df`:
+
+```{r}
+
+
+```
+
+It can be difficult to tell how old someone is in days. Let's add a new column to `age_tissue_df` to convert to years:
+
+```{r}
+
+
+```
+
+Save the new dataframe as a CSV file:
+
+```{r}
+
+
+```
+
+**Practice**: Summarize the average pack years smoked by gender.
+
+```{r}
+
+
+```
+
+------------------------------------------------------------------------
+
+## 9. More practice with `count()` and `arrange()`
+
+Count distinct number of tissues or organs of origin in ascending order:
+
+```{r}
+
+
+```
+
+**Practice**: Count the number of patients by race and arrange in descending order.
+
+```{r}
+
+
+```
+
+------------------------------------------------------------------------
+
+## 10. Using `%in%` with clinical data
+
+Extract data specifying which years of diagnosis to keep: 2010-2013:
+
+```{r}
+
+
+```
+
+This creates the same result as using multiple OR statements:
+
+```{r}
+
+
+```
+
+**Practice**: Filter the clinical data to include only patients with "Primary Tumor" or "Metastatic" sample types.
+
+```{r}
+
+
+```
+

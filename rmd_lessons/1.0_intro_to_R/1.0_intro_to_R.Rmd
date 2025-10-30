@@ -1,0 +1,1155 @@
+---
+title: "1.0 Intro to R"
+output:
+  learnr::tutorial:
+  progressive: TRUE
+  allow_skip: TRUE
+tutorial:
+      id: 1.0_intro
+      version: 1 # change the version when you want to invalidate past progress
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(gradethis)
+
+tutorial_options(
+    exercise.reveal_solution = FALSE, #Turn off show_solution button 
+    exercise.timelimit = 20, #Code can only run at most 20 seconds
+)
+
+```
+
+## Welcome to Coding for Cancer! 
+
+In this first week, we will introduce the R programming language in these interactive learning modules. 
+
+Use the left hand panel to navigate through today's sections! 
+
+<center>
+<img src="https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/ef5356a8-a9ee-4a54-9b62-7e1c4cb9f723.png?h=4bafe1cd8d6d09600399aa893554de85" width = 300>
+</center>
+
+<small>Image source: [Allison Horst](https://allisonhorst.com/everything-else)</small>
+
+## Getting started
+
+The box below is called a **code chunk**. We use it to write R code. Let's type out a sample code. To run the following code, we click on the **▷ Run Code** button.
+
+```{r welcome, exercise = TRUE}
+
+
+```
+
+::: {#welcome-hint .message style="color: #000;"}
+Let's start with typing `print("Hello World")` in the code chunk.
+:::
+
+The code chunk above also has a **Hint** button. If you are stuck and a code chunk has this button, click it to reveal a hint with intermediate instructions to get you closer to the answer.
+
+\
+We use the `#` symbol to specify a line that R will not run as code. You can use it to write notes! Click on the **▷ Run Code** button to see an example.
+
+```{r comments, exercise = TRUE}
+
+# This line of code prints the phrase "Hello World!"
+
+print("Hello World!")
+
+#print("This should not be printed")
+
+
+```
+
+```{r blank2, exercise = TRUE}
+## Extra code chuck for scratch work or notes
+
+
+```
+
+## Using R as a calculator
+
+Let's first start with a simple exercise. We can use R as a calculator to add two values like this:
+
+```{r addition, exercise=TRUE}
+12 + 4
+```
+
+\
+Use this code chunk to add (`+`), subtract (`-`), multiply (`*`), or divide (`/`) two values:
+
+```{r calculator1, exercise = TRUE}
+
+
+```
+
+::: {#calculator1-hint}
+**Hint:** Try typing any two numbers with an operator between them, like `5 + 3` or `8 * 2` or `10 - 4` or `15 / 3`.
+:::
+
+------------------------------------------------------------------------
+
+\
+We can also do multiple operations in a single line. Type this equation `5 + 4 * 6 - 2` in the code chunk below.
+
+```{r calculator2, exercise = TRUE}
+
+
+```
+
+::: {#calculator2-hint}
+**Hint:** Type exactly: `5 + 4 * 6 - 2` and run the code to see the result.
+:::
+
+\
+Order of operations do matter! Type this equation `(5 + 4) * 6 - 2` in the code chunk below.
+
+```{r calculator3, exercise = TRUE}
+
+
+```
+
+::: {#calculator3-hint}
+**Hint:** Type exactly: `(5 + 4) * 6 - 2` and notice how the parentheses change the result compared to the previous calculation.
+:::
+
+------------------------------------------------------------------------
+
+### Practice
+
+Write your own equation for R to compute. 
+
+```{r calculator4, exercise = TRUE}
+
+
+
+```
+
+::: {#calculator4-hint}
+**Hint:** Create any mathematical expression you like! For example: `(10 + 5) / 3` or `2^3 + 4` or `100 - 25 * 2`. Be creative!
+:::
+
+```{r blank3, exercise = TRUE}
+## Extra code chuck for scratch work or notes
+
+```
+
+## Assigning variables
+
+We use the `<-` operator to store a value to a variable. This is an example of making the variable `apples` and assign it the value `10`.
+
+```{r apples, exercise = TRUE}
+apples <- 10
+```
+
+\
+Here is how to visual assigning variables broken down to its three parts:
+
+<center>
+<img src="https://private-user-images.githubusercontent.com/36866649/471239282-34dacd1d-d0f0-4d78-96ac-2c72fe05faca.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTM2NDI4OTIsIm5iZiI6MTc1MzY0MjU5MiwicGF0aCI6Ii8zNjg2NjY0OS80NzEyMzkyODItMzRkYWNkMWQtZDBmMC00ZDc4LTk2YWMtMmM3MmZlMDVmYWNhLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA3MjclMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNzI3VDE4NTYzMlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWQ5MmNkNTE3NTc5OThkMjVhNmJmNWI0ODg5MDZmYjlkNzYxZDA2MTU2NjcxNjQ1OGE0ZjJhY2I0ZDRkZTM1YjYmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.VYyCQw0kdTcYMEqOQZpEIMFZF4hiKClbd8sJ9xjJUiM" width = 300>
+</center>
+
+
+\
+Alternatively, you can also use `=` to assign a variable. `=` works the same as `<-`.
+
+```{r lemons, exercise = TRUE}
+lemons = 16
+```
+
+---
+
+### Practice
+
+Here is an example for using variables to form a new variable: Let's make a new variable `total_fruits` and assign it the sum of `apples` and `lemons`. 
+```{r add_fruits_setup, include=FALSE}
+apples <- 10 
+lemons <- 16
+```
+
+
+```{r add_fruits, exercise = TRUE, exercise.setup="add_fruits_setup"}
+
+
+```
+
+:::{ #add_fruits-hint}
+We first make the variable `total_fruits`. Then using the assignment operator `<-`, we assign `total_fruits` the mathematical expression of the sum of `apples` and `lemons`.
+:::
+
+\
+Let's create more fruit variables and assign them with a number. Then, recalculate (1) the number of total fruits and (2) the number of fruits per person. Use the total number of people in class for this calculation.
+
+```{r more_fruits, exercise = TRUE, exercise.setup="add_fruits_setup"}
+
+```
+
+::: {#more_fruits-hint}
+**Hint:**
+
+1.  Create my fruit variables and assign them with any number of your choosing.
+2.  Recalculate `total_fruits` by adding all the fruit variables.
+3.  Divide the `total_fruits` by the number of people in class to obtain the fruits per person.
+:::
+
+## Data types
+
+In the previous example, we assigned `apples` with the value `10`. `10` a type of data called an **integer**.
+
+```{r}
+apples <- 10
+```
+
+------------------------------------------------------------------------
+
+The most common data types we will work with are:
+
+-   **Character**, also called **strings**: Contains a series of letters or symbols enclosed in `"` or `'`. Examples: `"Hello!"`, `"coding4%"`, `"good morning 52"`
+-   **Numerics**: Contains any type of number data. Examples: `4.1503`, `10.502`, `-205.2`
+-   **Integers**: Contains number data, but do not have decimal points. Examples: `5`, `-19`, `201`
+-   **Logicals**, also called **booleans**: Contains only `TRUE` or `FALSE`. It can be also represented as `T` or `F`, respectively.
+
+\
+
+<center>
+<img src="https://private-user-images.githubusercontent.com/36866649/471234489-2722d8dc-b829-4df6-8cd7-d32410b95dde.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTM2NDEwNTYsIm5iZiI6MTc1MzY0MDc1NiwicGF0aCI6Ii8zNjg2NjY0OS80NzEyMzQ0ODktMjcyMmQ4ZGMtYjgyOS00ZGY2LThjZDctZDMyNDEwYjk1ZGRlLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA3MjclMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNzI3VDE4MjU1NlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTFmYzU1MmIxNGEzN2QxZTg5NDNiMDBiNTQ1MTM5YzVlZTE3NGZjMWE3ZGIyMTlhMTNmYmYzYmE5YTFlODc2ZTYmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.SAGgogS1uhBdw6U_DcThpF-abMZuPGugS4R7oI7e2eg" width = 550>
+</center>
+
+------------------------------------------------------------------------
+
+This is an example of a **character** or **string** data type:
+
+```{r}
+city = "Seattle"
+```
+
+```{r blank4, exercise = TRUE}
+
+
+```
+
+```{r blank5, exercise = TRUE}
+## Extra code chuck for scratch work or notes
+
+
+```
+
+\
+It does not make sense if you do math operations on strings. If you run the code chunk below, it will result in an error because you cannot add `4` to `Seattle`.
+
+```{r bad_operation, exercise = TRUE}
+city = "Seattle"
+city + 4
+
+```
+
+::: {#bad_operation-hint}
+**Hint:** Run this code to see the error message. This demonstrates why data types matter - you can't do math with text!
+:::
+
+------------------------------------------------------------------------
+
+### Practice
+
+Let's try working with different data types:
+
+1.  Assign the character type of your name to the variable `myName`. Don't forget the quotation marks!
+2.  Assign an integer or numeric to the variable `myAge`:
+3.  Assign a logical to `applyingToCollege` if you are, or are not, applying to college this upcoming cycle.
+
+If you assigned `myName`, `myAge`, and `applyingToCollege` correctly, then if you run this code block, it should say a correct statement.
+
+```{r setup_statement, include=F}
+
+about_you <- function(myName,myAge,applyingToCollege) { 
+  ## You do not need to modify this code chunk. 
+  print(paste0("My name is ", myName))
+  print(paste0("I am ", myAge, " years old"))
+  if(applyingToCollege == T) {print("I am applying to college this summer.")}
+  if(applyingToCollege == F) {print("I am not applying to college this summer.")}
+}
+
+
+
+```
+
+```{r statement, exercise = TRUE, exercise.setup = "setup_statement"}
+
+myName <-
+myAge <-
+applyingToCollege <-
+
+## You do not need modify the code below.
+about_you(myName,myAge,applyingToCollege)
+```
+
+::: {#statement-hint}
+**Hint:**
+
+1.  Assign `myName` with a string of your name.
+2.  Assign `myAge` with an integer or numeric of your age.
+3.  Assign `applyingToCollege` with a logical (`TRUE` or `FALSE`) if you are applying to college.
+:::
+
+```{r blank6, exercise = TRUE}
+## Extra code chuck for scratch work or notes
+
+
+```
+
+## Exercise 1 {data-progressive="TRUE"}
+
+Let's get started with our first lesson! This exercise set will cover the Intro to R material in the previous sections.
+
+### Q1
+
+First, let's us R as a calculator. Divide 525600 by 60.
+
+```{r division, exercise = TRUE}
+
+```
+
+::: {#division-hint}
+**Hint:** Use the division operator `/` between the two numbers: `525600 / 60`
+:::
+
+```{r division-solution}
+525600 / 60
+```
+
+```{r division-check}
+grade_code(
+  correct = "Excellent! You calculated 8760 correctly. This represents the number of minutes in a year divided by 60, which gives us hours in a year!"
+)
+```
+
+### Q2
+
+We can use R for more complex analysis by assigning variables a value.
+
+```{r assignment, echo=FALSE}
+question("Which of these symbols is the assignment operator? (select ALL that apply)",
+  answer("<-", correct = TRUE),
+  answer("=", correct = TRUE),
+  answer("&"),
+  answer("->"),
+  answer("=="),
+  try_again = "Not quite. Refer from the 'Making Assignment' section of today's lesson.",
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  correct = "Nice work! Both `<-` and `=` are correct and can be used interchangeably."
+  )
+```
+
+### Q3
+
+Now let's use the assignment operator. Assign the value `10` to the object `weight_kg` by typing `weight_kg <- 10` or `weight_kg = 10`. Both these expressions are correct and interchangable in R.
+
+```{r weight1, exercise = TRUE}
+
+```
+
+::: {#weight1-hint}
+**Hint:** Type either `weight_kg <- 10` or `weight_kg = 10` to assign the value 10 to the variable `weight_kg`.
+:::
+
+```{r weight1-solution}
+# with <- operator ----
+weight_kg <- 10
+
+# with = operator ----
+weight_kg = 10
+```
+
+```{r weight1-check}
+grade_code(
+  correct = "Perfect! You've successfully assigned the value 10 to the variable weight_kg. This is the foundation of storing data in R!"
+)
+```
+
+### Q4
+
+Now let's convert `weight_kg` into pounds. The conversion between kg to pounds is 1kg = 2.2lbs.
+
+```{r weight_convert-setup, include = FALSE}
+weight_kg = 10
+```
+
+```{r weight_convert, exercise = TRUE, exercise.setup = "weight_convert-setup"}
+
+```
+
+::: {#weight_convert-hint}
+**Hint:** We want to multiply `weight_kg` with the conversion factor to obtain pounds.
+:::
+
+```{r weight_convert-solution}
+weight_kg * 2.2
+```
+
+```{r weight_convert-check}
+grade_code(
+  correct="Great job! 10 kilograms is approximately 22 pounds. You've successfully used a variable in a calculation!"
+)
+```
+
+## Excerise 2 {data-progressive="TRUE"}
+
+In this problem set, we'll recap on different data types. R has a few basic data types (types of information/data); These are characters, numerics, integers, and logicals/booleans.
+
+Here's a quick recap on data types:
+
+-   **Character**, also called **strings**: Contains a series of letters or symbols enclosed in `"` or `'`. Examples: `"Hello!"`, `"coding4%"`, `"good morning 52"`
+-   **Numerics**: Contains any type of number data. Examples: `4.1503`, `10.502`, `-205.2`
+-   **Integers**: Contains number data, but do not have decimal points. Examples: `5`, `-19`, `201`
+-   **Logicals**, also called **booleans**: Contains only `TRUE` or `FALSE`. It can be also represented as `T` or `F`, respectively.
+
+### Q1
+
+```{r data_type, echo=FALSE}
+question('What type of data is `"hello world"`?',
+  answer("character", correct = TRUE),
+  answer("string", correct = TRUE),
+  answer("numeric"),
+  answer("integer"),
+  answer("booleon"),
+  answer("logical"),
+  try_again = "Not quite. Refer from the 'Data types' section of today's lesson.",
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  correct = "Excellent! Both character are string correct and can be used interchangeably."
+  )
+```
+
+### Q2
+
+```{r data_type2, echo=FALSE}
+question_checkbox('What type of data is `3`?',
+  answer("character"),
+  answer("string"),
+  answer("numeric"),
+  answer("integer", correct = TRUE),
+  answer("booleon"),
+  answer("logical"),
+  try_again = "Not quite. Remember numerics have decimals, integers do not.",
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  correct = "Correct! Numbers without decimals are considered integers."
+  )
+```
+
+### Q3
+
+Variables are like storage containers for R data types. We can assign the values of variables by using `<-` or `=`.
+
+Assign the character `"yellow"` to the variable `colorOne.`
+
+```{r yellow, exercise = TRUE}
+
+```
+
+::: {#yellow-hint}
+**Hint:** Use either `colorOne <- "yellow"` or `colorOne = "yellow"`. Don't forget the quotation marks around yellow!
+:::
+
+```{r yellow-solution}
+# with <- operator ----
+colorOne <- "yellow"
+
+# with = operator ----
+colorOne = "yellow"
+```
+
+```{r yellow-check}
+grade_code(
+  correct = "Wonderful! You've successfully created a character variable. Notice how the quotation marks tell R this is text data, not a variable name."
+)
+```
+
+## Challenge Problem 1 {data-progressive="TRUE"}
+
+Welcome to the challenge problems for the Intro to R lesson. This is in no way required, it is meant for additional practice with R.
+
+In this problem set, we'll look to calculate how many times a heart beats in a year.
+
+### 
+
+```{r ready1, echo=FALSE}
+question('Ready to proceed?',
+  answer("Yes", correct = TRUE),
+  answer("No"),
+  try_again = "No worries! These questions are entirely optional and provide additional practice!",
+  allow_retry = TRUE,
+  correct = "Excellent!"
+  )
+```
+
+### Q1 of 8
+
+A normal resting heart rate for adults ranges from **60 - 100 beats per minute**.
+
+<center><img src="https://media1.tenor.com/m/OCutoOD37dwAAAAC/heart-heartbeat.gif" height="200"/></center>
+
+First, let's make an object called `lower_range_bpm` and assign it 60.
+
+```{r q1, exercise = TRUE}
+
+```
+
+::: {#q1-hint}
+**Hint:** Use the `<-` or the `=` operator to make assignments.
+:::
+
+```{r q1-solution}
+# with <- operator ----
+lower_range_bpm <- 60
+
+# with = operator ----
+lower_range_bpm = 60
+```
+
+```{r q1-check}
+grade_code(
+  correct = "Excellent! You've stored the lower heart rate range. This will be useful for our calculations!"
+)
+```
+
+### Q2 of 8
+
+Next, let's make an object called `upper_range_bpm` and assign it 100.
+
+```{r q2, exercise = TRUE}
+
+```
+
+::: {#q2-hint}
+**Hint:** Similar to the previous question, assign 100 to `upper_range_bpm` using either `<-` or `=`.
+:::
+
+```{r q2-solution}
+# with <- operator ----
+upper_range_bpm <- 100
+
+# with = operator ----
+upper_range_bpm = 100
+```
+
+```{r q2-check}
+grade_code(
+  correct = "Perfect! Now you have both the lower and upper heart rate ranges stored as variables."
+)
+```
+
+### Q3 of 8
+
+Now we need to calculate how many minutes in a year, let's start by multiplying 60 by 24 to get the number of minutes in a day and assign it to `mins_day`.
+
+```{r q3, exercise = TRUE}
+
+```
+
+::: {#q3-hint}
+**Hint:** Multiply 60 (minutes per hour) by 24 (hours per day) and assign the result to `mins_day`. Use: `mins_day <- 60 * 24`
+:::
+
+```{r q3-solution}
+# with <- operator ----
+mins_day <- 60*24
+
+# with <- operator, order swapped ----
+mins_day <- 24*60
+
+# with = operator ----
+mins_day = 60*24
+
+# with = operator, order swapped ----
+mins_day = 24*60
+```
+
+```{r q3-check}
+grade_code(
+  correct = "Great work! There are 1440 minutes in a day. You're building up the components for our heart rate calculation!"
+)
+```
+
+### Q4 of 8
+
+Now we can multiply `mins_day` by 365 to get the total minutes in a year, assign this to `mins_year`
+
+```{r setupq4, include=FALSE}
+mins_day <- 60 * 24
+```
+
+```{r q4, exercise = TRUE, exercise.setup = "setupq4"}
+
+```
+
+::: {#q4-hint}
+**Hint:** Multiply your `mins_day` variable by 365 (days per year) and assign it to `mins_year`: `mins_year <- mins_day * 365`
+:::
+
+```{r q4-solution}
+# with <- operator ----
+mins_year <- mins_day*365
+
+# with <- operator, order swapped ----
+mins_year <- 365*mins_day
+
+# with = operator ----
+mins_year = mins_day*365
+
+# with = operator, order swapped ----
+mins_year = 365*mins_day
+```
+
+```{r q4-check}
+grade_this_code(
+  correct = "Excellent! You've calculated that there are 525,600 minutes in a year. This number might sound familiar from the musical Rent!"
+)
+```
+
+### Q5 of 8
+
+Now we can multiply `lower_range_bpm` by `mins_year` to get the lower range of heart beats per year, and assign it to `lower_bpy.`
+
+```{r setupq5, include=FALSE}
+mins_day <- 60 * 24
+mins_year <- mins_day * 365
+upper_range_bpm <- 100
+lower_range_bpm <- 60
+```
+
+```{r q5, exercise = TRUE, exercise.setup = "setupq5"}
+
+```
+
+::: {#q5-hint}
+**Hint:** Multiply `lower_range_bpm` by `mins_year` and assign the result to `lower_bpy`: `lower_bpy <- lower_range_bpm * mins_year`
+:::
+
+```{r q5-solution}
+# with <- operator ----
+lower_bpy <- lower_range_bpm*mins_year
+
+# with <- operator, order swapped ----
+lower_bpy <- mins_year*lower_range_bpm
+
+# with = operator ----
+lower_bpy = lower_range_bpm*mins_year
+
+# with = operator, order swapped ----
+lower_bpy = mins_year*lower_range_bpm
+```
+
+```{r q5-check}
+grade_this_code(
+  correct = "Fantastic! You've calculated the minimum heartbeats per year (31,536,000). That's over 31 million heartbeats!"
+)
+```
+
+### Q6 of 8
+
+Likewise, we can multiply `upper_range_bpm` by `mins_year` to get the upper range of heart beats per year, and assign it to `upper_bpy.`
+
+```{r setupq6, include=FALSE}
+mins_day <- 60 * 24
+mins_year <- mins_day * 365
+upper_range_bpm <- 100
+lower_range_bpm <- 60
+```
+
+```{r q6, exercise = TRUE, exercise.setup = "setupq6"}
+
+```
+
+::: {#q6-hint}
+**Hint:** Similar to the previous question, multiply `upper_range_bpm` by `mins_year` and assign it to `upper_bpy`: `upper_bpy <- upper_range_bpm * mins_year`
+:::
+
+```{r q6-solution}
+# with <- operator ----
+upper_bpy <- upper_range_bpm*mins_year
+
+# with <- operator, order swapped ----
+upper_bpy <- mins_year*upper_range_bpm
+
+# with = operator ----
+upper_bpy = upper_range_bpm*mins_year
+
+# with = operator, order swapped ----
+upper_bpy = mins_year*upper_range_bpm
+```
+
+```{r q6-check}
+grade_this_code(
+  correct = "Perfect! You've calculated the maximum heartbeats per year (52,560,000). Your heart is quite the hard worker!"
+)
+```
+
+### Q7 of 8
+
+```{r q7, echo=FALSE}
+question("What is the range of heartbeats per year for an adult (lower range to upper range)? **Hint:** You can go back to previous code chunks and print the values that are in the lower and upper range variables.",
+  answer("3153600 to 525600"),
+  answer("31536000 to 52560000", correct = TRUE),
+  answer("1234 to 4321"),
+  answer("60 to 100"),
+  answer("20530530 to 60120200"),
+  allow_retry = TRUE,
+  random_answer_order = TRUE
+)
+```
+
+### Q8 of 8
+
+```{r setupq8, include=FALSE}
+mins_day <- 60 * 24
+mins_year <- mins_day * 365
+upper_range_bpm <- 100
+lower_range_bpm <- 60
+upper_bpy <- upper_range_bpm*mins_year
+lower_bpy <- lower_range_bpm*mins_year
+```
+
+What is the difference between the upper and lower range of heartbeats per year? Calculate this without re-typing the numbers.
+
+```{r q8, exercise = TRUE, exercise.setup = "setupq8"}
+
+```
+
+::: {#q8-hint}
+**Hint:** Use the variables for the upper and lower heartbeats per year to write an expression for the difference.
+:::
+
+```{r q8-solution}
+upper_bpy - lower_bpy
+```
+
+```{r q8-check}
+grade_this_code(
+  correct = "Outstanding! The difference is 21,024,000 heartbeats per year. This shows how much heart rate can vary between individuals!"
+)
+```
+
+### Great job on finishing this problem set!
+
+![](https://media.giphy.com/media/xUOxf7XfmpxuSode1O/giphy.gif)
+
+## Challenge Problem 2 {data-progressive="TRUE"}
+
+Welcome to the challenge problems for the data types lesson! As a reminder, these are set up for additional practice with R for those who finish the class exercises early.
+
+### 
+
+```{r ready2, echo=FALSE}
+question('Ready to proceed?',
+  answer("Yes", correct = TRUE),
+  answer("No"),
+  try_again = "No worries! These questions are entirely optional and provide additional practice!",
+  allow_retry = TRUE,
+  correct = "Excellent!"
+  )
+```
+
+### Q1 of 13
+
+You work at a bodega that sells candy, a popular item here is the chocolate bar.
+
+<center><img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnN1anlpeDVmaW51Y2xvN2pwbTQzdzY0YWM3dHV1cjRjcTliaXZ4bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l2JhrQPo0u1fZG0O4/giphy.gif" height="200"/></center>
+
+Assign the variable `item` with the value `"chocolate bar"`.
+
+```{r item, exercise = TRUE}
+
+```
+
+::: {#item-hint}
+**Hint:** Use either `item <- "chocolate bar"` or `item = "chocolate bar"`. Remember to include the quotation marks around the text!
+:::
+
+```{r item-solution}
+# with <- operator ----
+item <- "chocolate bar"
+
+# with = operator ----
+item = "chocolate bar"
+```
+
+```{r item-check}
+grade_code(
+  correct = "Perfect! You've created a character variable to store our product name. This will help us keep track of what we're selling!"
+)
+```
+
+### Q2 of 13
+
+Each chocolate bar costs \$1.25, assign the variable `price` with the price of the chocolate bar as a **numeric**.
+
+```{r price, exercise = TRUE}
+
+```
+
+```{r price-solution}
+# with <- operator ----
+price <- 1.25
+
+# with = operator ----
+price = 1.25
+```
+
+::: {#price-hint}
+**Hint:** Remove the \$ sign.
+:::
+
+```{r price-check}
+grade_code(
+  correct = "Excellent! You've stored the price as a numeric value. Notice we don't include the $ symbol - R stores just the number."
+)
+```
+
+### Q3 of 13
+
+WA state is a state with sales tax of 6.5%, calculate the total price of the 1 chocolate bar with sales tax, assign this to a new object called `with_tax`.
+
+```{r tax_setup, include=FALSE}
+price = 1.25
+```
+
+```{r tax, exercise = TRUE, exercise.setup="tax_setup"}
+
+```
+
+```{r tax-solution}
+# with <- operator ----
+with_tax <- price*1.065
+
+# with = operator ----
+with_tax = price*1.065
+```
+
+::: {#tax-hint}
+**Hint:** Use your stored values instead of retyping the price. To get the total price with sales tax multiply the price by 1.065.
+:::
+
+```{r tax-check}
+grade_code(
+  correct = "Great work! You calculated the price with tax ($1.33). Using variables makes it easy to update calculations if prices change!"
+)
+```
+
+### Q4 of 13
+
+How much would it cost to buy 6 chocolate bars **BEFORE** tax?
+
+```{r price_before_setup, include=FALSE}
+price = 1.25
+with_tax = price*1.065
+```
+
+```{r price_before, exercise = TRUE, exercise.setup="price_before_setup"}
+
+```
+
+```{r price_before-solution}
+price*6
+
+```
+
+::: {#price_before-hint}
+**Hint:** Multiply your variable for the price before tax by the number of chocolate bars
+:::
+
+```{r price_before-check}
+grade_code(
+  correct = "Perfect! Six chocolate bars would cost $7.50 before tax. You're getting the hang of using variables in calculations!"
+)
+```
+
+### Q5 of 13
+
+How much would it cost to buy 6 chocolate bars **AFTER** tax?
+
+```{r price_after_setup, include=FALSE}
+price = 1.25
+with_tax = price*1.065
+```
+
+```{r price_after, exercise = TRUE, exercise.setup="price_after_setup"}
+
+```
+
+```{r price_after-solution}
+# order1 ----
+with_tax*6
+
+```
+
+::: {#price_after-hint}
+**Hint:** Multiply your variable for the price with tax by the number of chocolate bars
+:::
+
+```{r price_after-check}
+grade_code(
+  correct = "Excellent! Six chocolate bars would cost $7.99 after tax. You can see how tax adds up on larger purchases!"
+)
+```
+
+### Q6 of 13
+
+The price of the chocolate bar is discounted to \$1.15 per bar before tax. Assign `discount_price` to this new price.
+
+```{r new_price, exercise = TRUE}
+
+```
+
+::: {#new_price-hint}
+**Hint:** Assign 1.15 to the variable `discount_price` using either `<-` or `=`. Don't include the $ symbol.
+:::
+
+```{r new_price-solution}
+# with <- operator ----
+discount_price <- 1.15
+
+# with = operator ----
+discount_price = 1.15
+```
+
+::: {#new_price-hint}
+**Hint:** Remove the \$ sign.
+:::
+
+```{r new_price-check}
+grade_code(
+  correct = "Great! You've stored the discounted price. This is a 10 cent savings per chocolate bar!"
+)
+```
+
+### Q7 of 13
+
+What is the sale price with tax per chocolate bar? Assign `discount_with_tax` with this new value.
+
+```{r new_price_tax_setup, include=FALSE}
+price = 1.25
+with_tax = price*1.065
+discount_price = 1.15
+```
+
+```{r new_price_tax, exercise = TRUE, exercise.setup="new_price_tax_setup"}
+
+```
+
+```{r new_price_tax-solution}
+# with <- operator ----
+discount_with_tax <- discount_price * 1.065
+
+# with = operator ----
+discount_with_tax = discount_price * 1.065
+```
+
+::: {#new_price_tax-hint}
+**Hint:** Recall the sales tax is 6.5% and we multiply the price with the sales tax.
+:::
+
+```{r new_price_tax-check}
+grade_code(
+  correct = "Perfect! The discounted price with tax is $1.22. You've successfully applied the same tax calculation to the new price!"
+)
+```
+
+### Q8 of 13
+
+You receive a large order of chocolate bars. The quantity requested is seventy chocolate bars!
+
+Make a new object called `quantity` and assign it `"seventy"`.
+
+```{r quantity_setup, include=FALSE}
+price = 1.25
+with_tax = price*1.065
+discount_price = 1.15
+```
+
+```{r quantity, exercise = TRUE, exercise.setup="quantity_setup"}
+
+```
+
+::: {#quantity-hint}
+**Hint:** Assign the text "seventy" to the variable quantity. Remember to use quotation marks: `quantity <- "seventy"`
+:::
+
+```{r quantity-solution}
+# with <- operator ----
+quantity <- 'seventy'
+
+# with = operator ----
+quantity ='seventy'
+```
+
+```{r quantity-check}
+grade_code(
+  correct = "Good! You've stored the quantity as text. But wait - will this work for calculations? Let's see what happens next..."
+)
+```
+
+### Q9 of 13
+
+Since you were storing these variables as you went you should be able to just ask R to do `discount_price*quantity` or `discount_with_tax*quantity`.
+
+```{r bad_data_type_setup, include=FALSE}
+price = 1.25
+with_tax = price*1.065
+discount_price = 1.15
+discount_with_tax <- discount_price * 1.065
+quantity <- 'seventy'
+```
+
+```{r bad_data_type, exercise=TRUE, exercise.setup="bad_data_type_setup"}
+
+
+```
+
+::: {#bad_data_type-hint}
+**Hint:** Try typing `discount_price * quantity` or `discount_with_tax * quantity` to see what error appears. This will help you understand the problem!
+:::
+
+```{r bad_data_type2, echo=FALSE}
+question_checkbox('But if try either of those calculations you will get an error, why is that?',
+  answer("R cannot do math"),
+  answer("R is confused"),
+  answer("The data type of `quantity` is wrong?", correct = TRUE),
+  answer("You did not store the right values."),
+  try_again = "Not exactly. What types of data can you do math operations with?",
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  correct = "Excellent! That is correct!"
+  )
+```
+
+### Q10 of 13
+
+```{r}
+price <- 1.25
+
+```
+
+```{r price_data_type2, echo=FALSE}
+question_checkbox('What data type is `price`?',
+  answer("character"),
+  answer("string"),
+  answer("numeric", correct = TRUE),
+  answer("integer"),
+  answer("booleon"),
+  answer("logical"),
+  try_again = "Not exactly! Try again.",
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  correct = "Excellent! That is correct!"
+  )
+```
+
+### Q11 of 13
+
+```{r}
+quantity <- "seventy"
+
+```
+
+```{r price_data_type3, echo=FALSE}
+question_checkbox('What data type is `quantity`?',
+  answer("character", correct = TRUE),
+  answer("string", correct = TRUE),
+  answer("numeric"),
+  answer("integer"),
+  answer("booleon"),
+  answer("logical"),
+  try_again = "Not exactly! Try again.",
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  correct = "Yes, correct! This is why we cannot do addition on a numeric with a string."
+  )
+```
+
+### Q12 of 13
+
+Re-assign `quantity` in the correct data type to do the calculation
+
+```{r quantity2_setup, include=FALSE}
+price = 1.25
+with_tax = price*1.065
+discount_price = 1.15
+discount_with_tax <- discount_price * 1.065
+```
+
+```{r quantity2, exercise = TRUE, exercise.setup="quantity2_setup"}
+
+```
+
+::: {#quantity2-hint}
+**Hint:** Instead of `seventy` which is a string data type, use the integer data type.
+:::
+
+```{r quantity2-solution}
+# with <- operator ----
+quantity <- 70
+
+# with = operator ----
+quantity = 70
+```
+
+```{r quantity2-check}
+grade_code(
+  correct = "Perfect! Now quantity is stored as a number (70) instead of text. This will allow us to perform mathematical operations!"
+)
+```
+
+### Q13 of 13
+
+Now calculate the discounted price after tax for this large order
+
+```{r quantity3_setup, include=FALSE}
+price = 1.25
+with_tax = price*1.065
+discount_price = 1.15
+discount_with_tax <- discount_price * 1.065
+quantity = 70
+```
+
+```{r quantity3, exercise = TRUE, exercise.setup="quantity3_setup"}
+
+```
+
+::: {#quantity3-hint}
+**Hint:** The total price for this order is the discounted price with tax multiplied by the quantity
+:::
+
+```{r quantity3-solution}
+# with <- operator ----
+discount_with_tax*quantity
+
+# with = operator ----
+quantity*discount_with_tax
+```
+
+```{r quantity3-check}
+grade_code(
+  correct = "Fantastic! The total cost for 70 chocolate bars with the discount and tax is $85.83. You've successfully completed a complex business calculation using variables and different data types!"
+)
+```
+
+### Great work on completing this challenge problem!
+
+<center><img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTRyeDV5bWdjb2RpMnpsZ2JvYWt0OWwyOG16d29peDJ6aGZqMjcxOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Wrscj8qsDogR4QHx2j/giphy.gif" height="200"/></center>
+
+
+## Exit Ticket
+
+Questions? Don’t forget to turn in today’s exit ticket!
+
+https://forms.gle/4mEXZtvekXzqGpiK8
+
+
+<center>
+<img src="https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/e684f0da-13b1-4d00-ab25-37814e79ee1e_rw_1920.png?h=2b72c110cfcf02f5cf1f74b558461c06" width = 400>
+</center>
+
+<small>Image source: [Allison Horst](https://allisonhorst.com/everything-else)</small>

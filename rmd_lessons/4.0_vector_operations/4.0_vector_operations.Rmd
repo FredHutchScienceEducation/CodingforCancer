@@ -1,0 +1,1559 @@
+---
+title: "4.0 Vector Operations"
+output:
+  learnr::tutorial:
+  progressive: TRUE
+  allow_skip: TRUE
+tutorial:
+      id: 4.0_vector_operations
+      version: 1 # change the version when you want to invalidate past progress
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(gradethis)
+
+tutorial_options(
+    exercise.reveal_solution = FALSE, #Turn off show_solution button 
+    exercise.timelimit = 20, #Code can only run at most 20 seconds
+)
+
+```
+
+## Vectors recap
+
+In this lesson, we look how to perform operations on vectors. Vectors are very useful for storing multiple values, but also important to understand how we can use the stored values.
+
+<center>
+<img src="https://imgs.xkcd.com/comics/fuck_grapefruit.png" width = 400>
+</center>
+
+<small>Image source: [xkcd](https://xkcd.com/)</small>
+
+
+
+\
+Recall that we can create a vector using the `c()` function and assigning it (`<-` or `=`) to a variable, like so:
+
+```{r}
+numbers <- c(2, 3, 4, 5)
+
+fruits = c("apples", "bananas", "kiwis", "limes")
+```
+
+\
+Let's create a vector called `favorite_numbers` and store your favorite numbers as integers or numerics.
+
+```{r fav_num, exercise=TRUE}
+
+favorite_numbers <-
+
+# The code below allows the favorite_numbers vector to be used in future code chunks. 
+# You do not need modify the code below.
+assign("favorite_numbers", favorite_numbers, envir=globalenv())
+print(favorite_numbers)
+```
+
+::: {#fav_num-hint}
+**Hint:** Use the `c()` function to combine your favorite numbers. For example: `c(7, 14, 21, 42)`
+:::
+
+Recall that we can subset values within a vector using the square brackets `[]` like `vector[index]` or `vector[index1, index2]` or `vector[index1:index2]`.
+
+```{r extract, exercise=TRUE}
+
+```
+
+::: {#extract-hint}
+**Hint:** Try extracting some values from your `favorite_numbers` vector. For example: `favorite_numbers[1]` for the first value or `favorite_numbers[1:3]` for the first three values.
+:::
+
+## Comparison operators
+
+Another way we can subset vectors is by using comparison operators.
+
+-   `==` equals to
+
+-   `>` greater than
+
+-   `<` less than
+
+-   `>=` greater than or equals to
+
+-   `<=` less than of equals to
+
+To use comparison operators, we think about it in two steps:
+
+1.  First, ask R to make a comparison. "Which numbers in the `favorite_numbers` vector is less than 20?" To do this, we type: `favorite_numbers < 20`.
+
+    ```{r compare_numbers, exercise=TRUE}
+
+
+    ```
+
+    ::: {#compare_numbers-hint}
+    **Hint:** Type `favorite_numbers < 20` to see which values are less than 20. This will return TRUE/FALSE for each element.
+    :::
+
+    The result of a comparison expressions return either `TRUE` or `FALSE` for each index of the vector.
+
+2.  Second, if we subset our vector with the comparison expression, like this `favorite_numbers[favorite_numbers < 20]`, it will subset any index that has `TRUE` in the position.
+
+    ```{r subset_compare, exercise=TRUE}
+
+
+    ```
+
+    ::: {#subset_compare-hint}
+    **Hint:** Use the comparison inside square brackets: `favorite_numbers[favorite_numbers < 20]` to extract only values less than 20.
+    :::
+
+------------------------------------------------------------------------
+
+### Practice
+
+Try out some comparison operators here:
+
+1.  Extract values that are higher than 50 in `favorite_numbers`.
+
+    ```{r compare_practice1, exercise=TRUE}
+
+
+    ```
+
+    ::: {#compare_practice1-hint}
+    **Hint:** Use the greater than operator `>` inside square brackets: `favorite_numbers[favorite_numbers > 50]`
+    :::
+
+2.  Extract values that are less than or equal to 5 in `favorite_numbers`.
+
+    ```{r compare_practice2, exercise=TRUE}
+
+
+    ```
+
+    ::: {#compare_practice2-hint}
+    **Hint:** Use the less than or equal to operator `<=`: `favorite_numbers[favorite_numbers <= 5]`
+    :::
+
+3.  Extract values greater than the average value in `favorite_numbers`.
+
+    ```{r compare_practice3, exercise=TRUE}
+
+
+    ```
+
+    ::: {#compare_practice3-hint}
+    **Hint:** First calculate the mean with `mean(favorite_numbers)`, then use it in the comparison: `favorite_numbers[favorite_numbers > mean(favorite_numbers)]`
+    :::
+
+## Conditional operators
+
+To specify **not**, we use the `!` sign. For example, to extract numbers **not greater than 5**, we type `favorite_numbers[!(favorite_numbers < 5)]`. Try it below:
+
+```{r not_example}
+
+```
+
+::: {#not_example-hint}
+**Hint:** Try the example: `favorite_numbers[!(favorite_numbers > 5)]` to see values that are NOT greater than 5.
+:::
+
+Choose a number in `favorite_numbers`, extract all numbers except that number:
+
+```{r not, exercise=TRUE}
+
+```
+
+::: {#not-hint}
+**Hint:** Use `!=` for "not equal to" or use `!` with `==`. For example: `favorite_numbers[favorite_numbers != 10]` or `favorite_numbers[!(favorite_numbers == 10)]`
+:::
+
+------------------------------------------------------------------------
+
+We can also use multiple conditions to extract values!
+
+-   **&**, or **&&** inclusively combine conditions (AND)
+
+-   **\|**, or **\|\|** exclusively combine conditions (OR)
+
+For example, if we wanted to extract values that are **equal to 12 AND greater than 15**, we type: `favorite_numbers[favorite_numbers == 12 && favorite_nunmbers > 15]`.
+
+\
+Let's try using **&**. Extract values that are greater than 4 AND less than 55.
+
+```{r and, exercise=TRUE}
+
+```
+
+::: {#and-hint}
+**Hint:** Use the `&` operator to combine conditions: `favorite_numbers[favorite_numbers > 4 & favorite_numbers < 55]`
+:::
+
+\
+Extract values that are greater than 40 OR less than 90.
+
+```{r or, exercise=TRUE}
+
+```
+
+::: {#or-hint}
+**Hint:** Use the `|` operator for OR conditions: `favorite_numbers[favorite_numbers > 40 | favorite_numbers < 90]`
+:::
+
+## Missing data
+
+Sometimes our data will have missing data! This value is written as `NA`, or "**N**ot **A**vailable".
+
+<center>
+<img src="https://pbs.twimg.com/media/CpDHF6WWEAAWeg2?format=jpg&name=small" width = 300>
+</center>
+
+\
+
+
+\
+Let's see what happens when you have `NA` in a vector. First, let's define this vector `numbers` with 2 `NA` values.
+
+```{r na_setup, include=FALSE}
+numbers <- c(4, 10, 7, NA, 35, 86, 32, NA)
+
+```
+
+```{r na, exercise=TRUE}
+numbers <- c(4, 10, 7, NA, 35, 86, 32, NA)
+
+
+```
+
+::: {#na-hint}
+**Hint:** After creating the vector, try printing it to see how `NA` values appear: `print(numbers)`
+:::
+
+Now let's compute the `mean()` of `numbers`
+
+```{r mean_na, exercise=TRUE, exercise.setup="na_setup"}
+
+```
+
+::: {#mean_na-hint}
+**Hint:** Try `mean(numbers)` and see what happens when there are NA values in the vector.
+:::
+
+\
+R cannot compute math functions like `mean` or `max` with `NA` values, so need to remove these `NA` values. To do this, we add the `na.rm=TRUE` argument to functions.
+
+```{r mean_rm_na, exercise=TRUE, exercise.setup="na_setup"}
+
+```
+
+::: {#mean_rm_na-hint}
+**Hint:** Add the `na.rm=TRUE` argument: `mean(numbers, na.rm=TRUE)`
+:::
+
+\
+If you are uncertain if there are missing data points, we can use the `is.na()` function.
+
+```{r is_na, exercise=TRUE, exercise.setup="na_setup"}
+
+
+```
+
+::: {#is_na-hint}
+**Hint:** Use `is.na(numbers)` to check which values are NA. This returns TRUE for NA values and FALSE for non-NA values.
+:::
+
+\
+If we use the logical output from `is.na()` with the not operator (`!`), we can tell R to "extract all values not NA"
+
+```{r extract_not_na, exercise=TRUE, exercise.setup="na_setup"}
+
+```
+
+::: {#extract_not_na-hint}
+**Hint:** numbers[!is.na(numbers)]
+:::
+
+## Practice {data-progressive="TRUE"}
+
+Last time we learned how to make a vector and use accessors to find values at specific positions in a vector.
+
+\
+Today we'll learn more about how to manipulate and use vectors.
+
+### Q1 of 19
+
+```{r practice1, echo=FALSE}
+question_checkbox('What is a vector?',
+  answer("an object that can store multiple values", correct = TRUE),
+  answer("a person"),
+  answer("a data type"),
+  answer("a data set"),  
+  try_again = "Not quite. Refer from the 'Data types' section from the Intro to R lesson.",
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  correct = "Excellent! Great work!"
+  )
+```
+
+### Q2 of 19
+
+To start, let's make a vector called `ages` with these values `50`, `42`, `55`, `53`, `60`, `25`, `65`.
+
+```{r practice2, exercise=TRUE}
+
+```
+
+```{r practice2-solution}
+# = ----
+ages = c(50, 42, 55, 53, 60, 25, 65)
+
+# <- ----
+ages <- c(50, 42, 55, 53, 60, 25, 65)
+```
+
+```{r practice2-check}
+grade_code(
+    correct = "Perfect! You've successfully created the ages vector with all the specified values.",
+    incorrect = "Not quite right. Make sure you're using the c() function and including all seven age values: 50, 42, 55, 53, 60, 25, 65."
+)
+```
+
+::: {#practice2-hint}
+**Hint:** To assign a vector use the assignment operator `<-` or `=` and the function `c()`.
+:::
+
+### Q3 of 19
+
+Last time we sub-setted the vector by indexes (position).
+
+\
+Extract the third value from the vector `ages`.
+
+```{r ages_setup, include=FALSE}
+ages <- c(50, 42, 55, 53, 60, 25, 65)
+```
+
+```{r practice3, exercise = TRUE, exercise.setup="ages_setup"}
+
+```
+
+```{r practice3-solution}
+ages[3] 
+
+```
+
+```{r practice3-check}
+grade_code(
+    correct = "Excellent! You correctly extracted the third value (55) from the ages vector.",
+    incorrect = "Not quite. Remember to use square brackets with the index number: ages[3]"
+)
+```
+
+::: {#practice3-hint}
+**Hint:** Use square brackets with the position number: `ages[3]` to get the third element.
+:::
+
+### Q4 of 19
+
+Now we will extract using conditions.
+
+\
+Let's start by extracting values from `ages` that are greater than 50.
+
+```{r practice4, exercise = TRUE, exercise.setup="ages_setup"}
+
+```
+
+```{r practice4-solution}
+ages[ages>50] 
+
+```
+
+```{r practice4-check}
+grade_code(
+    correct = "Great job! You successfully extracted all values greater than 50 from the ages vector.",
+    incorrect = "Not quite right. Use the comparison operator inside square brackets: ages[ages > 50]"
+)
+```
+
+::: {#practice4-hint}
+**Hint:** Use the greater than operator `>` inside square brackets: `ages[ages > 50]`
+:::
+
+### Q5 of 19
+
+Now let's extract values that are numerically equivalent to the argument using the `==` operator.
+
+\
+Extract values from `ages` that are exactly 60.
+
+```{r practice5, exercise = TRUE, exercise.setup="ages_setup"}
+
+```
+
+```{r practice5-solution}
+ages[ages==60] 
+
+```
+
+```{r practice5-check}
+grade_code(
+    correct = "Perfect! You found the value that equals exactly 60.",
+    incorrect = "Remember to use the double equals sign == for exact equality: ages[ages == 60]"
+)
+```
+
+::: {#practice5-hint}
+**Hint:** Use the equality operator `==` (double equals): `ages[ages == 60]`
+:::
+
+### Q6 of 19
+
+You can combine conditions using the `&`, `&&` operator (AND) between conditions.
+
+\
+Extract values greater than 50 AND less than 60 from `ages`.
+
+```{r practice6, exercise = TRUE, exercise.setup="ages_setup"}
+
+```
+
+```{r practice6-solution}
+# ----
+ages[ages > 50 & ages < 60] 
+
+# ----
+ages[ages < 60 & ages > 50] 
+
+```
+
+```{r practice6-check}
+grade_code(
+    correct = "Excellent! You successfully combined two conditions using the AND operator.",
+    incorrect = "Make sure to use the & operator between your two conditions: ages[ages > 50 & ages < 60]"
+)
+```
+
+::: {#practice6-hint}
+**Hint:** Use the `&` operator to combine both conditions: `ages[ages > 50 & ages < 60]`
+:::
+
+### Q7 of 19
+
+You can extract the opposite of a condition using the `!` operator (NOT logical operator).
+
+\
+Extract values that are greater than 55.
+
+```{r practice7, exercise = TRUE, exercise.setup="ages_setup"}
+
+```
+
+```{r practice7-solution}
+ages[ages>55] 
+
+```
+
+```{r practice7-check}
+grade_code(
+    correct = "Good work! You extracted all values greater than 55.",
+    incorrect = "Use the greater than operator: ages[ages > 55]"
+)
+```
+
+::: {#practice7-hint}
+**Hint:** Use the greater than operator: `ages[ages > 55]`
+:::
+
+### Q8 of 19
+
+Now extract values that are **not** greater than 55 (the opposite of the previous command).
+
+```{r practice8, exercise = TRUE, exercise.setup="ages_setup"}
+
+```
+
+```{r practice8-solution}
+ages[!(ages>55)]
+
+```
+
+```{r practice8-check}
+grade_code(
+    correct = "Perfect! You used the NOT operator to get the opposite condition.",
+    incorrect = "Use the ! operator before the condition in parentheses: ages[!(ages > 55)]"
+)
+```
+
+::: {#practice8-hint}
+**Hint:** Use the `!` operator before the condition in parentheses: `ages[!(ages > 55)]`
+:::
+
+### Q9 of 19
+
+So far we have only used vectors with complete data, but what if we were missing some values?
+
+\
+Often times with real datasets we have missing values, these are represented as `NA`.
+
+\
+Let's make a vector with missing variables, make the vector `heights` that contains `2`, `4`, `4`, `NA`, `6`.
+
+```{r practice9, exercise=TRUE}
+
+```
+
+```{r practice9-solution}
+# = ----
+heights = c(2, 4, 4, NA, 6)
+
+# <- ----
+heights <- c(2, 4, 4, NA, 6)
+```
+
+```{r practice9-check}
+grade_code(
+    correct = "Great! You've created a vector with missing data (NA values).",
+    incorrect = "Make sure to include NA (without quotes) as one of the values: c(2, 4, 4, NA, 6)"
+)
+```
+
+::: {#practice9-hint}
+**Hint:** Use `c()` to create the vector and include `NA` (without quotes) as the fourth element: `heights <- c(2, 4, 4, NA, 6)`
+:::
+
+### Q10 of 19
+
+```{r heights_setup, include=FALSE}
+heights = c(2, 4, 4, NA, 6)
+```
+
+Now, R can't do math with `NA` values. To confirm this, try to calculate the mean of `heights`.
+
+```{r practice10, exercise=TRUE, exercise.setup="heights_setup"}
+
+```
+
+```{r practice10-solution}
+mean(heights)
+```
+
+```{r practice10-check}
+grade_code(
+    correct = "In this case, you receive an error because NA exist in the vector."
+)
+```
+
+::: {#practice10-hint}
+**Hint:** Use the `mean()` function: `mean(heights)` and observe what happens with NA values.
+:::
+
+### Q11 of 19
+
+You have to remove the `NA` values first before performing a math function.
+
+\
+You can remove `NA` values by adding the argument `na.rm= TRUE` to your function.
+
+\
+Try taking the mean of `heights` again, this time with the `na.rm=TRUE` argument.
+
+```{r practice11, exercise=TRUE, exercise.setup="heights_setup"}
+
+```
+
+```{r practice11-solution}
+mean(heights, na.rm=TRUE)
+```
+
+```{r practice11-check}
+grade_code(
+    correct = "Excellent! Now R can calculate the mean by ignoring the NA values.",
+    incorrect = "Add the na.rm=TRUE argument: mean(heights, na.rm=TRUE)"
+)
+```
+
+::: {#practice11-hint}
+**Hint:** Add the `na.rm=TRUE` argument to the mean function: `mean(heights, na.rm=TRUE)`
+:::
+
+### Q12 of 19
+
+Calculate the max of `heights` with the `na.rm=TRUE` argument.
+
+```{r practice12, exercise=TRUE, exercise.setup="heights_setup"}
+
+```
+
+```{r practice12-solution}
+max(heights, na.rm=TRUE)
+```
+
+```{r practice12-check}
+grade_code(
+    correct = "Perfect! You found the maximum value while ignoring NA values.",
+    incorrect = "Use the max() function with na.rm=TRUE: max(heights, na.rm=TRUE)"
+)
+```
+
+::: {#practice12-hint}
+**Hint:** Use the `max()` function with the `na.rm=TRUE` argument: `max(heights, na.rm=TRUE)`
+:::
+
+### Q13 of 19
+
+You can also R to tell you which values are `NA` or not using the `is.na()` function.
+
+\
+The function returns a list of logicals (`TRUE` and `FALSE`). `NA` values will return `TRUE` while everything else will return `FALSE`.
+
+\
+Try the `is.na()` function on our vector `ages`.
+
+```{r practice13, exercise=TRUE, exercise.setup="ages_setup"}
+
+```
+
+```{r practice13-solution}
+is.na(ages)
+```
+
+```{r practice13-check}
+grade_code(
+    correct = "Good! Since the ages vector has no NA values, all results are FALSE.",
+    incorrect = "Use the is.na() function: is.na(ages)"
+)
+```
+
+::: {#practice13-hint}
+**Hint:** Use the `is.na()` function: `is.na(ages)` to check for missing values.
+:::
+
+### Q14 of 19
+
+Now try `is.na()` on our vector `heights`.
+
+```{r practice14, exercise=TRUE, exercise.setup="heights_setup"}
+
+```
+
+```{r practice14-solution}
+is.na(heights)
+```
+
+```{r practice14-check}
+grade_code(
+    correct = "Great! You can see TRUE in the fourth position where the NA value is located.",
+    incorrect = "Use the is.na() function: is.na(heights)"
+)
+```
+
+::: {#practice14-hint}
+**Hint:** Use the `is.na()` function: `is.na(heights)` to check which values are missing.
+:::
+
+### Q15 of 19
+
+```{r practice15, echo=FALSE}
+question_checkbox('Which index is the `NA` value in the vector `heights`?',
+  answer("1"),
+  answer("2"),
+  answer("3"),
+  answer("4", correct = TRUE),
+  answer("5"),
+  try_again = "Not quite. What position is the `TRUE` in the `heights` vector.",
+  allow_retry = TRUE,
+  random_answer_order = FALSE,
+  correct = "Excellent! Great work!"
+  )
+```
+
+### Q16 of 19
+
+We can also extract elements that are not missing values (not `NA`s) from our vector by using the `!` operator, the `is.na()` function, and the accessor `[]`.
+
+\
+First, let's create a subset of heights without NA values.
+
+```{r practice16, exercise=TRUE, exercise.setup="heights_setup"}
+
+```
+
+```{r practice16-solution}
+heights[!(is.na(heights))]
+```
+
+```{r practice16-check}
+grade_code(
+    correct = "Excellent! You successfully extracted only the non-NA values from the heights vector.",
+    incorrect = "Use the ! operator with is.na() inside square brackets: heights[!is.na(heights)]"
+)
+```
+
+::: {#practice16-hint}
+**Hint:** Use both the not `!` operator and the `is.na()` function as the input the accessing the `heights` vector.
+:::
+
+### Q17 of 19
+
+```{r practice17, echo=FALSE}
+question_checkbox('What is this portion `!(is.na(heights))` asking R to do?',
+  answer("to find values where `is.na(heights)` is not TRUE", correct = TRUE),
+  answer("to find values where `is.na(heights)` is TRUE"),
+  answer("to do math"),
+  answer("to print the vector"),
+  try_again = "Not quite. Remember the `!` is the opposite operator and the `is.na()` looks for whether a value is `NA` or not (`TRUE` = `NA`)",
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  correct = "Excellent! Great work!"
+  )
+```
+
+### Q18 of 19
+
+To save this subset (`heights` without `NA` values), assign it to a new object called `heights_no_NA`.
+
+```{r practice18, exercise=TRUE, exercise.setup="heights_setup"}
+
+```
+
+```{r practice18-solution}
+# <- ----
+heights_no_NA = heights[!(is.na(heights))]
+
+
+# <- ----
+heights_no_NA <- heights[!(is.na(heights))]
+```
+
+```{r practice18-check}
+grade_code(
+    correct = "Perfect! You've created a new vector without any NA values.",
+    incorrect = "Assign the subset to a new variable: heights_no_NA <- heights[!is.na(heights)]"
+)
+```
+
+::: {#practice18-hint}
+**Hint:** Use assignment operator to create a new variable: `heights_no_NA <- heights[!is.na(heights)]`
+:::
+
+### Q19 of 19
+
+```{r heights_na_setup, include=FALSE, exercise.setup="heights_setup"}
+heights_no_NA <- heights[!(is.na(heights))]
+
+```
+
+Since this new object `heights_no_NA`, does not have any `NA` values you should be able to use math functions without using the argument `na.rm = TRUE`.
+
+\
+Try calculating the mean of `heights_no_NA`.
+
+```{r practice19, exercise=TRUE, exercise.setup="heights_na_setup"}
+
+```
+
+```{r practice19-solution}
+
+mean(heights_no_NA)
+
+```
+
+```{r practice19-check}
+grade_code(
+    correct = "Excellent! Since there are no NA values, the mean function works without the na.rm argument.",
+    incorrect = "Use the mean() function: mean(heights_no_NA)"
+)
+```
+
+::: {#practice19-hint}
+**Hint:** Use the `mean()` function: `mean(heights_no_NA)` - no need for na.rm since there are no NA values.
+:::
+
+### Great job! You were able to subset your vectors based on conditions and remove all the NAs from your vector!
+
+## Exercise 1 {data-progressive="TRUE"}
+
+Let's get started with the in-class exercises. This exercise set will cover the Vector Operations material.
+
+### Q1 of 12
+
+```{r ex1_1, echo=FALSE}
+question('TRUE or FALSE: Vectors can be subsetted by conditions.',
+  answer("TRUE", correct = TRUE),
+  answer("FALSE"),
+  try_again = "Not quite. Conditions can be things like is greater than 50 (vector>50)",
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  correct = "Nice! That's correct!"
+  )
+```
+
+### Q2 of 12
+
+```{r ex1_2, echo=FALSE}
+question_text('What is the operator for not (or opposite)?',
+  answer("!", correct=TRUE),
+  try_again = "Not exactly. You can use this also to show excitement when writing.",
+  allow_retry = TRUE,
+  correct = "Correct!"
+  )
+```
+
+### Q3 of 12
+
+Make a vector called `more_heights` with these values `(63, 69, 60, 65, NA, 68, 61, 70, 61, 59, 64, 69, 63, 63, NA, 72, 65, 64, 70, 63, 65)`.
+
+```{r ex1_3, exercise=TRUE}
+
+```
+
+```{r ex1_3-solution}
+# <- ----
+more_heights <- c(63, 69, 60, 65, NA, 68, 61, 70, 61, 59, 64, 69, 63, 63, NA, 72, 65, 64, 70, 63, 65)
+
+# = ----
+more_heights = c(63, 69, 60, 65, NA, 68, 61, 70, 61, 59, 64, 69, 63, 63, NA, 72, 65, 64, 70, 63, 65)
+
+```
+
+```{r ex1_3-check}
+grade_code("Great job! You've successfully created a vector with multiple numeric values and NA values. Remember that c() combines values into a vector.")
+```
+
+::: {#ex1_3-hint}
+**Hint:** Use the `c()` function to combine values into a vector. Don't forget to include the `NA` values exactly where they appear in the list.
+:::
+
+### Q4 of 12
+
+```{r ex1_4, echo=FALSE}
+question('Which is the function that tells us which data points are `NA`?',
+  answer("`is.na()`", correct=TRUE),
+  answer("`na()`"), 
+  answer("`na.rm=TRUE`"),
+  try_again = "Not exactly. `na.rm=TRUE` is an argument not a function.",
+  allow_retry = TRUE,
+  correct = "Yes! Nice work!"
+  )
+```
+
+### Q5 of 12
+
+Subset `more_heights` with values that are not `NA`.
+
+```{r more_heights_setup, include=FALSE}
+more_heights <- c(63, 69, 60, 65, NA, 68, 61, 70, 61, 59, 64, 69, 63, 63, NA, 72, 65, 64, 70, 63, 65)
+```
+
+```{r ex1_5, exercise=TRUE, exercise.setup="more_heights_setup"}
+
+```
+
+```{r ex1_5-solution}
+more_heights[!(is.na(more_heights))]
+
+```
+
+```{r ex1_5-check}
+grade_code("Excellent! You've successfully used logical indexing to filter out NA values. The ! operator negates the is.na() function to find non-NA values.")
+```
+
+::: {#ex1_5-hint}
+**Hint:**
+
+1.  You need to first use the `is.na()` function to find values that are NA.
+2.  Then use the `!` to find the opposite of the `is.na()` output from Hint 1.
+3.  Subset the `more_heights` vector with the result from Hint 2.
+:::
+
+### Q6 of 12
+
+Save the subset from above to a new object called `more_heights_noNA`.
+
+```{r ex1_6, exercise=TRUE, exercise.setup="more_heights_setup"}
+
+```
+
+```{r ex1_6-solution}
+# = ----
+more_heights_noNA = more_heights[!(is.na(more_heights))]
+
+# <- ----
+more_heights_noNA <- more_heights[!(is.na(more_heights))]
+
+
+```
+
+```{r ex1_6-check}
+grade_code("Perfect! You've assigned the filtered vector to a new variable. This is a common pattern in R - filtering data and storing it for later use.")
+```
+
+::: {#ex1_6-hint}
+**Hint:** Use the expression that you made in Q5 and assign it to `more_heights_noNA`.
+:::
+
+### Q7 of 12
+
+```{r more_heights_setup2, include=FALSE}
+more_heights <- c(63, 69, 60, 65, NA, 68, 61, 70, 61, 59, 64, 69, 63, 63, NA, 72, 65, 64, 70, 63, 65)
+more_heights_noNA = more_heights[!(is.na(more_heights))]
+```
+
+Calculate the median of `more_heights`, add the argument to remove the NAs.
+
+```{r ex1_7, exercise=TRUE, exercise.setup="more_heights_setup2"}
+
+```
+
+```{r ex1_7-solution}
+median(more_heights, na.rm = TRUE)
+
+```
+
+```{r ex1_7-check}
+grade_code("Great work! The na.rm = TRUE argument tells the median function to ignore NA values when calculating the result.")
+```
+
+::: {#ex1_7-hint}
+**Hint:** The `median()` function has an argument called `na.rm` that you can set to `TRUE` to remove NA values before calculating.
+:::
+
+### Q8 of 12
+
+Now calculate the median of `more_heights_noNA` (the subset of `more_heights` with NAs removed).
+
+```{r ex1_8, exercise=TRUE, exercise.setup="more_heights_setup2"}
+
+```
+
+```{r ex1_8-solution}
+median(more_heights_noNA)
+
+```
+
+```{r ex1_8-check}
+grade_code("Excellent! Since more_heights_noNA already has the NA values removed, you don't need the na.rm argument.")
+```
+
+::: {#ex1_8-hint}
+**Hint:** Since `more_heights_noNA` doesn't contain any NA values, you can use the `median()` function directly without any additional arguments.
+:::
+
+### Q9 of 12
+
+```{r ex1_9, echo=FALSE}
+question('Was there a difference between the two medians above?',
+  answer("No", correct=TRUE),
+  answer("Yes"), 
+  try_again = "Are the numbers the same?",
+  allow_retry = TRUE,
+  correct = "Correct! Both ways will achieve the same solution."
+  )
+```
+
+### Q10 of 12
+
+Identify the elements in `more_heights_noNA` are greater than 67.
+
+```{r ex1_10, exercise=TRUE, exercise.setup="more_heights_setup2"}
+
+```
+
+```{r ex1_10-solution}
+more_heights_noNA[more_heights_noNA >67]
+
+```
+
+```{r ex1_10-check}
+grade_code("Perfect! You've used logical indexing to filter values greater than 67. This shows only the actual values that meet the condition.")
+```
+
+::: {#ex1_10-hint}
+**Hint:** Use logical indexing with the `>` operator. The format is `vector[vector > value]` to get elements that meet the condition.
+:::
+
+### Q11 of 12
+
+Calculate the length of the subset of the vector you found above.
+
+```{r ex1_11, exercise=TRUE, exercise.setup="more_heights_setup2"}
+
+```
+
+```{r ex1_11-solution}
+length(more_heights_noNA[more_heights_noNA >67])
+
+```
+
+```{r ex1_11-check}
+grade_code("Excellent! Using length() on a filtered vector tells you how many elements meet your condition.")
+```
+
+::: {ex1_11-hint}
+**Hint:** Use the `length()` function on the your previous code in Q10.
+:::
+
+### Q12 of 12
+
+```{r ex1_12, echo=FALSE}
+question('What does the result from the above function (`length(more_heights_noNA[more_heights_noNA >67])`) best describe?',
+  answer("The number of datapoints whose ages is greater than 67.", correct=TRUE),
+  answer("The size of the `more_heights_noNA` vector."), 
+  answer("The median of the ages in the  `more_heights_noNA` vector."),
+  try_again = "Not exactly. If you do the `length()` function on a subsetted vector, what does the output mean?",
+  allow_retry = TRUE,
+  correct = "Great thinking! This is how we think about functions and code to achieve physical meaning."
+  )
+```
+
+### Great work!
+
+## Exercise 2 {data-progressive="TRUE"}
+
+### Q1 of 8
+
+Now make a vector called `buildings` with the names of the Fred Hutch buildings `("Arnold", "Weintraub", "Thomas", "Hutchinson")`.
+
+```{r ex1_13, exercise=TRUE}
+
+```
+
+```{r ex1_13-solution}
+# <- ----
+buildings <- c('Arnold', 'Weintraub', 'Thomas', 'Hutchinson')
+
+# = ----
+buildings = c('Arnold', 'Weintraub', 'Thomas', 'Hutchinson')
+
+```
+
+```{r ex1_13-check}
+grade_code("Great! You've created a character vector with building names. Notice how character strings need to be in quotes.")
+```
+
+::: {#ex1_13-hint}
+**Hint:** Use the `c()` function to combine character strings. Remember to put each building name in quotes (either single or double quotes work).
+:::
+
+### Q2 of 8
+
+Whoops, we forgot about `'Yale'`, add it to the beginning of `buildings`.
+
+```{r building_setup, include=FALSE}
+buildings = c('Arnold', 'Weintraub', 'Thomas', 'Hutchinson')
+
+```
+
+```{r ex1_14, exercise=TRUE, exercise.setup="building_setup"}
+
+```
+
+```{r ex1_14-solution}
+# <- ----
+buildings <- c("Yale", buildings)
+
+# = ----
+buildings = c("Yale", buildings)
+
+```
+
+```{r ex1_14-check}
+grade_code("Perfect! You've successfully added an element to the beginning of the vector by putting it first in the c() function.")
+```
+
+::: {#ex1_14-hint}
+**Hint:** To add an element to the beginning, use `c("Yale", buildings)`. The existing vector name can be used inside the c() function.
+:::
+
+### Q3 of 8
+
+We recently got two new buildings! Add `Steam Plant` and `Eastlake` to the end of `buildings`.
+
+```{r building_setup2, include=FALSE}
+buildings = c('Yale', 'Arnold', 'Weintraub', 'Thomas', 'Hutchinson')
+
+```
+
+```{r ex1_15, exercise=TRUE, exercise.setup="building_setup2"}
+
+```
+
+```{r ex1_15-solution}
+# <- ----
+buildings <- c(buildings, "Steam Plant", "Eastlake")
+
+# = ----
+buildings = c(buildings, "Steam Plant", "Eastlake")
+
+```
+
+```{r ex1_15-check}
+grade_code("Excellent! You've added multiple elements to the end of the vector. Notice how you can add several elements at once.")
+```
+
+::: {#ex1_15-hint}
+**Hint:** To add elements to the end, use `c(buildings, "Steam Plant", "Eastlake")`. Put the existing vector first, then the new elements.
+:::
+
+### Q4 of 8
+
+Subset the vector to show only the name of the building whose name is in Fred Hutchinson Cancer Center.
+
+```{r building_setup3, include=FALSE}
+buildings = c('Yale', 'Arnold', 'Weintraub', 'Thomas', 'Hutchinson',  "Steam Plant", "Eastlake")
+
+```
+
+```{r ex1_16, exercise=TRUE, exercise.setup="building_setup3"}
+
+```
+
+```{r ex1_16-solution}
+buildings[buildings == 'Hutchinson'] 
+
+```
+
+```{r ex1_16-check}
+grade_code("Great job! You've used logical indexing with the equality operator to find a specific building name.")
+```
+
+::: {#ex1_16-hint}
+**Hint:** the operator for equals is `==`.
+:::
+
+### Q5 of 8
+
+Make a vector called `vacation_days` with these values `(5, 7, 20, 1, 0, 0, 12, 4, 2, 2, 2, 4, 5, 6, 7, 10, 4)`.
+
+\
+This vector represents the number of vacation days possessed by various employees. Each element in the vector represents an individual, the value itself represents the number of vacation days they have
+
+```{r ex1_17, exercise=TRUE}
+
+```
+
+```{r ex1_17-solution}
+# = ----
+vacation_days = c(5, 7, 20, 1, 0, 0, 12, 4, 2, 2, 2, 4, 5, 6, 7, 10, 4)
+
+# <- ----
+vacation_days <- c(5, 7, 20, 1, 0, 0, 12, 4, 2, 2, 2, 4, 5, 6, 7, 10, 4)
+
+```
+
+```{r ex1_17-check}
+grade_code("Perfect! You've created a numeric vector representing vacation days data. This type of real-world data is common in data analysis.")
+```
+
+::: {#ex1_17-hint}
+**Hint:** Use the `c()` function to create a vector with all the numeric values. Make sure to include all 17 values as listed.
+:::
+
+### Q6 of 8
+
+How many employees are represented in the vector?
+
+```{r vacation_setup, include=FALSE}
+vacation_days = c(5, 7, 20, 1, 0, 0, 12, 4, 2, 2, 2, 4, 5, 6, 7, 10, 4)
+```
+
+```{r ex1_18, exercise=TRUE, exercise.setup="vacation_setup"}
+ 
+```
+
+```{r ex1_18-solution}
+length(vacation_days)
+
+```
+
+```{r ex1_18-check}
+grade_code("Excellent! The length() function tells you how many elements are in the vector, which corresponds to the number of employees.")
+```
+
+::: {#ex1_18-hint}
+**Hint:** Use the `length()` function to find out how many elements are in the vector. Each element represents one employee.
+:::
+
+### Q7 of 8
+
+How many employees have at least 7 days worth of vacation days available?
+
+```{r ex1_19, exercise=TRUE, exercise.setup="vacation_setup"}
+ 
+```
+
+```{r ex1_19-solution}
+length(vacation_days[vacation_days >= 7])
+
+```
+
+```{r ex1_19-check}
+grade_code("Great work! You've combined logical indexing with length() to count how many employees meet the condition of having at least 7 vacation days.")
+```
+
+::: {#ex1_19-hint}
+**Hint:** First filter the vector to find vacation days >= 7, then use `length()` to count how many employees meet this condition.
+:::
+
+### Q8 of 8
+
+How many employees have less than the average number of vacation days available?
+
+```{r ex1_20, exercise=TRUE, exercise.setup="vacation_setup"}
+ 
+```
+
+```{r ex1_20-solution}
+length(vacation_days[vacation_days < mean(vacation_days)])
+
+```
+
+```{r ex1_20-check}
+grade_code("Excellent! You've used mean() inside the logical condition to dynamically compare against the average. This is a powerful technique for data analysis.")
+```
+
+::: {#ex1_20-hint}
+**Hint:** Use `mean(vacation_days)` to calculate the average, then filter for values less than this average, and count them with `length()`.
+:::
+
+### Excellent work with manipulating vectors! Concepts are starting to build on itself so let us know if you have any questions!
+
+## Challenge Problem 1 {data-progressive="TRUE"}
+
+Welcome to the challenge problems for the Vector Operations lesson. This is in no way required, it is meant for additional practice with R.
+
+### 
+
+```{r ready1, echo=FALSE}
+question('Ready to proceed?',
+  answer("Yes", correct = TRUE),
+  answer("No"),
+  try_again = "No worries! These questions are entirely optional and provide additional practice!",
+  allow_retry = TRUE,
+  correct = "Excellent!"
+  )
+```
+
+### Q1 of 10
+
+Katmai National Park is famous for the salmon run each summer and the brown bear feast that accompanies it. Brown bears can lose roughly 30% of their body weight while hibernating, so it is essential that they pack on the pounds during the summer. They feed on high-caloric foods, like sockeye salmon (one salmon can be \~4000 calories), but also on sedges (a grass, often eating about 30 lbs of sedges a day), berries, and grubs. Over the course of the summer, bears have to add hundreds of pounds to their body weight to make up for weight lost during the past hibernation, and to survive the next hibernation. At peak season, brown bears can add up to **four pounds of weight per day!**
+
+<center><img src="https://media.npr.org/assets/img/2019/10/09/435-comparison-2019-notext-002-_custom-29828bf59cb1f469b9a61bb8499e7441b2cb327a.jpg" height="200"/></center>
+
+\
+In this challenge problem, we will look at the weight of 25 bears recorded in the months of June and September.
+
+| Bear | `june_lb` | `sept_lb` |
+|:-----|:----------|:----------|
+| N409 | 725       | 1234      |
+| N727 | 656       | 1023      |
+| N358 | 835       | 1000      |
+| K260 | 747       | 1134      |
+| K192 | 856       | 1111      |
+| K359 | 800       | 1057      |
+| N359 | 634       | 918       |
+| N298 | 670       | 1041      |
+| K211 | 837       | 1101      |
+| K214 | 860       | 998       |
+| T219 | 807       | 1122      |
+| T210 | 838       | 1173      |
+| T056 | 787       | 1182      |
+| T087 | 846       | 1288      |
+| T132 | 754       | 988       |
+| K168 | 779       | 1105      |
+| K321 | 650       | 1076      |
+| N287 | 778       | 1065      |
+| S112 | 885       | 1318      |
+| S134 | 811       | 1179      |
+| S163 | 754       | 1006      |
+| S152 | 864       | 1401      |
+| T142 | 730       | 1153      |
+| S201 | 980       | 1370      |
+| N633 | 765       | 1141      |
+
+For convenience, we already created vectors for the above data and are labeled as:
+
+1.  `name` - names of the bears
+2.  `june_lbs` - weight of the bears in pounds recorded in June
+3.  `sept_lbs` - weight of the bears in pounds recorded in Sept
+
+```{r bear_setup, include=FALSE}
+name = c("N409", "N727", "N358", "K260", "K192", "K359", "N359", "N298", "K211", "K214", "T219", "T210", "T056", "T087", "T132", "K168", "K321", "N287", "S112", "S134", "S163", "S152", "T142", "S201", "N633")
+
+june_lbs = c(725, 656, 835, 747, 856, 800, 634, 670, 837, 860, 807, 838, 787, 846, 754, 779, 650, 778, 885, 811, 754, 864, 730, 980, 765)
+
+sept_lbs = c(1234, 1023, 1000, 1134, 1111, 1057, 918, 1041, 1101, 998, 1122, 1173, 1182, 1288, 988, 1105, 1076, 1065, 1318, 1179, 1006, 1401, 1153, 1370, 1141)
+
+```
+
+\
+The vectors `name`, `june_lbs`, and `sept_lbs` are already loaded, so you do not have to create them. Call the `name` vector to see the names of the bears.
+
+```{r ch1_1, exercise=TRUE, exercise.setup="bear_setup"}
+ 
+```
+
+```{r ch1_1-solution}
+name
+
+```
+
+```{r ch1_1-check}
+grade_code("Perfect! You can see all 25 bear names. Each bear has a unique identifier that corresponds to their weight measurements.")
+```
+
+::: {#ch1_1-hint}
+**Hint:** Simply type the name of the vector (`name`) to display its contents.
+:::
+
+### Q2 of 10
+
+What is the median weight of the 25 bears in the month of June?
+
+```{r ch1_2, exercise=TRUE, exercise.setup="bear_setup"}
+ 
+```
+
+```{r ch1_2-solution}
+median(june_lbs)
+
+```
+
+```{r ch1_2-check}
+grade_code("Great! You've calculated the median June weight. The median gives you the middle value when all weights are arranged in order.")
+```
+
+::: {#ch1_2-hint}
+**Hint:** Use the `median()` function on the `june_lbs` vector to find the middle value of the bear weights in June.
+:::
+
+### Q3 of 10
+
+What is the median weight of the 25 bears in the month of September?
+
+```{r ch1_3, exercise=TRUE, exercise.setup="bear_setup"}
+ 
+```
+
+```{r ch1_3-solution}
+median(sept_lbs)
+
+```
+
+```{r ch1_3-check}
+grade_code("Excellent! Notice how much higher the September median is compared to June - this shows the significant weight gain over the summer!")
+```
+
+::: {#ch1_3-hint}
+**Hint:** Use the `median()` function on the `sept_lbs` vector to find the middle value of the bear weights in September.
+:::
+
+### Q4 of 10
+
+We can do mathematical operations on vectors that hold the same data type. For example, if we wanted to calculate the weight difference between the months of September and June, we can subtract the `june_lbs` vector from the `sept_lbs` vector.
+
+Let's try that: Subtract the `june_lbs` vector from the `sept_lbs` vector and assign it to the variable `diff_lbs`.
+
+```{r ch1_4, exercise=TRUE, exercise.setup="bear_setup"}
+ 
+```
+
+```{r ch1_4-solution}
+# <- ----
+diff_lbs <- sept_lbs - june_lbs
+
+# = ----
+diff_lbs = sept_lbs - june_lbs
+
+```
+
+```{r ch1_4-check}
+grade_code("Perfect! You've performed element-wise subtraction on two vectors. This creates a new vector where each element represents the weight gain for each bear.")
+```
+
+::: {#ch1_4-hint}
+**Hint:** Use the subtraction operator (-) between the two vectors: `sept_lbs - june_lbs`, then assign the result to `diff_lbs` using either `=` or `<-`.
+:::
+
+### Q5 of 10
+
+Now that you have made `diff_lbs`, let's look at the values in this new vector. Call `diff_lbs` to print out the weight differences of each bear.
+
+```{r bear_setup2, include=FALSE}
+name = c("N409", "N727", "N358", "K260", "K192", "K359", "N359", "N298", "K211", "K214", "T219", "T210", "T056", "T087", "T132", "K168", "K321", "N287", "S112", "S134", "S163", "S152", "T142", "S201", "N633")
+
+june_lbs = c(725, 656, 835, 747, 856, 800, 634, 670, 837, 860, 807, 838, 787, 846, 754, 779, 650, 778, 885, 811, 754, 864, 730, 980, 765)
+
+sept_lbs = c(1234, 1023, 1000, 1134, 1111, 1057, 918, 1041, 1101, 998, 1122, 1173, 1182, 1288, 988, 1105, 1076, 1065, 1318, 1179, 1006, 1401, 1153, 1370, 1141)
+
+diff_lbs <- sept_lbs - june_lbs
+
+```
+
+```{r ch1_5, exercise=TRUE, exercise.setup="bear_setup2"}
+ 
+```
+
+```{r ch1_5-solution}
+diff_lbs
+
+```
+
+```{r ch1_5-check}
+grade_code("Excellent! You can see the weight gain for each bear. Notice how most bears gained substantial weight, with some gaining over 500 pounds!")
+```
+
+::: {#ch1_5-hint}
+**Hint:** Simply type `diff_lbs` to display the contents of the weight difference vector.
+:::
+
+### Q6 of 10
+
+How many bears gained more than or equal to 300 pounds between June and September?
+
+```{r ch1_6, exercise=TRUE, exercise.setup="bear_setup2"}
+ 
+```
+
+```{r ch1_6-solution}
+# length ----
+length(diff_lbs[diff_lbs >= 300])
+
+# sum ----
+sum(diff_lbs >=300)
+
+```
+
+```{r ch1_6-check}
+grade_code("Great work! You've counted how many bears gained at least 300 pounds. Both approaches work - length() counts the filtered elements, while sum() counts TRUE values.")
+```
+
+::: {#ch1_6-hint}
+**Hint:** Filter `diff_lbs` for values >= 300, then count them using `length()`. Alternatively, you can use `sum()` on the logical condition directly.
+:::
+
+### Q7 of 10
+
+What is the average pounds the bears gained from June to September?
+
+```{r ch1_7, exercise=TRUE, exercise.setup="bear_setup2"}
+ 
+```
+
+```{r ch1_7-solution}
+mean(diff_lbs)
+
+
+```
+
+```{r ch1_7-check}
+grade_code("Perfect! The average weight gain shows how much weight bears typically gain during the summer feeding season.")
+```
+
+::: {#ch1_7-hint}
+**Hint:** Use the `mean()` function on the `diff_lbs` vector to calculate the average weight gain.
+:::
+
+### Q8 of 10
+
+How many bears gained more or equal to the average weight difference from June to September?
+
+```{r ch1_8, exercise=TRUE, exercise.setup="bear_setup2"}
+ 
+```
+
+```{r ch1_8-solution}
+# length ----
+length(diff_lbs[diff_lbs >= mean(diff_lbs)])
+
+# sum ----
+sum(diff_lbs >=mean(diff_lbs))
+
+
+```
+
+```{r ch1_8-check}
+grade_code("Excellent! You've dynamically compared each bear's weight gain to the average. This shows how many bears gained above-average weight.")
+```
+
+::: {#ch1_8-hint}
+**Hint:** Use `mean(diff_lbs)` as the comparison value in your logical condition, then count the results with `length()` or `sum()`.
+:::
+
+### Q9 of 10
+
+How many bears gained between 200 to 400 pounds from June to September?
+
+```{r ch1_9, exercise=TRUE, exercise.setup="bear_setup2"}
+ 
+```
+
+```{r ch1_9-solution}
+# length ----
+length(diff_lbs[diff_lbs > 200 & diff_lbs < 400])
+
+# sum ----
+sum(diff_lbs > 200 & diff_lbs < 400)
+
+
+```
+
+```{r ch1_9-check}
+grade_code("Great job! You've used compound logical conditions with the & operator to find bears within a specific weight gain range.")
+```
+
+::: {#ch1_9-hint}
+**Hint:** Use the `&` operator to combine two conditions: `diff_lbs > 200 & diff_lbs < 400`. Then count the results with `length()` or `sum()`.
+:::
+
+### Q10 of 10
+
+How many bears fall within 20% of the average weight difference from June to September?
+
+```{r ch1_10, exercise=TRUE, exercise.setup="bear_setup2"}
+ 
+```
+
+```{r ch1_10-solution}
+# length ----
+length(diff_lbs[(diff_lbs > mean(diff_lbs)*0.8 & diff_lbs < mean(diff_lbs)*1.2)])
+
+# length_alt ----
+length(diff_lbs[(diff_lbs > mean(diff_lbs) - mean(diff_lbs)*0.2 & diff_lbs < mean(diff_lbs) + mean(diff_lbs)*0.2)])
+
+# sum ----
+sum(diff_lbs[(diff_lbs > mean(diff_lbs)*0.8 & diff_lbs < mean(diff_lbs)*1.2)])
+
+# sum_alt ----
+sum(diff_lbs[(diff_lbs > mean(diff_lbs) - mean(diff_lbs)*0.2 & diff_lbs < mean(diff_lbs) + mean(diff_lbs)*0.2)])
+
+```
+
+```{r ch1_10-check}
+grade_code("Outstanding! You've calculated a range around the mean and counted bears within that range. This advanced technique shows bears with 'typical' weight gain patterns.")
+```
+
+::: {#ch1_10-hint}
+**Hint:** Calculate 20% above and below the mean. You can use `mean(diff_lbs) * 0.8` for the lower bound and `mean(diff_lbs) * 1.2` for the upper bound, then combine with `&`.
+:::
+
+### Great work on completing the challenge problem! 
+
+<center>
+<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjMzaHY3MDB4aWcyNnc3dXV6bTdpazhhZGNjOTd3bG0weTU2dmpzbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/dzaUX7CAG0Ihi/giphy.gif" width = 400>
+</center>
+
+## Exit Ticket
+
+Questions? Don’t forget to turn in today’s exit ticket!
+
+https://forms.gle/AbtcVx5D8Zcki3tD6 
+
+<center>
+<img src="https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/d65eb83f-66e4-4760-8c1f-29d336d1d6df_rw_3840.png?h=ece3b7c448f38a10cd71866e2cbb2b4d" width = 400>
+</center>
+
+<small>Image source: [Allison Horst](https://allisonhorst.com/everything-else)</small>

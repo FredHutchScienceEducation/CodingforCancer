@@ -1,0 +1,583 @@
+---
+title: "5.0 Week 1 Review"
+output:
+  learnr::tutorial:
+  progressive: TRUE
+  allow_skip: TRUE
+tutorial:
+      id: 5.0_review
+      version: 1 # change the version when you want to invalidate past progress
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(gradethis)
+
+tutorial_options(
+    exercise.reveal_solution = FALSE, #Turn off show_solution button 
+    exercise.timelimit = 20, #Code can only run at most 20 seconds
+)
+
+```
+
+## Intro to R and Basic Data Types Review {data-progressive="TRUE"}
+
+### Q1
+
+```{r 1_1, echo=FALSE}
+question_checkbox('What is R?',
+  answer("a coding language", correct = TRUE),
+  answer("an app"),
+  answer("software"),
+  answer("Magic"),  
+  try_again = "Not quite. Think about what we've been learning all this week - R is a programming language used for data analysis and statistics.",
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  correct = "Yes! Great work! R is indeed a coding language (specifically a programming language) designed for statistical computing and data analysis."
+  )
+```
+
+**Hint:** Think about what we've been using to write code and perform calculations this week. R is a tool for programming and data analysis.
+
+### Q2
+
+```{r 1_2, echo=FALSE}
+question_checkbox('What is a variable?',
+  answer("an object that stores values in R", correct = TRUE),
+  answer("a basic data type in R"),
+  answer("a word"),
+  answer("another coding language"),  
+  try_again = "Not quite. Remember how we've been using variables this week - they're like containers that hold information. For example, when we write `x <- 5`, we're storing the value 5 in a variable named x.",
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  correct = "Excellent! Great work! A variable is indeed an object that stores values in R. Variables act like labeled containers that hold data we can use later in our code."
+  )
+```
+
+**Hint:** Think of a variable like a labeled box where you can store information. When you write `name <- "John"`, you're putting the value "John" into a box labeled "name".
+
+### Q3
+
+```{r 1_3, echo=FALSE}
+question_text('What is the assignment operator?',
+  answer("<-", correct=TRUE),
+  answer("=", correct = TRUE),
+  try_again = "Not exactly. There are two operators that we have used to assign values to variables. Think about the symbols we use when we write something like `x <- 5` or `x = 5`.",
+  allow_retry = TRUE,
+  correct = "Correct! Both `<-` and `=` are assignment operators in R. The `<-` operator is more traditional in R, while `=` works the same way. Both assign values to variables."
+  )
+```
+
+**Hint:** Look at how we've been assigning values to variables. There are two symbols we can use: one looks like an arrow pointing left, and the other is a simple equals sign.
+
+### Q4 
+
+Write the code to assign your name as a string to the variable `myName`.
+
+```{r 1_4, exercise=TRUE}
+
+```
+
+```{r 1_4-hint}
+# Remember to put your name in quotes to make it a string
+# Use either <- or = to assign the value
+# Example format: myName <- "YourName"
+```
+
+```{r 1_4-solution}
+
+# ----
+myName <- "Matthew"
+
+# ----
+myName = "Matthew"
+
+```
+
+```{r 1_4-check}
+grade_result(
+  pass_if(~ exists("myName") && is.character(myName), 
+          "Perfect! You've successfully assigned a string to the variable myName. Remember, strings in R must be enclosed in quotes, and you used the assignment operator correctly."),
+  fail_if(~ !exists("myName"), 
+          "Make sure you create a variable called 'myName'. Use the assignment operator (<- or =) to assign your name to this variable."),
+  fail_if(~ exists("myName") && !is.character(myName), 
+          "Make sure your name is in quotes so it's stored as a string. For example: myName <- \"YourName\". Without quotes, R treats it as a variable name rather than text.")
+)
+```
+
+
+### Q5
+
+```{r 1_5, echo=FALSE}
+question_checkbox('What data type is `"numbers"`?',
+  answer("String/Character", correct=TRUE),
+  answer("Integer"),
+  answer("Numeric"),
+  answer("Logical"),
+  try_again = "Not exactly. Look at the quotation marks around \"numbers\". What do the quotations mean for data types? Anything enclosed in quotes becomes text/character data, regardless of what's written inside.",
+  allow_retry = TRUE,
+  correct = "Correct! Even though the word is 'numbers', the quotation marks make it a String/Character data type. In R, anything enclosed in quotes is treated as text, not as numerical data."
+  )
+```
+
+**Hint:** Look carefully at the quotation marks. In R, anything enclosed in quotes (even if it looks like numbers) becomes text data.
+
+### Q6
+
+```{r 1_6, echo=FALSE}
+question_checkbox('What data type would you want for a math function (ex: `variable*133`)?',
+  answer("String/Character"),
+  answer("Integer", correct=TRUE),
+  answer("Numeric", correct=TRUE),
+  answer("Logical"),
+  try_again = "Not exactly. What kinds of data are used in math functions? You need numerical data (numbers) to perform mathematical operations. Strings/characters can't be multiplied or added.",
+  allow_retry = TRUE,
+  correct = "Correct! Both Integer and Numeric data types work for mathematical operations. These are the number data types in R that allow you to perform calculations like multiplication, addition, etc."
+  )
+```
+
+**Hint:** Think about what type of data you need to do math. Can you multiply text? You need number data types for mathematical operations.
+
+### Q7
+
+Write the code to check the data type of the variable `new_value`.
+
+```{r 1_7_setup, include=FALSE}
+new_value = "Hello World"
+```
+
+```{r 1_7, exercise=TRUE, exercise.setup="1_7_setup"}
+
+```
+
+```{r 1_7-hint}
+# Use the class() function to check data types
+# Put the variable name inside the parentheses
+# Format: class(variable_name)
+```
+
+```{r 1_7-solution}
+class(new_value)
+
+```
+
+```{r 1_7-check}
+grade_result(
+  pass_if(~ identical(.result, "character"), 
+          "Excellent! You correctly used the class() function to check the data type. The variable new_value contains \"Hello World\", which is character/string data."),
+  fail_if(~ TRUE, 
+          "Make sure you're using the class() function with the variable name new_value inside the parentheses. The format should be: class(new_value)")
+)
+```
+
+
+## Functions Review {data-progressive="TRUE"}
+
+### Q1
+
+```{r 2_1, echo=FALSE}
+question_checkbox('What is the name of the input you give a function?',
+  answer("Variable"),
+  answer("Argument", correct=TRUE),
+  answer("Object"),
+  answer("Numeric"),
+  try_again = "Not exactly. Refer back to the functions lesson to find out this name. When you use a function like round(3.14, 2), the values 3.14 and 2 are called the function's inputs or parameters.",
+  allow_retry = TRUE,
+  correct = "Correct! Arguments are the inputs you provide to functions. For example, in round(3.14, 2), both 3.14 and 2 are arguments that tell the function what to do."
+  )
+```
+
+**Hint:** Think about what you call the inputs or parameters that you pass into a function. When you write `round(3.14, 2)`, what do you call the 3.14 and 2?
+
+### Q2
+
+```{r 2_2, echo=FALSE}
+question_text('What is the 7th function on your coding help sheet?',
+  answer("max()", correct=TRUE),
+  answer("max(vector)", correct=TRUE),
+  answer("max", correct=TRUE),
+  try_again = "Not exactly. Refer back to your coding help sheet provided at the start of the program! Count down to the 7th function listed - it's used to find the largest value.",
+  allow_retry = TRUE,
+  correct = "Correct! The max() function is the 7th function on your help sheet. It finds the maximum (largest) value in a set of numbers or vector."
+  )
+```
+
+**Hint:** Look at your coding help sheet and count down to the 7th function. This function is used to find the largest value in a dataset.
+
+### Q3
+
+```{r 2_3, echo=FALSE}
+question_checkbox('TRUE or FALSE: you can switch the order of arguments in a function, as long as you explicitly state argument types (include argument labels).',
+  answer("FALSE"),
+  answer("TRUE", correct=TRUE),
+  try_again = "Not exactly. Try switching the arguments with labels in a code chunk. For example, round(digits=2, x=3.14) works the same as round(3.14, 2) because you've labeled which argument is which.",
+  allow_retry = TRUE,
+  correct = "Correct! When you use argument labels (like digits=2), you can put the arguments in any order because R knows which argument is which based on the labels."
+  )
+```
+
+**Hint:** Think about what happens when you label your arguments. If you write `round(digits=2, x=3.14)` instead of `round(3.14, 2)`, does it still work?
+
+### Q4
+
+```{r 2_4, echo=FALSE}
+question_checkbox('What operator can you use to get more information on the function `toupper()`? ',
+  answer("!"),
+  answer("?", correct=TRUE),
+  answer("|"), 
+  answer("<-"),
+  try_again = "Not exactly. Think about what symbol you put before a function name to open the help documentation. It's the same symbol used for questions!",
+  allow_retry = TRUE,
+  correct = "Correct! The ? operator opens the help documentation for functions. Type ?toupper() to learn more about how the toupper() function works."
+  )
+```
+
+**Hint:** What symbol do you use to ask a question? That same symbol can be used to get help about functions in R.
+
+### Q5
+
+Write the code to use the function `round()` to round `525600.123` to 1 digit. 
+
+```{r 2_5, exercise=TRUE}
+
+```
+
+```{r 2_5-hint}
+# The round() function takes two arguments:
+# 1. The number to round
+# 2. The number of digits to round to
+# Format: round(number, digits=number_of_digits)
+```
+
+```{r 2_5-solution}
+
+# ----
+round(525600.123, digits=1)
+
+# ----
+round(525600.123, 1)
+
+```
+
+```{r 2_5-check}
+grade_result(
+  pass_if(~ identical(.result, 525600.1), 
+          "Perfect! You correctly used the round() function to round 525600.123 to 1 decimal place, giving you 525600.1. The round() function is very useful for cleaning up decimal numbers."),
+  fail_if(~ TRUE, 
+          "Make sure you're using round(525600.123, 1) or round(525600.123, digits=1). The second argument tells R how many decimal places to keep.")
+)
+```
+
+### Q6
+
+Now write the code to store the value from above to the variable `mins_year`. 
+
+```{r 2_6, exercise=TRUE}
+
+```
+
+```{r 2_6-hint}
+# Combine the assignment operator with the round() function
+# Format: variable_name <- round(number, digits=1)
+# or: variable_name = round(number, digits=1)
+```
+
+```{r 2_6-solution}
+
+# ----
+mins_year <- round(525600.123, digits=1)
+
+# ----
+mins_year = round(525600.123, digits=1)
+
+# ----
+mins_year <- round(525600.123, 1)
+
+# ----
+mins_year = round(525600.123, 1)
+
+```
+
+```{r 2_6-check}
+grade_result(
+  pass_if(~ exists("mins_year") && identical(mins_year, 525600.1), 
+          "Excellent! You successfully combined the assignment operator with the round() function to store 525600.1 in the variable mins_year. This demonstrates how functions and variables work together."),
+  fail_if(~ !exists("mins_year"), 
+          "Make sure you create a variable called 'mins_year' using the assignment operator (<- or =)."),
+  fail_if(~ exists("mins_year") && !identical(mins_year, 525600.1), 
+          "Make sure you're storing the result of round(525600.123, 1) in the mins_year variable. The format should be: mins_year <- round(525600.123, 1)")
+)
+```
+
+
+### Q7 
+
+Write the code to calculate the number of minutes in 5 years.
+
+```{r 2_7_setup, include=FALSE}
+mins_year = round(525600.123, 1)
+```
+
+```{r 2_7, exercise=TRUE, exercise.setup="2_7_setup"}
+
+```
+
+```{r 2_7-hint}
+# You already have mins_year which contains minutes in 1 year
+# To find minutes in 5 years, multiply mins_year by 5
+# Format: mins_year * 5
+```
+
+```{r 2_7-solution}
+
+# ----
+mins_year*5
+
+```
+
+```{r 2_7-check}
+grade_result(
+  pass_if(~ identical(.result, 2628000.5), 
+          "Perfect! You calculated that there are 2,628,000.5 minutes in 5 years by multiplying the minutes in one year (525600.1) by 5. This shows how variables can be used in calculations."),
+  fail_if(~ TRUE, 
+          "Make sure you multiply mins_year by 5. The variable mins_year already contains the number of minutes in one year, so you just need to multiply it by 5.")
+)
+```
+
+## Vectors Review {data-progressive="TRUE"}
+
+### Q1
+
+```{r 3_1, echo=FALSE}
+question_checkbox('What is a vector?',
+  answer("A list of numbers"),
+  answer("Another name for a single variable"),
+  answer("Objects with multiple values", correct=TRUE), 
+  answer("A type of function"),
+  try_again = "Not exactly. Think about how vectors differ from single variables. A vector can hold multiple pieces of data in one object, like c(1, 2, 3, 4).",
+  allow_retry = TRUE,
+  correct = "Correct! Vectors are objects that can store multiple values in R. Unlike a single variable that holds one value, a vector can hold many values of the same data type."
+  )
+```
+
+**Hint:** Think about the difference between storing one value (like `x <- 5`) and storing multiple values (like `x <- c(1, 2, 3, 4)`). What do we call the second type?
+
+### Q2
+```{r 3_2, echo=FALSE}
+question_checkbox('True or False: Vectors can store values of different data types?',
+  answer("TRUE"),
+  answer("FALSE", correct = TRUE),
+  try_again = "Not exactly. Vectors in R must contain values of the same data type. If you try to mix numbers and text in a vector, R will convert everything to text to keep the data types consistent.",
+  allow_retry = TRUE,
+  correct = "Correct! Vectors in R can only store values of the same data type. All elements must be numbers, or all must be text, etc. This is called 'homogeneous' data storage."
+  )
+```
+
+**Hint:** Think about what happens when you try to put both numbers and text in the same vector. Does R allow mixed data types, or does it convert everything to match?
+
+### Q3
+```{r 3_3, echo=FALSE}
+question_checkbox("What is the name of the number we use to reference values in a vector?",
+  answer("Position"),
+  answer("Index", correct = TRUE),
+  answer("Argument"),
+  answer("Place"),
+  answer("Reference Number"),
+  try_again = "Not exactly. When you write vector[3] to get the third item, what do you call that number 3? It's the position number that 'indexes' or points to a specific value.",
+  allow_retry = TRUE,
+  correct = "Correct! The index is the position number used to reference specific values in a vector. For example, in vector[3], the number 3 is the index that refers to the third element."
+)
+```
+
+**Hint:** When you write `my_vector[3]` to get the third item, what do you call the number 3? It's the position number that helps you locate specific values.
+
+### Q4
+
+Write the code to make a vector called `rain_fall` with the values 101, 32, 44, and 60.
+
+```{r 3_4, exercise=TRUE}
+
+```
+
+```{r 3_4-hint}
+# Use the c() function to create vectors
+# Put the values inside the parentheses, separated by commas
+# Format: vector_name <- c(value1, value2, value3, value4)
+```
+
+```{r 3_4-solution}
+
+# ----
+rain_fall = c(101, 32, 44, 60)
+
+# ----
+rain_fall <- c(101, 32, 44, 60)
+
+
+```
+
+```{r 3_4-check}
+grade_result(
+  pass_if(~ exists("rain_fall") && identical(rain_fall, c(101, 32, 44, 60)), 
+          "Perfect! You successfully created a vector called rain_fall with the values 101, 32, 44, and 60. The c() function combines multiple values into a single vector object."),
+  fail_if(~ !exists("rain_fall"), 
+          "Make sure you create a variable called 'rain_fall' using the assignment operator."),
+  fail_if(~ exists("rain_fall") && !identical(rain_fall, c(101, 32, 44, 60)), 
+          "Make sure you're using the c() function with the correct values: c(101, 32, 44, 60). Check that all numbers are correct and separated by commas.")
+)
+```
+
+### Q5 
+
+Write the code to reference the 3rd item in `rain_fall` (i.e. `44`)
+
+```{r 3_5_setup, include=FALSE}
+rain_fall = c(101, 32, 44, 60)
+```
+
+
+```{r 3_5, exercise=TRUE, exercise.setup="3_5_setup"}
+
+```
+
+```{r 3_5-hint}
+# Use square brackets [] with the index number
+# Format: vector_name[index_number]
+# Remember, the 3rd item has index 3
+```
+
+```{r 3_5-solution}
+
+rain_fall[3]
+
+```
+
+```{r 3_5-check}
+grade_result(
+  pass_if(~ identical(.result, 44), 
+          "Excellent! You correctly used rain_fall[3] to access the third element, which is 44. Square brackets with index numbers are how we access specific values in vectors."),
+  fail_if(~ TRUE, 
+          "Make sure you're using square brackets with the index number: rain_fall[3]. The number 3 refers to the third position in the vector.")
+)
+```
+
+### Q6
+
+Write the code to add 98 to the end of the vector `rain_fall`
+
+```{r 3_6, exercise=TRUE, exercise.setup="3_5_setup"}
+
+```
+
+```{r 3_6-hint}
+# Use the c() function to combine the existing vector with the new value
+# Format: vector_name <- c(vector_name, new_value)
+# This creates a new vector with all the old values plus the new one
+```
+
+```{r 3_6-solution}
+
+# ----
+rain_fall = c(rain_fall, 98)
+
+# ----
+rain_fall <- c(rain_fall, 98)
+
+```
+
+```{r 3_6-check}
+grade_result(
+  pass_if(~ exists("rain_fall") && identical(rain_fall, c(101, 32, 44, 60, 98)), 
+          "Perfect! You successfully added 98 to the end of the rain_fall vector. Using c(rain_fall, 98) combines the existing vector with the new value, creating a longer vector."),
+  fail_if(~ !exists("rain_fall"), 
+          "Make sure you're updating the rain_fall variable."),
+  fail_if(~ exists("rain_fall") && !identical(rain_fall, c(101, 32, 44, 60, 98)), 
+          "Make sure you're using c(rain_fall, 98) to add 98 to the end of the existing vector. The format should be: rain_fall <- c(rain_fall, 98)")
+)
+```
+
+
+### Q7
+
+Write the code to reference the 2nd AND 4th value in `rain_fall`.
+
+```{r 3_7_setup, include=FALSE}
+rain_fall = c(101, 32, 44, 60, 98)
+```
+
+```{r 3_7, exercise=TRUE, exercise.setup="3_7_setup"}
+
+```
+
+```{r 3_7-hint}
+# To get multiple specific values, use c() inside the square brackets
+# Format: vector_name[c(index1, index2)]
+# You want the 2nd and 4th values, so use indices 2 and 4
+```
+
+```{r 3_7-solution}
+
+# ----
+rain_fall[c(2,4)]
+
+
+```
+
+```{r 3_7-check}
+grade_result(
+  pass_if(~ identical(.result, c(32, 60)), 
+          "Excellent! You correctly used rain_fall[c(2,4)] to get the 2nd and 4th values (32 and 60). Using c() inside square brackets lets you access multiple specific positions at once."),
+  fail_if(~ TRUE, 
+          "Make sure you're using c(2,4) inside the square brackets: rain_fall[c(2,4)]. This tells R to get both the 2nd and 4th elements.")
+)
+```
+
+
+
+### Q8
+
+Write the code to reference the 2nd THROUGH 4th value in `rain_fall`. 
+
+```{r 3_8, exercise=TRUE, exercise.setup="3_7_setup"}
+
+```
+
+```{r 3_8-hint}
+# Use the colon operator (:) to create a sequence of consecutive indices
+# Format: vector_name[start_index:end_index]
+# You want from the 2nd through the 4th, so use 2:4
+```
+
+```{r 3_8-solution}
+
+# ----
+rain_fall[2:4]
+
+
+# ----
+rain_fall[c(2:4)]
+
+```
+
+```{r 3_8-check}
+grade_result(
+  pass_if(~ identical(.result, c(32, 44, 60)), 
+          "Perfect! You correctly used rain_fall[2:4] to get a consecutive range of values from the 2nd through 4th positions (32, 44, 60). The colon operator (:) creates a sequence of consecutive numbers, making it easy to select ranges of data."),
+  fail_if(~ TRUE, 
+          "Make sure you're using the colon operator to create a range: rain_fall[2:4]. This gives you all values from position 2 through position 4.")
+)
+```
+
+## Exit Ticket
+
+Good job on a great first week of Coding for Cancer! Don’t forget to turn in today’s exit ticket!
+
+https://forms.gle/Up3xmtyAUEfZtM5M7 
+
+<center>
+<img src="https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/e4a11b1f-f235-461f-ab73-ce6128c59e49_rw_1920.png?h=a34a4173c717bfbc600a8682d419288e" width = 400>
+</center>
+
+<small>Image source: [Allison Horst](https://allisonhorst.com/everything-else)</small>
+

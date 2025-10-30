@@ -1,0 +1,1174 @@
+---
+title: "3.0 Functions"
+output:
+  learnr::tutorial:
+  progressive: TRUE
+  allow_skip: TRUE
+tutorial:
+      id: 3.0_functions
+      version: 1 # change the version when you want to invalidate past progress
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(gradethis)
+
+tutorial_options(
+    exercise.reveal_solution = FALSE, #Turn off show_solution button 
+    exercise.timelimit = 20, #Code can only run at most 20 seconds
+)
+
+```
+
+## Functions
+
+**Functions** are commands that allow us to do repeat complex tasks or actions. 
+
+
+<center>
+<img src="https://private-user-images.githubusercontent.com/36866649/471270783-cad0046f-ea7f-4611-a86e-499b491a341c.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTM2NjIxNTAsIm5iZiI6MTc1MzY2MTg1MCwicGF0aCI6Ii8zNjg2NjY0OS80NzEyNzA3ODMtY2FkMDA0NmYtZWE3Zi00NjExLWE4NmUtNDk5YjQ5MWEzNDFjLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA3MjglMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNzI4VDAwMTczMFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPThmYzliMDYwOTU1YmU3NzEzNDgxZGQ2YWUzNWJkMWZjNjU0MTlkNDA2YmJkNTNjMTlkNzcwYzI1MDg1YmUxNWEmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.nrE5vZZeU7WVhP1ixazWo-7qPd6xh8CMsynDmC9ZXFk" width = 500>
+</center>
+
+
+\
+
+
+\
+Let take this vector as our starting example:
+```{r ages, exercise = TRUE}
+ages <- c(10,25,20,14,60,20)
+ages
+```
+
+\
+We can use the function `length()` to find out the length of the vector:
+```{r ages_setup, include=FALSE}
+ages <- c(10,25,20,14,60,20)
+
+```
+
+
+```{r length, exercise=TRUE, exercise.setup="ages_setup"}
+
+```
+
+:::{#length-hint}
+**Hint:** Type `length(ages)`. 
+:::
+
+\
+We can use the function `mean` to calculate the mean:
+```{r mean, exercise=TRUE, exercise.setup="ages_setup"}
+
+```
+
+:::{#mean-hint}
+**Hint:** Type `mean(ages)`. 
+:::
+
+
+\
+Try the following functions on the `ages` vector:
+  
+  - `max()`
+  - `min()`
+  - `median()`
+  - `range()`
+  - `sum()`
+
+```{r function_try, exercise=TRUE, exercise.setup="ages_setup"}
+
+```
+
+
+```{r blank1, exercise=TRUE,  exercise.setup="ages_setup"}
+## Extra code chuck for scratch work or notes
+
+
+```
+
+
+## More Examples
+
+Let's look at other different functions:
+
+\
+`abs()` take the absolute value of the input
+```{r abs, exercise=TRUE}
+
+```
+
+
+\
+`floor()` rounds values **DOWN** to the nearest integer and `ceiling()` and rounds values **UP**.
+```{r floor, exercise=TRUE}
+
+```
+
+```{r ceiling, exercise=TRUE}
+
+```
+
+\
+If you want to round to a specific decimal point, you can use `round()` and specify the number of `digits` like this:
+```{r round, exercise=TRUE}
+
+```
+
+:::{#round-hint}
+**Hint:** Type `round(_value_, digits=2)`. 
+:::
+
+```{r blank2, exercise=TRUE}
+## Extra code chuck for scratch work or notes
+
+
+```
+
+## Practice  {data-progressive="TRUE"}
+
+**Functions** are built in complex tasks or a predefined set of code that allows your to repeat particular actions.
+
+\
+An example of a function is `round()`, it rounds the number entered in the `()`. We call the number entered in the parentheses is called the `argument`.
+
+###
+
+```{r practice1, echo=FALSE}
+question_checkbox('Thinking back to the previous lesson, what data type has decimal points?',
+  answer("character"),
+  answer("string"),
+  answer("numeric", correct = TRUE),
+  answer("integer"),
+  answer("booleon"),
+  answer("logical"),
+  try_again = "Not quite. Refer from the 'Data types' section from the Intro to R lesson.",
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  correct = "Excellent! Great work!"
+  )
+```
+
+
+### 
+Now round the numeric `3.14` using the `round()` function  by entering `3.14` as an argument into the `()`.
+```{r practice2, exercise = TRUE}
+
+```
+
+```{r practice2-solution}
+round(3.14)
+```
+
+```{r practice2-check}
+grade_code(
+  correct = "Perfect! You successfully used the round() function to round 3.14 to 3.",
+  incorrect = "Not quite right. Make sure you're using the round() function with 3.14 inside the parentheses."
+)
+```
+
+:::{#practice2-hint}
+**Hint:** Add the numeric you want to round into the parentheses.
+:::
+
+###
+You can also specify the number of digits you want to round to by adding  `digits = number` after the first argument.
+
+\
+Now try rounding `3.14159` to `2` digits.
+```{r practice3, exercise = TRUE}
+
+```
+
+```{r practice3-solution}
+round(3.14159, digits=2)
+```
+
+```{r practice3-check}
+grade_code(
+  correct = "Excellent! You've learned how to specify the number of digits when rounding.",
+  incorrect = "Try again. Remember to use both the number and the digits argument."
+)
+```
+
+:::{#practice3-hint}
+**Hint:** Add `digits=2` after the number you want to round.
+:::
+
+###
+If you ever forget what a function does you can enter the function name after `?` and your computer will tell you! This will pull up a description of the function and information on how to use it.
+
+\
+Type `?round` to pull up the documentation for the `round` function.
+```{r practice4, exercise = TRUE}
+
+```
+
+```{r practice4-solution}
+# no parentheses ----
+?round
+
+# with parentheses ----
+?round()
+```
+
+```{r practice4-check}
+grade_code(
+  correct = "Great! You've learned how to access R's help documentation using the ? operator.",
+  incorrect = "Make sure you type ?round (with or without parentheses)."
+)
+```
+
+:::{#practice4-hint}
+**Hint:** Type the question mark followed by the function name: ?round
+:::
+
+###
+From the `?round` help description, it specified the argument `x` as the input, and `digits` as the number of decimal places.
+
+\
+Using the `round` function with complete argument labels. Enter `x=3.14` and `digits=0` as the arguments into the function `round()`. 
+```{r practice5, exercise = TRUE}
+
+```
+
+```{r practice5-solution}
+round(x=3.14, digits=0)
+```
+
+```{r practice5-check}
+grade_code(
+  correct = "Perfect! You've used explicit argument labels - this makes your code very clear and readable.",
+  incorrect = "Make sure you include both x=3.14 and digits=0 inside the round() function."
+)
+```
+
+:::{#practice5-hint}
+**Hint:** Use round() with both argument labels: x=3.14 and digits=0 separated by a comma.
+:::
+
+###
+```{r practice6, echo=FALSE}
+question_checkbox('Did you get the same answer as `round(3.14)`?',
+  answer("Different"),
+  answer("Same", correct = TRUE),
+  try_again = "Are you sure? You can scroll up to see your previous commands",
+  allow_retry = TRUE,
+  random_answer_order = FALSE,
+  correct = "Yes! In `round(3.14)` the `digits` argument is assumed to be `0`."
+  )
+```
+
+
+### 
+Let's try switching the order of the arguments. Copy your code from the last command and switch the position of the arguments (`digits=0, x=3.14`).
+```{r practice7, exercise = TRUE}
+
+```
+
+```{r practice7-solution}
+round(digits=0, x=3.14)
+```
+
+```{r practice7-check}
+grade_code(
+  correct = "Excellent! You can see that argument order doesn't matter when you use labels.",
+  incorrect = "Make sure you switch the order: digits=0 should come first, then x=3.14."
+)
+```
+
+:::{#practice7-hint}
+**Hint:** Put digits=0 first, then x=3.14, separated by a comma inside round().
+:::
+
+###
+
+```{r practice8, echo=FALSE}
+question_checkbox('What happened? Did you get the same answer?',
+  answer("Different"),
+  answer("Same", correct = TRUE),
+  try_again = "Are you sure? You can scroll up to see your previous commands",
+  allow_retry = TRUE,
+  random_answer_order = FALSE,
+  correct = "Yes! As long as the arguments are listed, R will match them and put them in the correct order."
+  )
+```
+
+
+###
+Switching the order doesn't change when you use argument labels (ex: `x=` and `digits =`).
+
+\
+Now let's try removing the argument labels (`x=` and `digits =`) from your last line of code. Type `round(0, 3.14)`. 
+```{r practice9, exercise = TRUE}
+
+```
+
+```{r practice9-solution}
+round(0, 3.14)
+```
+
+```{r practice9-check}
+grade_code(
+  correct = "Good! Notice how removing the labels changes the result - R assumes the first argument is x and the second is digits.",
+  incorrect = "Type exactly: round(0, 3.14) with no argument labels."
+)
+```
+
+:::{#practice9-hint}
+**Hint:** Type round(0, 3.14) - just the numbers without the x= and digits= labels.
+:::
+
+###
+
+```{r practice10, echo=FALSE}
+question_checkbox('What happened? Was your answer the same with the argument labels?',
+  answer("Different", correct = TRUE),
+  answer("Same"),
+  try_again = "Are you sure? You can scroll up to see your previous commands",
+  allow_retry = TRUE,
+  random_answer_order = FALSE,
+  correct = "Yes! Without argument labels, R will assume the order based on the order it is presented in the `?round` documentation."
+  )
+```
+
+###
+When you have argument labels R can understand what you are asking, but without the argument labels it will assume the default order or arguments.
+
+\
+So argument order doesn't matter as much when you use labels, **but if you don't use labels, you have to be mindful of argument order (the order the arguments are entered).**
+
+
+###
+You can also use functions on a vector.
+
+\
+Let's try on `vector_1` from a previous lesson. Assign the variable `vector_1` a vector of `(1,2,3)`
+```{r practice11, exercise = TRUE}
+
+```
+
+```{r practice11-solution}
+# with = ----
+vector_1 = c(1,2,3)
+
+# with <- ----
+vector_1 <- c(1,2,3)
+
+```
+
+```{r practice11-check}
+grade_code(
+  correct = "Great! You've created a vector with three elements using the c() function.",
+  incorrect = "Remember to use c() to combine the numbers and assign it to vector_1."
+)
+```
+
+:::{#practice11-hint}
+**Hint:** To create vectors, we use the `c()` and the assignment operator `=` or `<-`.
+:::
+
+###
+The function `length()`, tells you the length of a vector, try it on `vector_1`. 
+```{r vector1_setup, include=FALSE}
+vector_1 <- c(1,2,3)
+```
+
+```{r practice12, exercise = TRUE, exercise.setup="vector1_setup"}
+
+```
+
+```{r practice12-solution}
+length(vector_1)
+```
+
+```{r practice12-check}
+grade_code(
+  correct = "Perfect! The length() function shows that vector_1 has 3 elements.",
+  incorrect = "Use the length() function with vector_1 as the argument."
+)
+```
+
+:::{#practice12-hint}
+**Hint:** Use length(vector_1) to find out how many elements are in the vector.
+:::
+
+###
+Add the value `7` to the end of `vector_1`. Make sure to reassign `vector_1`.
+```{r practice13, exercise = TRUE, exercise.setup="vector1_setup"}
+
+```
+
+```{r practice13-solution}
+# with = ----
+vector_1 = c(vector_1, 7)
+
+# with <- ----
+vector_1 <- c(vector_1, 7)
+
+```
+
+```{r practice13-check}
+grade_code(
+  correct = "Excellent! You've successfully added 7 to the end of vector_1 and reassigned it.",
+  incorrect = "Remember to use c() to combine the existing vector_1 with the new value 7, and reassign it."
+)
+```
+
+:::{#practice13-hint}
+**Hint:** Use c(vector_1, 7) to add 7 to the existing vector, and assign it back to vector_1.
+:::
+
+### 
+What is the new length of `vector_1`? Write the code that would obtain this answer.
+```{r vector2_setup, include=FALSE}
+vector_1 <- c(1,2,3,7)
+```
+
+```{r practice14, exercise = TRUE, exercise.setup="vector2_setup"}
+
+```
+
+```{r practice14-solution}
+length(vector_1)
+```
+
+```{r practice14-check}
+grade_code(
+  correct = "Perfect! The length is now 4 since you added one more element.",
+  incorrect = "Use the length() function on vector_1 to find its new length."
+)
+```
+
+:::{#practice14-hint}
+**Hint:** Use the same length() function you used before, but on the updated vector_1.
+:::
+
+###
+There are also math functions we can use.
+
+\
+The function `mean()` calculates the mean of the vector. Try it on `vector_1`.
+
+```{r practice15, exercise = TRUE, exercise.setup="vector2_setup"}
+
+```
+
+```{r practice15-solution}
+mean(vector_1)
+```
+
+```{r practice15-check}
+grade_code(
+  correct = "Great! The mean() function calculated the average of all values in vector_1.",
+  incorrect = "Use mean(vector_1) to calculate the average of the vector elements."
+)
+```
+
+:::{#practice15-hint}
+**Hint:** Use mean(vector_1) to calculate the average of all numbers in the vector.
+:::
+
+###
+The function `median`, calculates the median of a vector, try it on `vector_1`.
+
+```{r practice16, exercise = TRUE, exercise.setup="vector2_setup"}
+
+```
+
+```{r practice16-solution}
+median(vector_1)
+```
+
+```{r practice16-check}
+grade_code(
+  correct = "Excellent! The median() function found the middle value when the numbers are arranged in order.",
+  incorrect = "Use median(vector_1) to find the median value of the vector."
+)
+```
+
+:::{#practice16-hint}
+**Hint:** Use median(vector_1) to find the middle value of the vector.
+:::
+
+### Great work with functions and vectors today!
+
+
+## Exercise 1 {data-progressive="TRUE"}
+
+Let's get started with the in-class exercises. This exercise set will cover the Functions material. 
+
+
+```{r ex1_1, echo=FALSE}
+question_checkbox('what is a function in R?',
+  answer("Built-in complex tasks or a predefined set of code", correct = TRUE),
+  answer("Math operation"),
+  answer("A data type"),
+  try_again = "Not exactly. Do you need to assign functions or do they come already defined?",
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  correct = "Correct!"
+  )
+```
+
+###
+```{r ex1_2, echo=FALSE}
+question_checkbox('What is the name of the values entered into a function (inside the parentheses)?',
+  answer("argument", correct = TRUE),
+  answer("object"),
+  answer("variable"),
+  answer("numeric"),
+  try_again = "Not exactly. What is being manipulated by the function?",
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  correct = "Correct!"
+  )
+```
+
+###
+Let's look at some pre-made functions.
+
+\
+The function `abs()` calculates the absolute value of a number, try using it on `-234`.
+```{r ex1_3, exercise = TRUE}
+
+```
+
+```{r ex1_3-solution}
+abs(-234)
+```
+
+```{r ex1_3-check}
+grade_code(
+  correct = "Perfect! The abs() function converted -234 to its absolute value of 234.",
+  incorrect = "Use abs(-234) to get the absolute value of -234."
+)
+```
+
+:::{#ex1_3-hint}
+**Hint:** Use abs(-234) to calculate the absolute value of -234.
+:::
+
+###
+The function `ceiling()` rounds up the argument (a numeric) to the nearest integer, try it on `1.2`.
+```{r ex1_4, exercise = TRUE}
+
+```
+
+```{r ex1_4-solution}
+ceiling(1.2)
+```
+
+```{r ex1_4-check}
+grade_code(
+  correct = "Great! The ceiling() function rounded 1.2 up to the nearest integer, which is 2.",
+  incorrect = "Use ceiling(1.2) to round up to the nearest integer."
+)
+```
+
+:::{#ex1_4-hint}
+**Hint:** Use ceiling(1.2) - remember ceiling always rounds UP to the nearest integer.
+:::
+
+###
+Try the function `ceiling()` on `2.629`.
+```{r ex1_5, exercise = TRUE}
+
+```
+
+```{r ex1_5-solution}
+ceiling(2.629)
+```
+
+```{r ex1_5-check}
+grade_code(
+  correct = "Excellent! Even though 2.629 is close to 3, ceiling() rounded it up to 3.",
+  incorrect = "Use ceiling(2.629) to round up to the nearest integer."
+)
+```
+
+:::{#ex1_5-hint}
+**Hint:** Use ceiling(2.629) - ceiling will round any decimal up to the next whole number.
+:::
+
+###
+`ceiling()` rounds **UP**, but there is another function called `floor()` that rounds **DOWN**.
+
+\
+Try the function `floor()` on the same argument as before, `1.2`.
+
+```{r ex1_6, exercise = TRUE}
+
+```
+
+```{r ex1_6-solution}
+floor(1.2)
+```
+
+```{r ex1_6-check}
+grade_code(
+  correct = "Perfect! The floor() function rounded 1.2 down to 1, which is different from ceiling().",
+  incorrect = "Use floor(1.2) to round down to the nearest integer."
+)
+```
+
+:::{#ex1_6-hint}
+**Hint:** Use floor(1.2) - floor always rounds DOWN to the nearest integer.
+:::
+
+###
+
+```{r ex1_7, echo=FALSE}
+question_checkbox('Look back at your output for `ceiling(1.2)` and compare it to the output for `floor(1.2)`, do you notice the difference in outputs?',
+  answer("Yes", correct = TRUE),
+  answer("No"),
+  try_again = "Not exactly. Scroll up to see the results for `ceiling(1.2)` and `floor(1.2)`.",
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  correct = "Correct!"
+  )
+```
+
+###
+
+```{r ex1_8, echo=FALSE}
+question_checkbox('Based on this pattern and knowing what you know about the two functions, what do you think the output of `floor(2.6)` will be?',
+  answer("2", correct = TRUE),
+  answer("1"),
+  answer("3"),
+  answer("4"),
+  answer("0"),
+  try_again = "Not exactly. `ceiling` rounds UP, `floor` rounds DOWN.",
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  correct = "Correct!"
+  )
+```
+
+###
+Let's try it out. Use the function `floor()` on the argument 2.6.
+```{r ex1_9, exercise = TRUE}
+
+```
+
+```{r ex1_9-solution}
+floor(2.6)
+```
+
+```{r ex1_9-check}
+grade_code(
+  correct = "Excellent! As predicted, floor(2.6) gave us 2 by rounding down.",
+  incorrect = "Use floor(2.6) to round 2.6 down to the nearest integer."
+)
+```
+
+:::{#ex1_9-hint}
+**Hint:** Use floor(2.6) - remember floor rounds down to the nearest integer.
+:::
+
+###
+Let's try out some math functions.
+
+\
+The function `log()` calculates the log of the argument, try it on `35`.
+```{r ex1_10, exercise = TRUE}
+
+```
+
+```{r ex1_10-solution}
+log(35)
+```
+
+```{r ex1_10-check}
+grade_code(
+  correct = "Great! The log() function calculated the natural logarithm of 35.",
+  incorrect = "Use log(35) to calculate the logarithm of 35."
+)
+```
+
+:::{#ex1_10-hint}
+**Hint:** Use log(35) to calculate the natural logarithm of 35.
+:::
+
+###
+The function `sqrt()` calculates the square root of the argument, try it on `64`.
+
+```{r ex1_11, exercise = TRUE}
+
+```
+
+```{r ex1_11-solution}
+sqrt(64)
+```
+
+```{r ex1_11-check}
+grade_code(
+  correct = "Perfect! The square root of 64 is 8, since 8 × 8 = 64.",
+  incorrect = "Use sqrt(64) to calculate the square root of 64."
+)
+```
+
+:::{#ex1_11-hint}
+**Hint:** Use sqrt(64) to find the square root of 64.
+:::
+
+###
+The function `exp()` calculates the exponential function of the argument, try it on `0`.
+```{r ex1_12, exercise = TRUE}
+
+```
+
+```{r ex1_12-solution}
+exp(0)
+```
+
+```{r ex1_12-check}
+grade_code(
+  correct = "Excellent! exp(0) equals 1, since e raised to the power of 0 is 1.",
+  incorrect = "Use exp(0) to calculate e raised to the power of 0."
+)
+```
+
+:::{#ex1_12-hint}
+**Hint:** Use exp(0) to calculate e raised to the power of 0.
+:::
+
+###
+Those were some common math functions for **numerics** and **integers**, now let's look at functions for **characters/strings**.
+
+\
+The function `toupper()` takes a character/string argument and changes it to be all upper case, try it with `"coding for cancer"`.
+```{r ex1_13, exercise = TRUE}
+
+```
+
+```{r ex1_13-solution}
+toupper("coding for cancer")
+```
+
+```{r ex1_13-check}
+grade_code(
+  correct = "Perfect! The toupper() function converted all letters to uppercase.",
+  incorrect = "Use toupper() with the text in quotes: toupper(\"coding for cancer\")."
+)
+```
+
+:::{#ex1_13-hint}
+**Hint:** Use toupper("coding for cancer") - remember to put the text in quotes.
+:::
+
+###
+`toupper()` makes everything uppercase, it has a counterpart `tolower()` that makes everything lowercase, try it on "CODing foR CANCER".
+
+```{r ex1_14, exercise = TRUE}
+
+```
+
+```{r ex1_14-solution}
+tolower("CODing foR CANCER")
+```
+
+```{r ex1_14-check}
+grade_code(
+  correct = "Excellent! The tolower() function converted all letters to lowercase, regardless of their original case.",
+  incorrect = "Use tolower() with the text in quotes: tolower(\"CODing foR CANCER\")."
+)
+```
+
+:::{#ex1_14-hint}
+**Hint:** Use tolower("CODing foR CANCER") - remember to put the text in quotes.
+:::
+
+### Great work on completing the exercise!
+
+We went through a lot of functions today. **You don't need to memorize these!** If you ever need to reference back to the functions, use the available resources like Coding Help Sheets, lesson slides, and Google!"
+
+
+## Challenge Problem 1 {data-progressive="TRUE"}
+
+Welcome to the challenge problems for the Functions lesson. This is in no way required, it is meant for additional practice with R.
+
+In this problem set, we'll practice looking up new functions.
+
+<center>
+<img src="https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/9718f461-8060-433b-b014-b294da38d172_rw_3840.png?h=7bbe367d69b1e04a617cd8a81031df15" width = 400>
+</center>
+
+
+### 
+
+```{r ready1, echo=FALSE}
+question('Ready to proceed?',
+  answer("Yes", correct = TRUE),
+  answer("No"),
+  try_again = "No worries! These questions are entirely optional and provide additional practice!",
+  allow_retry = TRUE,
+  correct = "Excellent!"
+  )
+```
+
+###
+There is a function called `trunc`, use the help feature to look up this function.
+```{r ex2_1, exercise = TRUE}
+
+```
+
+```{r ex2_1-solution}
+?trunc
+```
+
+```{r ex2_1-check}
+grade_code(
+  correct = "Great! You've accessed the help documentation for the trunc() function.",
+  incorrect = "Use ?trunc to look up the help documentation for the trunc function."
+)
+```
+
+:::{#ex2_1-hint}
+**Hint:** Type ?trunc to access the help documentation.
+:::
+
+###
+```{r ex2_2, echo=FALSE}
+question('What is the argument for the function `trunc`?',
+  answer("Single numeric", correct = TRUE),
+  answer("Multiple numerics"),
+  answer("Stings"),
+  answer("Logical"),
+  try_again = "Not exactly. You can see this information in the `?trunc` information.",
+  allow_retry = TRUE,
+  correct = "Correct!"
+  )
+```
+
+### 
+The R help description was not really clear, so let's try googling this function. Search "trunc function R docs" in Google.
+
+```{r ex2_3, echo=FALSE}
+question('Do you see the search result from Rdocumentation.org?',
+  answer("Yes", correct = TRUE),
+  answer("No"),
+  answer("Huh?"),
+  try_again = "Make sure 'R docs' is in your search",
+  allow_retry = TRUE,
+  correct = "Nice job finding it!"
+  )
+```
+
+### 
+[This](https://www.rdocumentation.org/packages/Sim.PLFN/versions/1.0/topics/Trunc) is the official R website with documentation with every R function. You can use this or other websites with user information like Stack Exchange whenever you need a refresher on functions.
+
+\
+Now that we know a little bit more about `trunc()`, let's try using it.
+
+\
+You have 32 cows in a pasture. Create a new variable called `total` assign the number of cows in the entire pasture.
+```{r ex2_4, exercise = TRUE}
+
+```
+
+```{r ex2_4-solution}
+# with = ----
+total = 32
+
+# with <- ----
+total <- 32
+
+```
+
+```{r ex2_4-check}
+grade_code(
+  correct = "Perfect! You've created a variable called 'total' and assigned it the value 32.",
+  incorrect = "Create a variable called 'total' and assign it the value 32 using = or <-."
+)
+```
+
+:::{#ex2_4-hint}
+**Hint:** Use total = 32 or total <- 32 to assign the number of cows to the variable.
+:::
+
+
+### 
+You want to divide the cows into **3 groups** for going out to graze, find the number of cows in each group and assign it to `per_group`. 
+```{r total_setup, include=FALSE}
+total <- 32
+
+```
+
+
+```{r ex2_5, exercise = TRUE, exercise.setup="total_setup"}
+
+```
+
+```{r ex2_5-solution}
+# with = ----
+per_group = total / 3
+
+# with <- ----
+per_group <- total / 3
+
+```
+
+```{r ex2_5-check}
+grade_code(
+  correct = "Excellent! You've calculated how many cows would be in each group by dividing total by 3.",
+  incorrect = "Divide the total by 3 and assign the result to per_group."
+)
+```
+
+:::{#ex2_5-hint}
+**Hint:** Use per_group = total / 3 to divide the total number of cows by 3 groups.
+:::
+
+
+###
+Let's see how many cows are in each group. Type the `per_group` variable to print out the value that is assigned to `per_group`.
+```{r group_setup, include=FALSE}
+total <- 32
+per_group <- total / 3
+
+```
+
+
+```{r ex2_6, exercise = TRUE, exercise.setup="group_setup"}
+
+```
+
+```{r ex2_6-solution}
+per_group
+
+```
+
+```{r ex2_6-check}
+grade_code(
+  correct = "Good! You can see that per_group contains a decimal number, which we'll need to handle since we can't have partial cows.",
+  incorrect = "Just type per_group to see its value."
+)
+```
+
+:::{#ex2_6-hint}
+**Hint:** Simply type per_group to print its value.
+:::
+
+###
+Since you can't have part of a cow, truncate this number to figure out how many cows will be in each group.
+```{r ex2_7, exercise = TRUE, exercise.setup="group_setup"}
+
+```
+
+```{r ex2_7-solution}
+trunc(per_group)
+
+```
+
+```{r ex2_7-check}
+grade_code(
+  correct = "Perfect! The trunc() function removed the decimal part, giving you the whole number of cows per group.",
+  incorrect = "Use the trunc() function with per_group as the argument."
+)
+```
+
+:::{#ex2_7-hint}
+**Hint:** Use the `trunc()` function and variable `per_group`
+:::
+
+###
+
+```{r ex2_8, echo=FALSE}
+question('How many cows are in each group?',
+  answer("10", correct = TRUE),
+  answer("3"),
+  answer("21"),
+  answer("32"),
+  answer("Moo."),
+  try_again = "Not exactly. What was the output from using the `trunc()` function?",
+  allow_retry = TRUE,
+  correct = "Correct!"
+  )
+```
+
+###
+How many cows are left in your pasture? Subtract the truncated `per_group` value multiplied by 3 from `total`, assign it to `cows_left`.
+```{r ex2_9, exercise = TRUE, exercise.setup="group_setup"}
+
+```
+
+```{r ex2_9-solution}
+# with = ----
+cows_left = total - trunc(per_group)*3
+
+# with <- ----
+cows_left <- total - trunc(per_group)*3
+```
+
+```{r ex2_9-check}
+grade_code(
+  correct = "Excellent! You've calculated how many cows remain after dividing them into equal groups.",
+  incorrect = "Subtract (trunc(per_group) * 3) from total and assign it to cows_left."
+)
+```
+
+:::{#ex2_9-hint}
+**Hint:** Use cows_left = total - trunc(per_group)*3 to find the remaining cows.
+:::
+
+###
+Print `cows_left` to see how many cows you have left in the pasture.
+```{r cows_left, include=FALSE}
+total <- 32
+per_group <- total / 3
+cows_left <- total - trunc(per_group)*3
+
+```
+
+```{r ex2_10, exercise = TRUE, exercise.setup="cows_left"}
+
+```
+
+```{r ex2_10-solution}
+cows_left
+
+```
+
+```{r ex2_10-check}
+grade_code(
+  correct = "Perfect! You have 2 cows left in the pasture after dividing the others into 3 equal groups.",
+  incorrect = "Just type cows_left to see how many cows remain."
+)
+```
+
+:::{#ex2_10-hint}
+**Hint:** Simply type cows_left to print its value.
+:::
+
+###
+There are many resources available when learning how to code. In this program, we also have resources and coding help sheets available for you in Google Classroom.
+
+\
+In a separate window, open up Google Classroom and find the Coding Helpsheet for this week.
+\
+
+```{r ex2_11, echo=FALSE}
+question('What is the very last function in the Functions section of the Coding Helpsheet?',
+  answer("`substr`", correct = TRUE),
+  answer("`round`"),
+  answer("`max`"),
+  answer("`sqrt`"),
+  answer("`abs`"),
+  try_again = "Go to the Week 1 Coding Helpsheet in Google Classroom",
+  allow_retry = TRUE,
+  correct = "Correct!"
+  )
+```
+
+###
+Let's try using this function (`substr`).
+
+\
+Look up this new function in the code chunk below.
+```{r ex2_12, exercise = TRUE}
+
+```
+
+```{r ex2_12-solution}
+?substr
+
+```
+
+```{r ex2_12-check}
+grade_code(
+  correct = "Great! You've accessed the help documentation for the substr() function.",
+  incorrect = "Use ?substr to look up the help documentation."
+)
+```
+
+:::{#ex2_12-hint}
+**Hint:** Type ?substr to access the help documentation for the substr function.
+:::
+
+###
+```{r ex2_13, echo=FALSE}
+question_text('What does this function `substr` do? Copy the description from the help information',
+  answer("Extract or replace substrings in a character vector.", correct=TRUE),
+  try_again = "Not exactly. Copy and paste the description from `?substr`.",
+  allow_retry = TRUE,
+  correct = "Nice!",
+  incorrect = "Not exactly. Make sure you're copying all of the description from the help information."
+  )
+```
+
+###
+Copy this `"cows like to eat grass when they go to pasture"` and assign it to the variable `song`.
+```{r ex2_14, exercise = TRUE}
+
+```
+
+```{r ex2_14-solution}
+# with = ----
+song = "cows like to eat grass when they go to pasture"
+
+# with <- ----
+song <- "cows like to eat grass when they go to pasture"
+
+```
+
+```{r ex2_14-check}
+grade_code(
+  correct = "Perfect! You've assigned the text string to the variable 'song'.",
+  incorrect = "Assign the text string to the variable 'song' using quotes around the text."
+)
+```
+
+###
+The argument of the `substr` function can be found in the help output (`?substr`).
+
+\
+Take the first 22 characters of that phrase `song` using the `substr` function.
+
+```{r song_setup, include = FALSE}
+song <- "cows like to eat grass when they go to pasture"
+```
+
+```{r ex2_15, exercise = TRUE, exercise.setup="song_setup"}
+
+```
+
+```{r ex2_15-solution}
+substr(song, 1, 22)
+
+```
+
+```{r ex2_15-check}
+grade_code(
+  correct = "Great work! Cows do like to eat grass!",
+  incorrect = "Use the `substr` function and the help function (`?`) to figure out how to use `substr`."
+)
+```
+
+:::{#ex2_15-hint}
+**Hint:** You want to extract the 1st through the 22nd characters.
+:::
+
+### Congrats on finishing the challenge problem! 
+
+Good job learning more about functions!
+
+<center>
+<img src="https://tenor.com/view/cow-cute-mika-noah-raj-gif-26361697" width = 400>
+</center>
+
+## Exit Ticket
+
+Questions? Don’t forget to turn in today’s exit ticket!
+
+https://forms.gle/ZNCpQYrN1kPQEpXG9 
+
+<center>
+<img src="https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/5ccff989-900e-4f2b-aece-55278b563cfa_rw_3840.png?h=0e42e3b3516e2d9ae08909ffee7fed0c" width = 400>
+</center>
+
+<small>Image source: [Allison Horst](https://allisonhorst.com/everything-else)</small>
+
+
+
