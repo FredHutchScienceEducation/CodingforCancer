@@ -1,4 +1,0 @@
-[submodule "swirl_lessons"]
-	path = swirl_lessons
-	url = https://github.com/FredHutchScienceEducation/CodingforCancer-Swirl
-	branch = main
